@@ -23,4 +23,13 @@
         <item>זכר</item>
         <item>נקבה</item>
     </string-array>
+    <string name="pass1">סיסמה</string>
+    <string name="title">הרשמה</string>
+    <string name="pass2">הקלד שנית את הסיסמה</string>
+    <string-array name="type">
+        <item>מנטור</item>
+        <item>מנטיי</item>
+    </string-array>
+    <string name="type">נרשם כ</string>
+    <string name="ok">אישור</string>
 </resources>
