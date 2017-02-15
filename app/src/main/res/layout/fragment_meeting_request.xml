@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:alpha="0.9"
+        android:layout_marginTop="400dp"
+        android:layout_gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fancybg"
+        android:id="@+id/bg_id"
+        tools:layout_gravity="bottom" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_height="39dp"
+        android:layout_width="match_parent"
+        android:background="#304FFE"
+        android:minHeight="39dp"
+        android:elevation="8dp">
+        <TextView
+            android:layoutDirection="locale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tool_bar"
+            android:layout_gravity="right"
+            android:id="@+id/toolbar_title"
+            android:textSize="24sp"
+            android:fontFamily="monospace" />
+    </android.support.v7.widget.Toolbar>
+    <RelativeLayout
+        android:layout_marginTop="42dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fancybg_id">
+
+        <EditText
+            android:theme="@style/EditTextTheme"
+            android:textDirection="locale"
+            android:gravity="right|top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/summary_id"
+            android:layout_alignBaseline="@+id/topic_id"
+            android:layout_alignBottom="@+id/topic_id"
+            android:layout_centerHorizontal="true"
+            android:hint="@string/summary_topic"
+            android:textColorLink="@android:color/holo_blue_dark" />
+
+        <TextView
+            android:text="@string/summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:id="@+id/topic_id"
+            android:layout_below="@+id/dateBtn_id"
+            android:layout_alignStart="@+id/callimage_id" />
+
+        <TextView
+            android:text="@string/publicFB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/public_feedback_id"
+            android:layout_alignEnd="@+id/public_feedback_id"
+            android:id="@+id/public_hint" />
+
+        <TextView
+            android:text="@string/privateFB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/private_feedback_id"
+            android:layout_alignEnd="@+id/private_feedback_id"
+            android:id="@+id/private_hint" />
+
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            app:srcCompat="@drawable/facetofaceicon"
+            android:id="@+id/face2face_id"
+            android:layout_alignTop="@+id/facetoface_checkbox_id"
+            android:layout_toStartOf="@+id/public_hint" />
+
+        <CheckBox
+            android:text="@string/faceToface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:id="@+id/facetoface_checkbox_id"
+            android:layout_below="@+id/meetingType_id"
+            android:layout_toStartOf="@+id/dateBtn_id" />
+
+        <CheckBox
+            android:text="@string/call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/call_checkbox_id"
+            android:layout_alignTop="@+id/face2face_id"
+            android:layout_alignEnd="@+id/summary_id" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            app:srcCompat="@drawable/androidcall"
+            android:id="@+id/callimage_id"
+            android:layout_alignTop="@+id/call_checkbox_id"
+            android:layout_toEndOf="@+id/call_checkbox_id"
+            android:layout_marginStart="13dp" />
+
+        <EditText
+            android:theme="@style/EditTextTheme"
+            android:textDirection="locale"
+            android:gravity="right|top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/private_feedback_id"
+            android:hint="@string/feedback"
+            android:layout_below="@+id/public_hint"
+            android:layout_alignEnd="@+id/public_hint"
+            android:layout_marginTop="15dp" />
+
+        <EditText
+            android:theme="@style/EditTextTheme"
+            android:textDirection="locale"
+            android:gravity="right|top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_marginTop="23dp"
+            android:id="@+id/public_feedback_id"
+            android:hint="@string/feedback"
+            android:layout_below="@+id/summary_id"
+            android:layout_alignStart="@+id/summary_id" />
+
+
+        <!--
+        <info.hoang8f.widget.FButton
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:buttonColor="#304FFE"
+            app:shadowColor="#3F51B5"
+            app:shadowEnabled="true"
+            app:shadowHeight="5dp"
+            app:cornerRadius="5dp"
+            android:layout_below="@+id/private_hint"
+            android:layout_alignStart="@+id/facetoface_checkbox_id" />
+            -->
+        <!--
+            <Button
+                android:textStyle="bold"
+                android:background="@drawable/button_custom2"
+                android:text="@string/request_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sendBtn_id"
+                android:elevation="8dp"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="25dp" />
+                -->
+
+        <TextView
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="invisible"
+            android:text="@string/error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/meetingType_error_id"
+            android:layout_marginEnd="11dp"
+            android:layout_alignBaseline="@+id/meetingType_id"
+            android:layout_alignBottom="@+id/meetingType_id"
+            android:layout_alignEnd="@+id/dateBtn_error_id" />
+
+        <TextView
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="invisible"
+            android:text="@string/error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/topic_error_id"
+            android:layout_marginEnd="12dp"
+            android:layout_alignBaseline="@+id/summary_id"
+            android:layout_alignBottom="@+id/summary_id"
+            android:layout_toStartOf="@+id/summary_id" />
+
+        <TextView
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="invisible"
+            android:text="@string/error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dateBtn_error_id"
+            android:layout_marginBottom="14dp"
+            android:layout_alignBottom="@+id/dateBtn_id"
+            android:layout_toEndOf="@+id/topic_error_id" />
+
+        <Button
+            android:background="@drawable/button_custom2"
+            android:fontFamily="sans-serif-condensed"
+            android:textStyle="bold"
+            android:text="@string/date_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:id="@+id/dateBtn_id"
+            android:elevation="7dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_below="@+id/facetoface_checkbox_id"
+            android:layout_alignStart="@+id/meetingType_id" />
+
+        <TextView
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="24sp"
+            android:text="@string/meeting_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/meetingType_id"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/private_hint"
+            android:layout_marginTop="10dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/bordertwo"
+            android:id="@+id/imageView2"
+            android:layout_above="@+id/summary_id"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+    <com.dd.morphingbutton.MorphingButton
+        android:alpha="0.82"
+        android:layout_marginTop="250dp"
+        android:layout_gravity="center"
+        android:text="@string/request_button"
+        android:id="@+id/morph_sendBtn_id"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        />
+
+</FrameLayout>

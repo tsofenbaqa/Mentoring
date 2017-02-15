@@ -33,4 +33,26 @@
     <string name="type">נרשם כ</string>
     <string name="ok">אישור</string>
     <string name="profile">פרופיל</string>
+
+    <!-- meeting row -->
+    <string name="meetingTitle">כותרת פגישה</string>
+    <string name="meetingTopic">נושא פגישה</string>
+    <string name="meetingDate">תאריך הפגישה</string>
+
+    <!-- Request Meeting-->
+    <string name="tool_bar"><b>קביעת פגישה</b></string>
+    <string name="meeting_type">סוג פגישה</string>
+    <string name="date_button">בחר תאריך ושעה</string>
+    <string name="request_button">שלח </string>
+    <string name="summary_topic">...פרטים</string>
+    <string name="faceToface">פנים אל פנים</string>
+    <string name="call">שיחה</string>
+    <string name="whatsup">call shalom\'s sister via whatsup</string>
+    <string name="summary"> נושא: </string>
+    <string name="back">חזור</string>
+    <string name="emptyString"></string>
+    <string name="publicFB">(כולם רואים את זה)</string>
+    <string name="privateFB">(רק אני וצופן רואים את זה)</string>
+    <string name="feedback">...משוב</string>
+    <string name="error">(לא חוקי)</string>
 </resources>
