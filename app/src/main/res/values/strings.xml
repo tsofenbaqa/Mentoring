@@ -23,6 +23,19 @@
         <item>זכר</item>
         <item>נקבה</item>
     </string-array>
+    <string name="upcv">העלאת קורות חיים</string>
+    <string name="upmark">העלאת גיליון ציונים</string>
+
+  <string name="pass1">סיסמה</string>
+  <string name="title">הרשמה</string>
+  <string name="pass2">הקלד שנית את הסיסמה</string>
+  <string-array name="type">
+    <item>מנטור</item>
+    <item>מנטיי</item>
+  </string-array>
+  <string name="type">נרשם כ</string>
+  <string name="ok">אישור</string>
+  <string name="profile">פרופיל</string>
     <string name="pass1">סיסמה</string>
     <string name="title">הרשמה</string>
     <string name="pass2">הקלד שנית את הסיסמה</string>
