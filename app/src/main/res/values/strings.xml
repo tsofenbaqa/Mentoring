@@ -1,36 +1,36 @@
 <resources>
-    <string name="app_name">Mentoring</string>
+  <string name="app_name">Mentoring</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Settings</string>
-    <string name="fname">שם פרטי</string>
-    <string name="lname">שם משפחה</string>
-    <string name="id">ת.זהות</string>
-    <string name="gender">מין</string>
-    <string name="phone">נייד</string>
-    <string name="email">דוא"ל</string>
-    <string name="mentor">מנטור</string>
-    <string name="major">התמחות</string>
-    <string name="institution">מוסד לימודים</string>
-    <string name="semster">מספר סמסטר לסיום</string>
-    <string name="average">ממוצע ציונים</string>
-    <string name="address">כתובת</string>
-    <string name="courseid">מספר קורס</string>
-    <string name="datestart">תאריך תחילת קורס</string>
-    <string name="notes">הערות</string>
-    <string-array name="gender">
-        <item>זכר</item>
-        <item>נקבה</item>
-    </string-array>
-    <string name="pass1">סיסמה</string>
-    <string name="title">הרשמה</string>
-    <string name="pass2">הקלד שנית את הסיסמה</string>
-    <string-array name="type">
-        <item>מנטור</item>
-        <item>מנטיי</item>
-    </string-array>
-    <string name="type">נרשם כ</string>
-    <string name="ok">אישור</string>
-    <string name="profile">פרופיל</string>
+  <string name="navigation_drawer_open">Open navigation drawer</string>
+  <string name="navigation_drawer_close">Close navigation drawer</string>
+  <string name="action_settings">Settings</string>
+  <string name="fname">שם פרטי</string>
+  <string name="lname">שם משפחה</string>
+  <string name="id">ת.זהות</string>
+  <string name="gender">מין</string>
+  <string name="phone">נייד</string>
+  <string name="email">דוא"ל</string>
+  <string name="mentor">מנטור</string>
+  <string name="major">התמחות</string>
+  <string name="institution">מוסד לימודים</string>
+  <string name="semster">מספר סמסטר לסיום</string>
+  <string name="average">ממוצע ציונים</string>
+  <string name="address">כתובת</string>
+  <string name="courseid">מספר קורס</string>
+  <string name="datestart">תאריך תחילת קורס</string>
+  <string name="notes">הערות</string>
+  <string-array name="gender">
+    <item>זכר</item>
+    <item>נקבה</item>
+  </string-array>
+  <string name="pass1">סיסמה</string>
+  <string name="title">הרשמה</string>
+  <string name="pass2">הקלד שנית את הסיסמה</string>
+  <string-array name="type">
+    <item>מנטור</item>
+    <item>מנטיי</item>
+  </string-array>
+  <string name="type">נרשם כ</string>
+  <string name="ok">אישור</string>
+  <string name="profile">פרופיל</string>
 </resources>
