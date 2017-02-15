@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.example.a2017.mentoring.Fragments.MeetingFragment;
 import com.example.a2017.mentoring.Fragments.UpdateProfileFragment;
 import com.example.a2017.mentoring.R;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         actionBarDrawerToggle();
+        goToMettingFragment();
     }
 
     @Override
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             case R.id.profile :
                 UpdateProfileFragment profileFragment = new UpdateProfileFragment();
-                transaction.add(R.id.fragment_container, profileFragment,"PROFILE_FRAGMENT");
+                transaction.replace(R.id.fragment_container, profileFragment,"PROFILE_FRAGMENT");
                 transaction.commit();
 
         }
@@ -73,5 +75,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+    }
+
+    private void goToMettingFragment()
+    {
+        fragmentManager = getSupportFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        MeetingFragment meetingFragment = new MeetingFragment();
+        transaction.replace(R.id.fragment_container, meetingFragment,"MEETING_FRAGMENT");
+        transaction.commit();
     }
 }
