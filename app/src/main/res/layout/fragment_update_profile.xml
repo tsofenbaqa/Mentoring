@@ -94,6 +94,7 @@
                                 android:id="@+id/fname"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:maxLines="1"
                                 android:hint="@string/fname"/>
                         </android.support.design.widget.TextInputLayout>
 
@@ -105,6 +106,7 @@
                                 android:id="@+id/lname"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:maxLines="1"
                                 android:hint="@string/lname"/>
                         </android.support.design.widget.TextInputLayout>
                         <android.support.design.widget.TextInputLayout
@@ -115,6 +117,7 @@
                                 android:id="@+id/id"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:maxLines="1"
                                 android:inputType="number"
                                 android:hint="@string/id" />
                         </android.support.design.widget.TextInputLayout>
@@ -160,6 +163,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="phone"
+                                android:maxLines="1"
                                 android:hint="@string/phone" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -172,6 +176,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="textEmailAddress"
+                                android:maxLines="1"
                                 android:hint="@string/email" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -184,6 +189,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="text"
+                                android:maxLines="1"
                                 android:hint="@string/mentor" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -196,6 +202,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="text"
+                                android:maxLines="1"
                                 android:hint="@string/major" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -208,6 +215,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="number"
+                                android:maxLines="1"
                                 android:hint="@string/semster" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -220,6 +228,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="number"
+                                android:maxLines="1"
                                 android:hint="@string/average" />
                         </android.support.design.widget.TextInputLayout>
                         <android.support.design.widget.TextInputLayout
@@ -231,6 +240,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="text"
+                                android:maxLines="1"
                                 android:hint="@string/address" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -243,6 +253,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="text"
+                                android:maxLines="1"
                                 android:hint="@string/notes" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -267,6 +278,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="date"
+                                android:maxLines="1"
                                 android:hint="@string/datestart" />
                         </android.support.design.widget.TextInputLayout>
 

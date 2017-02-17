@@ -3,7 +3,7 @@
     android:id="@+id/login_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5fb0c9"
+    android:background="@drawable/side_nav_bar"
     android:orientation="vertical"
     android:scrollbarAlwaysDrawVerticalTrack="true">
 
@@ -17,7 +17,8 @@
         android:text="Account Login"
         android:textColor="#fff"
         android:textSize="26sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:alpha="1"/>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -41,31 +42,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/user"
-                    android:background="@drawable/icon_bg"
-                    android:hint="User Name"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:id="@+id/etusername"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawableLeft="@drawable/lock"
-                    android:background="@drawable/icon_bg"
-                    android:hint="Password"
-                    android:inputType="numberPassword"
-                    android:id="@+id/etpassword"/>
             </android.support.design.widget.TextInputLayout>
+
+            <EditText
+                android:layout_marginTop="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:drawableLeft="@drawable/user"
+                android:background="@drawable/icon_bg"
+                android:hint="User Name"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:id="@+id/etusername"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@drawable/lock"
+                android:background="@drawable/icon_bg"
+                android:hint="Password"
+                android:inputType="numberPassword"
+                android:id="@+id/etpassword"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -79,7 +83,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="22dp"
-                android:background="#d67601"
+                android:background="@drawable/side_nav_bar"
                 android:text="Sign in"
                 android:textAllCaps="false"
                 android:textColor="#fff"

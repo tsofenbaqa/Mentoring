@@ -32,6 +32,21 @@
   </android.support.design.widget.TextInputLayout>
 
   <android.support.design.widget.TextInputLayout
+      android:id="@+id/phone"
+      android:layout_width="match_parent"
+      android:textDirection="rtl"
+      android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/phone2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textDirection="rtl"
+        android:inputType="phone"
+        android:hint="@string/phone"/>
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
       android:id="@+id/edlname"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">

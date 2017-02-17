@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClientRetrofit
 {
-    private static final String BASE_URL = "http://10.0.0.8:8080/ChatService/";
+    private static final String BASE_URL = "http://172.20.10.12:8080/ItemService/";
     private static Retrofit retrofit = null ;
     public static Retrofit getClient()
     {

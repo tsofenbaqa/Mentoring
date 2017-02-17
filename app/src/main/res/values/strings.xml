@@ -42,7 +42,6 @@
   <string name="meetingTitle">כותרת פגישה</string>
   <string name="meetingTopic">נושא פגישה</string>
   <string name="meetingDate">תאריך הפגישה</string>
-
     <!-- Request Meeting-->
     <string name="tool_bar"><b>קביעת פגישה</b></string>
     <string name="meeting_type">סוג פגישה</string>
