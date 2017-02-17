@@ -18,6 +18,8 @@
     <string name="address">כתובת</string>
     <string name="courseid">מספר קורס</string>
     <string name="datestart">תאריך תחילת קורס</string>
+    <string name="send">שלח</string>
+
     <string name="notes">הערות</string>
     <string-array name="gender">
         <item>זכר</item>
@@ -40,34 +42,6 @@
   <string name="meetingTitle">כותרת פגישה</string>
   <string name="meetingTopic">נושא פגישה</string>
   <string name="meetingDate">תאריך הפגישה</string>
-    <string name="upcv">העלאת קורות חיים</string>
-    <string name="upmark">העלאת גיליון ציונים</string>
-
-  <string name="pass1">סיסמה</string>
-  <string name="title">הרשמה</string>
-  <string name="pass2">הקלד שנית את הסיסמה</string>
-  <string-array name="type">
-    <item>מנטור</item>
-    <item>מנטיי</item>
-  </string-array>
-  <string name="type">נרשם כ</string>
-  <string name="ok">אישור</string>
-  <string name="profile">פרופיל</string>
-    <string name="pass1">סיסמה</string>
-    <string name="title">הרשמה</string>
-    <string name="pass2">הקלד שנית את הסיסמה</string>
-    <string-array name="type">
-        <item>מנטור</item>
-        <item>מנטיי</item>
-    </string-array>
-    <string name="type">נרשם כ</string>
-    <string name="ok">אישור</string>
-    <string name="profile">פרופיל</string>
-
-    <!-- meeting row -->
-    <string name="meetingTitle">כותרת פגישה</string>
-    <string name="meetingTopic">נושא פגישה</string>
-    <string name="meetingDate">תאריך הפגישה</string>
 
     <!-- Request Meeting-->
     <string name="tool_bar"><b>קביעת פגישה</b></string>
