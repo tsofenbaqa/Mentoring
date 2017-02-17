@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.a2017.mentoring.R;
 
-import java.util.ArrayList;
-
 /**
  * Created by 2017 on 15/02/2017.
  */

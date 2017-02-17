@@ -1,19 +1,14 @@
-package com.example.pcp.request_meeting;
+package com.example.a2017.mentoring.Fragments;
 
-import android.animation.Animator;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,30 +17,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.dd.morphingbutton.MorphingButton;
-
 import java.util.Calendar;
+import com.example.a2017.mentoring.R;
 
-import static android.R.attr.animation;
-import static android.R.attr.color;
-import static android.R.attr.shape;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public class RequestFragment extends Fragment implements
         DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener{
@@ -86,7 +69,7 @@ public class RequestFragment extends Fragment implements
 
     private void setUpFields(View view) {
         datebtn = (Button) view.findViewById(R.id.dateBtn_id);
-        meetingType = (TextView) view.findViewById(R.id.meeting_type_text);
+        meetingType = (TextView) view.findViewById(R.id.meetingType_id);
         toolbar = (Toolbar) view.findViewById(R.id.toolbar2);
         faceToface = (CheckBox) view.findViewById(R.id.facetoface_checkbox_id);
         call = (CheckBox) view.findViewById(R.id.call_checkbox_id);
@@ -144,20 +127,7 @@ public class RequestFragment extends Fragment implements
             }
         });
     }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int res_id = item.getItemId();
-        if(res_id == R.id.action_back){
-            Toast.makeText(getContext()," selected back option",Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     public void requestBtnHandler(){
         reqBtn.setOnClickListener(new View.OnClickListener() {
