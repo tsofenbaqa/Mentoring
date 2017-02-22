@@ -1,5 +1,6 @@
 package com.example.a2017.mentoring.RetrofitApi;
 
+import com.example.a2017.mentoring.Model.Login;
 import com.example.a2017.mentoring.Model.Register;
 
 import retrofit2.Call;
@@ -15,6 +16,6 @@ public interface ApiInterfaceRetrofit
     @POST("addNewUser")
     Call<String> addNewUser(@Body Register register);
 
-    @POST("x")
-    Call<String> addNewUser(@Body String x);
+    @POST("loginUser")
+    Call<String> LoginUser(@Body Login login);
 }

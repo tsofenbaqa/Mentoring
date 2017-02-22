@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 
 import com.example.a2017.mentoring.Activitys.MainActivity;
+import com.example.a2017.mentoring.Model.Login;
 import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
@@ -26,7 +27,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class login extends Fragment {
+public class login extends Fragment
+{
 
    Button signin_btn;
     EditText et_username, et_password;
@@ -40,30 +42,62 @@ public class login extends Fragment {
         et_password = (EditText) view.findViewById(R.id.etpassword);
 
 
-        signin_btn.setOnClickListener(new View.OnClickListener() {
+
+        return view;
+    }
+
+    private void signinBtn()
+    {
+        signin_btn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 String username = et_username.getText().toString();
                 String password = et_password.getText().toString();
-
-                if (username.equals("admin") && (password.equals("1234"))) {
-
-                    Intent i2 = new Intent(view.getContext(), MainActivity.class);
-                    view.getContext().startActivity(i2);
-
-                } else  if (!et_username.equals("admin")){
-                    et_username.setError("wrong username");
-
+                if(! username.isEmpty() && !password.isEmpty())
+                {
+                    Login login = new Login(username,password);
+                    sendLoginToServer(login);
                 }
-                else {
-                    et_password.setError("wrong password");
-                }
-
-
 
             }
         });
-        return view;
+    }
+    private void sendLoginToServer(Login login)
+    {
+        ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
+        Call<String> loginUser = retrofit.LoginUser(login);
+        loginUser.enqueue(new Callback<String>()
+        {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response)
+            {
+                Log.d( "onResponse: ","done");
+                if(response.code() == 200 ||response.code() == 204)
+                {
+                    Intent i2 = new Intent(getContext(), MainActivity.class);
+                   getContext().startActivity(i2);
+                    Toast.makeText(getContext(),"is done " , Toast.LENGTH_LONG).show();
+
+                }
+                else if(response.code() == 404 )
+                {
+                    Toast.makeText(getActivity(),"we are sorry the user exists try another user " , Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"error " , Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t)
+            {
+                Toast.makeText(getActivity(),"onFailure" , Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     }

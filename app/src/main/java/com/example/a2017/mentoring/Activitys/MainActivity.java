@@ -12,9 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.a2017.mentoring.Fragments.MeetingFragment;
-import com.example.a2017.mentoring.Fragments.RegisterFragmentAbu;
+import com.example.a2017.mentoring.Fragments.RegisterFragment;
 import com.example.a2017.mentoring.Fragments.UpdateProfileFragment;
-import com.example.a2017.mentoring.Fragments.login;
 import com.example.a2017.mentoring.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
@@ -62,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id)
         {
             case R.id.profile :
-                login profileFragment = new login();
-                transaction.replace(R.id.fragment_container, profileFragment,"PROFILE_FRAGMENT");
+                UpdateProfileFragment updateProfileFragment = new  UpdateProfileFragment();
+                transaction.replace(R.id.fragment_container, updateProfileFragment,"PROFILE_FRAGMENT");
                 transaction.commit();
 
         }
