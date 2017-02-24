@@ -6,9 +6,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+
 import com.example.a2017.mentoring.Fragments.RegisterFragment;
 import com.example.a2017.mentoring.Fragments.login;
 import com.example.a2017.mentoring.R;
+import com.example.a2017.mentoring.Utils.Preferences;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +35,15 @@ public class WelcomeActivity extends AppCompatActivity {
         adapter.addFragment(new login(), getResources().getString(R.string.login));
         adapter.addFragment(new RegisterFragment(), getResources().getString(R.string.register));
         viewPager.setAdapter(adapter);
+    }
+
+    private void isLoggedIn(){
+        if(Preferences.isLogin(getApplicationContext())){
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+        }else{
+            setupViewPager(viewPager);
+        }
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -61,5 +73,7 @@ public class WelcomeActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+
+
     }
 }

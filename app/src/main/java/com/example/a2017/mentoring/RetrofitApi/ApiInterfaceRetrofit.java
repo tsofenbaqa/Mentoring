@@ -2,6 +2,7 @@ package com.example.a2017.mentoring.RetrofitApi;
 
 import com.example.a2017.mentoring.Model.Login;
 import com.example.a2017.mentoring.Model.Register;
+import com.example.a2017.mentoring.Model.*;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -18,4 +19,7 @@ public interface ApiInterfaceRetrofit
 
     @POST("loginUser")
     Call<String> LoginUser(@Body Login login);
+
+    @POST("requestMeeting/255")
+    Call<Void> requestMeeting(@Body Request request);
 }

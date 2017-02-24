@@ -1,9 +1,9 @@
 package com.example.a2017.mentoring.Activitys;
 
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,13 +12,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.a2017.mentoring.Fragments.MeetingFragment;
-import com.example.a2017.mentoring.Fragments.RegisterFragment;
 import com.example.a2017.mentoring.Fragments.UpdateProfileFragment;
 import com.example.a2017.mentoring.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
-    private  Toolbar toolbar;
+    private Toolbar toolbar;
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
