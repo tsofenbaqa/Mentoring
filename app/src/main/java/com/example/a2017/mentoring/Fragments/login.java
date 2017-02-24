@@ -40,9 +40,6 @@ public class login extends Fragment
         signin_btn = (Button) view.findViewById(R.id.signin_btn);
         et_username = (EditText)view.findViewById(R.id.etusername);
         et_password = (EditText) view.findViewById(R.id.etpassword);
-
-
-
         return view;
     }
 
@@ -87,19 +84,18 @@ public class login extends Fragment
                 }
                 else if(response.code() == 404 )
                 {
-                    Toast.makeText(getActivity(),"we are sorry the user exists try another user " , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),getText(R.string.user_exist) , Toast.LENGTH_LONG).show();
                 }
                 else
                 {
-                    Toast.makeText(getActivity(),"error " , Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(getActivity(),getText(R.string.error_general) , Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t)
             {
-                Toast.makeText(getActivity(),"onFailure" , Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),getText(R.string.failure) , Toast.LENGTH_LONG).show();
             }
         });
     }

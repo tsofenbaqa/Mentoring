@@ -20,8 +20,7 @@
     <string name="datestart">תאריך תחילת קורס</string>
     <string name="send">שלח</string>
     <string name="login">כניסה</string>
-    <string name="user_empty">חסר שם משתמש</string>
-    <string name="pass_empty">חסר שם משתמש</string>
+
     <string name="register">הרשמה</string>
     <string name="notes">הערות</string>
     <string-array name="gender">
@@ -30,7 +29,6 @@
     </string-array>
     <string name="upcv">העלאת קורות חיים</string>
     <string name="upmark">העלאת גיליון ציונים</string>
-
     <string name="pass1">סיסמה</string>
     <string name="title">הרשמה</string>
     <string name="pass2">הקלד שנית את הסיסמה</string>
@@ -61,4 +59,10 @@
     <string name="privateFB">(רק אני וצופן רואים את זה)</string>
     <string name="feedback">...משוב</string>
     <string name="error">(לא חוקי)</string>
+    <!-- AFif update 24.2.2017-->
+    <string name="user_empty">חסר שם משתמש</string>
+    <string name="pass_empty">חסר שם משתמש</string>
+    <string name="user_exist">משתמש קיים, נא לנסות שוב</string>
+    <string name="error_general"> מצטערים, יש תקלת מערכת</string>
+    <string name="failure">תקלה בהתחברות לשרת</string>
 </resources>
