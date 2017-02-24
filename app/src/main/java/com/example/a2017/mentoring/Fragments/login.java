@@ -38,6 +38,7 @@ public class login extends Fragment
         signin_btn = (Button) view.findViewById(R.id.signin_btn);
         et_username = (EditText)view.findViewById(R.id.etusername);
         et_password = (EditText) view.findViewById(R.id.etpassword);
+        signinBtn();
         return view;
     }
 
@@ -84,7 +85,7 @@ public class login extends Fragment
                 }
                 else if(response.code() == 404 )
                 {
-                    Toast.makeText(getActivity(),getText(R.string.user_exist) , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),getText(R.string.userNOTexist) , Toast.LENGTH_LONG).show();
                 }
                 else
                 {

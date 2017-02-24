@@ -22,9 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import com.dd.morphingbutton.MorphingButton;
-import com.example.a2017.mentoring.Model.Request;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
@@ -127,7 +125,7 @@ public class RequestFragment extends Fragment implements
                     Toast.makeText(getActivity(),"Request was sent Successfull",Toast.LENGTH_SHORT).show();
                     hideErrors();
                     success();
-                    sendRequestMeetingToServer(new Request(1,2,meeting_type,meeting_date,meeting_time,meeting_topic,"",""));
+                    //sendRequestMeetingToServer(new Request(1,2,meeting_type,meeting_date,meeting_time,meeting_topic,"",""));
 
                 }else{
                     Toast.makeText(getActivity(),"invalid info, try again...",Toast.LENGTH_SHORT).show();
@@ -265,7 +263,7 @@ public class RequestFragment extends Fragment implements
     }
 
 
-    public void sendRequestMeetingToServer(Request request){
+    /*public void sendRequestMeetingToServer(Request request){
         ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
         Call<Void> requestMeeting = retrofit.requestMeeting(request);
         requestMeeting.enqueue(new Callback<Void>(){
@@ -288,5 +286,5 @@ public class RequestFragment extends Fragment implements
                 Toast.makeText(getActivity(),"onFailure" , Toast.LENGTH_LONG).show();
             }
         });
-    }
+    }*/
 }

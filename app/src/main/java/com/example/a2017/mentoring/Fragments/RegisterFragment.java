@@ -60,15 +60,15 @@ public class RegisterFragment extends Fragment {
       {
         readTextFromEditText();
 
-        if ((isValidEmail(emailet.getText()) &&
-                  (isValidname(fnameet.getText().toString(), "First")) &&
-                  (isValidname(lnameet.getText().toString(), "Last") &&
-                          (isValidPassword(pass1et.getText().toString(), pass2et.getText().toString())))))
-          {
+//        if ((isValidEmail(emailet.getText()) &&
+//                  (isValidname(fnameet.getText().toString(), "First")) &&
+//                  (isValidname(lnameet.getText().toString(), "Last") &&
+//                          (isValidPassword(pass1et.getText().toString(), pass2et.getText().toString())))))
+//          {}
 
         Register register = new Register(semailet,spass1et,sfnameet,slnameet,stype,sphone);
         sendRegisterToServer(register);
-      }
+
 
       }
     });

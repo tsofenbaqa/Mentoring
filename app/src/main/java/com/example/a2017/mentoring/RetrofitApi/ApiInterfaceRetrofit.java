@@ -20,6 +20,4 @@ public interface ApiInterfaceRetrofit
     @POST("loginUser")
     Call<String> LoginUser(@Body Login login);
 
-    @POST("requestMeeting/255")
-    Call<Void> requestMeeting(@Body Request request);
 }

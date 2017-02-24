@@ -61,7 +61,7 @@
                 android:background="@drawable/icon_bg"
                 android:hint="User Name"
                 android:inputType="textEmailAddress"
-                android:textColor="#fff"
+                android:textColor="@color/white"
                 android:maxLines="1"
                 android:id="@+id/etusername"/>
 
@@ -72,7 +72,7 @@
                 android:drawableLeft="@drawable/lock"
                 android:background="@drawable/icon_bg"
                 android:hint="Password"
-                android:textColor="#fff"
+                android:textColor="@color/white"
                 android:inputType="numberPassword"
                 android:id="@+id/etpassword"/>
 
@@ -81,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:paddingTop="5dp"
+                android:textColor="@color/white"
                 android:text="Forgot Password?" />
 
 

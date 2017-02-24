@@ -62,7 +62,7 @@
     <!-- AFif update 24.2.2017-->
     <string name="user_empty">חסר שם משתמש</string>
     <string name="pass_empty">חסר שם משתמש</string>
-    <string name="user_exist">משתמש קיים, נא לנסות שוב</string>
+    <string name="userNOTexist">משתמש לא קיים</string>
     <string name="error_general"> מצטערים, יש תקלת מערכת</string>
     <string name="failure">תקלה בהתחברות לשרת</string>
     <string name="logout">יציאה</string>
