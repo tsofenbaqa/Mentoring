@@ -1,5 +1,6 @@
 package com.example.a2017.mentoring.Activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import com.example.a2017.mentoring.Fragments.MeetingFragment;
 import com.example.a2017.mentoring.Fragments.UpdateProfileFragment;
 import com.example.a2017.mentoring.R;
+import com.example.a2017.mentoring.Utils.Preferences;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -63,6 +65,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 UpdateProfileFragment updateProfileFragment = new  UpdateProfileFragment();
                 transaction.replace(R.id.fragment_container, updateProfileFragment,"PROFILE_FRAGMENT");
                 transaction.commit();
+                break;
+            case R.id.logout:
+                Intent intent = new Intent(this,WelcomeActivity.class);
+                startActivity(intent);
+                this.finish();
+                Preferences.setLogin(false,this);
+                break;
+
 
         }
         drawer.closeDrawer(GravityCompat.START);

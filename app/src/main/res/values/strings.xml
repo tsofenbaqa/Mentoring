@@ -65,4 +65,5 @@
     <string name="user_exist">משתמש קיים, נא לנסות שוב</string>
     <string name="error_general"> מצטערים, יש תקלת מערכת</string>
     <string name="failure">תקלה בהתחברות לשרת</string>
+    <string name="logout">יציאה</string>
 </resources>
