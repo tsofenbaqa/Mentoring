@@ -1,5 +1,4 @@
 package com.example.a2017.mentoring.Activitys;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -7,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+
 import com.example.a2017.mentoring.Fragments.RegisterFragment;
 import com.example.a2017.mentoring.Fragments.login;
 import com.example.a2017.mentoring.R;
@@ -25,7 +25,7 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        isLoggedIn();
+        setupViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
     }

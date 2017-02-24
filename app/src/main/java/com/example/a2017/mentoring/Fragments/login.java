@@ -3,7 +3,6 @@ package com.example.a2017.mentoring.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,10 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import com.example.a2017.mentoring.Activitys.MainActivity;
 import com.example.a2017.mentoring.Model.Login;
-import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
@@ -40,8 +37,6 @@ public class login extends Fragment
         signin_btn = (Button) view.findViewById(R.id.signin_btn);
         et_username = (EditText)view.findViewById(R.id.etusername);
         et_password = (EditText) view.findViewById(R.id.etpassword);
-
-
 
         return view;
     }

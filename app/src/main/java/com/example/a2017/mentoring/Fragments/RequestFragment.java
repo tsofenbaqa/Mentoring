@@ -12,9 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,18 +22,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
 import com.dd.morphingbutton.MorphingButton;
-import java.util.Calendar;
+import com.example.a2017.mentoring.Model.Request;
 import com.example.a2017.mentoring.R;
+import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
+import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
+
+import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RequestFragment extends Fragment implements
         DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener{
 
-    Button reqBtn,datebtn;
+    Button   reqBtn,datebtn;
     TextView meetingType,toolbar_title;
     TextView inValid_meetingType,inValid_dateAndTime,inValid_topic;
-    Toolbar toolbar;
+    Toolbar  toolbar;
     CheckBox faceToface , call;
     EditText topic,publicFeedback,privateFeedback;
 
@@ -46,6 +52,7 @@ public class RequestFragment extends Fragment implements
     int validMeetingType = 1;
     int validTopic = 1;
 
+    String meeting_date,meeting_time,meeting_type,meeting_topic,meeting_public_feedback,meeting_private_feedback;
     MorphingButton morphingButton;
 
     public RequestFragment() {
@@ -120,6 +127,8 @@ public class RequestFragment extends Fragment implements
                     Toast.makeText(getActivity(),"Request was sent Successfull",Toast.LENGTH_SHORT).show();
                     hideErrors();
                     success();
+                    sendRequestMeetingToServer(new Request(1,2,meeting_type,meeting_date,meeting_time,meeting_topic,"",""));
+
                 }else{
                     Toast.makeText(getActivity(),"invalid info, try again...",Toast.LENGTH_SHORT).show();
                     showErrors();
@@ -173,6 +182,8 @@ public class RequestFragment extends Fragment implements
 
         String date = "Date:"+day_final+"/"+month_final+"/"+year_final+"   ";
         String time = "Time:"+hour_final+"/"+minute_final;
+        meeting_date = day_final+"/"+month_final+"/"+year_final;
+        meeting_time = hour_final+":"+minute_final;
         Toast.makeText(getActivity(),date+time,Toast.LENGTH_LONG).show();
     }
 
@@ -192,9 +203,14 @@ public class RequestFragment extends Fragment implements
         if(topic_size <= 0){
             validTopic = 0;
         }else{
+            meeting_topic = topic.getText().toString();
             validTopic = 1;
         }
-        if((faceToface.isChecked() && !call.isChecked()) || (!faceToface.isChecked() && call.isChecked())) {
+        if(faceToface.isChecked() && !call.isChecked()) {
+            meeting_type = getResources().getString(R.string.faceToface);
+            validMeetingType = 1;
+        }else if(!faceToface.isChecked() && call.isChecked()){
+            meeting_type = getResources().getString(R.string.call);
             validMeetingType = 1;
         }else{
             validMeetingType = 0;
@@ -229,11 +245,9 @@ public class RequestFragment extends Fragment implements
     public int dimen(@DimenRes int resId) {
         return (int) getResources().getDimension(resId);
     }
-
     public int color(@ColorRes int resId) {
         return getResources().getColor(resId);
     }
-
     public int integer(@IntegerRes int resId) {
         return getResources().getInteger(resId);
     }
@@ -248,5 +262,31 @@ public class RequestFragment extends Fragment implements
                 // pressed state color
                 .icon(R.drawable.ic_check_black_24dp); // icon
         morphingButton.morph(circle);
+    }
+
+
+    public void sendRequestMeetingToServer(Request request){
+        ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
+        Call<Void> requestMeeting = retrofit.requestMeeting(request);
+        requestMeeting.enqueue(new Callback<Void>(){
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response){
+                Log.d( "onResponse: ","done");
+                if(response.code() == 200 ||response.code() == 204){
+                    Toast.makeText(getContext(),"received successfully" , Toast.LENGTH_LONG).show();
+                }
+                else if(response.code() == 302 ){
+                    Toast.makeText(getActivity(),"sending meeting request failed, sorry... " , Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getActivity(),"error " , Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t){
+                Toast.makeText(getActivity(),"onFailure" , Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
