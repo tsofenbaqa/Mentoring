@@ -20,6 +20,8 @@
     <string name="datestart">תאריך תחילת קורס</string>
     <string name="send">שלח</string>
     <string name="login">כניסה</string>
+    <string name="user_empty">חסר שם משתמש</string>
+    <string name="pass_empty">חסר שם משתמש</string>
     <string name="register">הרשמה</string>
     <string name="notes">הערות</string>
     <string-array name="gender">

@@ -60,6 +60,12 @@ public class login extends Fragment
                     Login login = new Login(username,password);
                     sendLoginToServer(login);
                 }
+                else if(username.isEmpty()){
+                    et_username.setError(getText(R.string.user_empty));
+                }
+                else {
+                et_password.setError(getText(R.string.pass_empty));
+                }
 
             }
         });
@@ -78,8 +84,6 @@ public class login extends Fragment
                 {
                     Intent i2 = new Intent(getContext(), MainActivity.class);
                    getContext().startActivity(i2);
-                    Toast.makeText(getContext(),"is done " , Toast.LENGTH_LONG).show();
-
                 }
                 else if(response.code() == 404 )
                 {
