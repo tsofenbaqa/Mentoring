@@ -79,6 +79,7 @@ public class login extends Fragment
                 {
                     Intent i2 = new Intent(getContext(), MainActivity.class);
                     getContext().startActivity(i2);
+
                     Preferences.setLogin(true,getContext());
                 }
                 else if(response.code() == 404 )
