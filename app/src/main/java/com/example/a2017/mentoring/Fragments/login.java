@@ -3,7 +3,6 @@ package com.example.a2017.mentoring.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,13 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import com.example.a2017.mentoring.Activitys.MainActivity;
 import com.example.a2017.mentoring.Model.Login;
-import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
+import com.example.a2017.mentoring.Utils.Preferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -80,7 +78,8 @@ public class login extends Fragment
                 if(response.code() == 200 ||response.code() == 204)
                 {
                     Intent i2 = new Intent(getContext(), MainActivity.class);
-                   getContext().startActivity(i2);
+                    getContext().startActivity(i2);
+                    Preferences.setLogin(true,getContext());
                 }
                 else if(response.code() == 404 )
                 {
