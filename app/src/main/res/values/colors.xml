@@ -8,5 +8,5 @@
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
-
+    <color name="indigo">#4b0082</color>
 </resources>
