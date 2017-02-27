@@ -63,12 +63,12 @@ public class UpdateProfileFragment extends Fragment
         myImage = (SimpleDraweeView) view.findViewById(R.id.myImageView);
         chooseResume=(Button)view.findViewById(R.id.upcv_btn);
         chooseGradeSheet=(Button)view.findViewById(R.id.gradeSheetBtn);
-        menteeUpdateProfile=(Button)view.findViewById(R.id.menteeUpdateProfile);
+        //menteeUpdateProfile=(Button)view.findViewById(R.id.menteeUpdateProfile);
         fabProgressCircle = (FABProgressCircle) view.findViewById(R.id.fabProgressCircle);
         setMyimageOnClick();
         setChooseResumeOnClick();
         setChooseGradeSheetOnClick();
-        setmenteeUpdateProfileOnClick();
+        //setmenteeUpdateProfileOnClick();
         return view;
     }
 
@@ -102,7 +102,7 @@ public class UpdateProfileFragment extends Fragment
         }
     };
 
-    private void setmenteeUpdateProfileOnClick()
+   /* private void setmenteeUpdateProfileOnClick()
     {
         menteeUpdateProfile.setOnClickListener(new View.OnClickListener()
         {
@@ -115,7 +115,7 @@ public class UpdateProfileFragment extends Fragment
                 fabProgressCircle.show();
             }
         });
-    }
+    }*/
 
     private void setMyimageOnClick()
     {
