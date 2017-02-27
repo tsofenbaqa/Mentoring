@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.a2017.mentoring.Fragments.RegisterFragment;
 import com.example.a2017.mentoring.Fragments.RequestFragment;
 import com.example.a2017.mentoring.Fragments.login;
 import com.example.a2017.mentoring.R;
@@ -35,7 +36,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new login(), getResources().getString(R.string.login));
-        adapter.addFragment(new RequestFragment(), getResources().getString(R.string.register));
+        adapter.addFragment(new RegisterFragment(), getResources().getString(R.string.register));
         viewPager.setAdapter(adapter);
     }
 

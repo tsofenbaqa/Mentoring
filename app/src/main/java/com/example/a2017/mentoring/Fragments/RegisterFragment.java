@@ -65,6 +65,7 @@ public class RegisterFragment extends Fragment {
     ok.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         readTextFromEditText();
+        isAllValid();
         if(isAllValid()) {
           Register register = new Register(_email, _first_password, _first_name, _last_name, _type, _phone_number);
           sendRegisterToServer(register);
@@ -88,8 +89,8 @@ public class RegisterFragment extends Fragment {
   }
 
   public boolean isValidPhoneNumber() {
-    if(android.util.Patterns.PHONE.matcher(phone_number.getText().toString()).matches()) {
-      if((/*phone_number.getText().toString().length()<10)||*/(phone_number.getText().toString().length()>10)))
+    if((!android.util.Patterns.PHONE.matcher(phone_number.getText().toString()).matches())|| (_phone_number.length()<10)||(_phone_number.length()>10)) {
+      //if((/*phone_number.getText().toString().length()<10)||*/(phone_number.getText().toString().length()>10)))
       phone_number.setError("Invalid Phone number");
       return false;
     } else {
@@ -176,11 +177,13 @@ public class RegisterFragment extends Fragment {
         if (response.code() == 200 || response.code() == 204) {
           progressBar.setVisibility(View.GONE);
           liquidButton.startPour();
-
+          liquidButton.setAutoPlay(true);
         } else if (response.code() == 302) {
           Toast.makeText(getActivity(), getResources().getString(R.string.userExists), Toast.LENGTH_LONG).show();
+          progressBar.setVisibility(View.GONE);
         } else {
           Toast.makeText(getActivity(), getResources().getString(R.string.error_general), Toast.LENGTH_LONG).show();
+          progressBar.setVisibility(View.GONE);
         }
       }
 
