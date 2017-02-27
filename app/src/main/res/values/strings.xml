@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Mentoring</string>
-    <string name="notify_completed">completed</string>
-    <string name="notify_failed">failed</string>
-    <string name="notify_upload">"upload in progress"</string>
+    <string name="notify_completed">העלאה הושלמה</string>
+    <string name="notify_failed">העלאה נכשלה</string>
+    <string name="notify_upload">"העלאה מתבצעת"</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>

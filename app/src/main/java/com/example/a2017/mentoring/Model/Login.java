@@ -8,10 +8,12 @@ public class Login
 {
     private String Email;
     private String Password;
+    private String Type;
+    private int Id;
 
-
-    public Login()
-    {
+    public Login(String type,int id){
+        Type = type;
+        Id = id;
     }
 
     public Login(String email, String password)
