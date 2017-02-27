@@ -66,10 +66,13 @@ public class RegisterFragment extends Fragment {
       @Override public void onClick(View v) {
         readTextFromEditText();
         isAllValid();
+        getType();
+
         if(isAllValid()) {
-          Register register = new Register(_email, _first_password, _first_name, _last_name, _type, _phone_number);
+          Register register = new Register(_first_name, _last_name, _phone_number, _email, _first_password, _type);
           sendRegisterToServer(register);
         }
+
 
       }
     });
@@ -175,16 +178,17 @@ public class RegisterFragment extends Fragment {
       @Override public void onResponse(Call<String> call, Response<String> response) {
         Log.d("onResponse: ", "done");
         if (response.code() == 200 || response.code() == 204) {
-          progressBar.setVisibility(View.GONE);
+
           liquidButton.startPour();
           liquidButton.setAutoPlay(true);
         } else if (response.code() == 302) {
           Toast.makeText(getActivity(), getResources().getString(R.string.userExists), Toast.LENGTH_LONG).show();
-          progressBar.setVisibility(View.GONE);
+
         } else {
           Toast.makeText(getActivity(), getResources().getString(R.string.error_general), Toast.LENGTH_LONG).show();
-          progressBar.setVisibility(View.GONE);
+
         }
+        progressBar.setVisibility(View.GONE);
       }
 
       @Override public void onFailure(Call<String> call, Throwable t) {

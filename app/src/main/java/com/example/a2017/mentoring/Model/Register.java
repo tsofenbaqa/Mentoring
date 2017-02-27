@@ -11,14 +11,14 @@ public class Register {
 
 
 
-    public Register(String email ,String password, String firstName, String lastName, String type, String phone){
+    public Register(String firstName ,String lastName, String phone, String email, String password, String type){
 
-        Email=email;
-        Password=password;
-        FirstName=firstName;
-        LastName=lastName;
-        Type=type;
-        Phone=phone;
+        this.Email=email;
+        this.Password=password;
+        this.FirstName=firstName;
+        this.LastName=lastName;
+        this.Type=type;
+        this.Phone=phone;
     }
 
     public Register()
