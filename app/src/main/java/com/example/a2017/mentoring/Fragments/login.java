@@ -69,11 +69,11 @@ public class login extends Fragment
     private void sendLoginToServer(Login login)
     {
         ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
-        Call<String> loginUser = retrofit.LoginUser(login);
-        loginUser.enqueue(new Callback<String>()
+        Call<Login> loginUser = retrofit.LoginUser(login);
+        loginUser.enqueue(new Callback<Login>()
         {
             @Override
-            public void onResponse(Call<String> call, Response<String> response)
+            public void onResponse(Call<Login> call, Response<Login> response)
             {
                 Log.d( "onResponse: ","done");
                 if(response.code() == 200 ||response.code() == 204)
@@ -94,7 +94,7 @@ public class login extends Fragment
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t)
+            public void onFailure(Call<Login> call, Throwable t)
             {
                 Toast.makeText(getActivity(),getText(R.string.failure) , Toast.LENGTH_LONG).show();
             }

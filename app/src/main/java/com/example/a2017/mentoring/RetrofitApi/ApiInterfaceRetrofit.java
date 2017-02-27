@@ -18,7 +18,7 @@ public interface ApiInterfaceRetrofit
     Call<String> addNewUser(@Body Register register);
 
     @POST("loginUser")
-    Call<String> LoginUser(@Body Login login);
+    Call<Login> LoginUser(@Body Login login);
 
     @POST("updateMenteeProfile")
     Call<Void> updateMenteeProfile(@Body MenteeProfile menteeProfile);
