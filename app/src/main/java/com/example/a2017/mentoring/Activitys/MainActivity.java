@@ -17,7 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.a2017.mentoring.Fragments.MeetingFragment;
-import com.example.a2017.mentoring.Fragments.UpdateProfileFragment;
+import com.example.a2017.mentoring.Fragments.MenteeProfileFragment;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.Utils.Preferences;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private static final int READ_PERMISSION_CODE = 123;
-
+    private boolean isProfileUpdate ;
+    private boolean isMentee ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +40,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        isProfileUpdate = Preferences.isProfileUpdate(this);
+        isMentee = Preferences.isMentee(this);
         actionBarDrawerToggle();
-        goToMettingFragment();
+        configureRequestPermissions();
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        if(isMentee)
+        {
+            if(isProfileUpdate)
+            {
+                goToMettingFragment();
+            }
+            else
+            {
+                goToMenteeProfile();
+            }
+        }
+        else
+        {
+            if(isProfileUpdate)
+            {
+                goToMenteeList();
+            }
+            else
+            {
+                goToMentorProfile();
+            }
+        }
     }
 
     @Override
@@ -67,8 +98,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id)
         {
             case R.id.profile :
-                UpdateProfileFragment updateProfileFragment = new  UpdateProfileFragment();
-                transaction.replace(R.id.fragment_container, updateProfileFragment,"PROFILE_FRAGMENT");
+                MenteeProfileFragment menteeProfileFragment = new MenteeProfileFragment();
+                transaction.replace(R.id.fragment_container, menteeProfileFragment,"PROFILE_FRAGMENT");
                 transaction.commit();
                 break;
             case R.id.logout:
@@ -100,6 +131,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction.replace(R.id.fragment_container, meetingFragment,"MEETING_FRAGMENT");
         transaction.commit();
     }
+    private void goToMenteeProfile()
+    {
+        fragmentManager = getSupportFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        MenteeProfileFragment menteeProfile = new MenteeProfileFragment();
+        transaction.replace(R.id.fragment_container, menteeProfile,"MENTEE_PROFILE");
+        transaction.commit();
+    }
+    private void goToMentorProfile()
+    {
+        fragmentManager = getSupportFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        MenteeProfileFragment menteeProfile = new MenteeProfileFragment();
+        transaction.replace(R.id.fragment_container, menteeProfile,"MENTEE_PROFILE");
+        transaction.commit();
+    }
+
+    private void goToMenteeList()
+    {
+        fragmentManager = getSupportFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        MenteeProfileFragment menteeProfile = new MenteeProfileFragment();
+        transaction.replace(R.id.fragment_container, menteeProfile,"MENTEE_PROFILE");
+        transaction.commit();
+    }
 
     private void configureRequestPermissions()
     {
@@ -109,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             {
                 if(!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 {
+                    Preferences.setFirstRun(false,getApplication());
                     requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, READ_PERMISSION_CODE);
                 }
             }

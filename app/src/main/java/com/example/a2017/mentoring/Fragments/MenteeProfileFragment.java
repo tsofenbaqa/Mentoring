@@ -7,8 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -19,20 +17,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import com.example.a2017.mentoring.Model.MenteeProfile;
+import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.Services.MenteeProfileService;
 import com.example.a2017.mentoring.Utils.Preferences;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.jorgecastilloprz.FABProgressCircle;
+import com.google.gson.Gson;
 
 /**
  * Created by 2017 on 13/02/2017.
  */
 
-public class UpdateProfileFragment extends Fragment
+public class MenteeProfileFragment extends Fragment
 {
     private static final int SELECT_PICTURE = 100;
     private static final int SELECT_RESUME = 102;
@@ -46,25 +50,47 @@ public class UpdateProfileFragment extends Fragment
     private String imageUriString = null ;
     private String resumeUriString = null ;
     private String gradeSheetUriString = null;
+    private boolean isProfileUpdate ;
+    private boolean isMentee ;
+    private Register register;
+    private Spinner gender;
+    private EditText fname , lname ,id ,phone ,email ,mentor ,major ,semster ,average ,address ,notes ,courseid ,datestart , graduation_status;
+    private String _fname , _lname ,_id ,_gender ,_phone ,_email ,_mentor ,_major ,_semster ,_average ,_address ,_notes ,_courseid ,_datestart , _graduation_status;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         isFirstRun = Preferences.isFirstRun(getActivity());
+        isProfileUpdate = Preferences.isProfileUpdate(getContext());
+        isMentee = Preferences.isMentee(getContext());
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.fragment_update_profile,container,false);
+        View view = inflater.inflate(R.layout.fragment_update_mentee_profile,container,false);
        // coordinatorLayout = (CoordinatorLayout)view.findViewById(R.id.cor);
         myImage = (SimpleDraweeView) view.findViewById(R.id.myImageView);
         chooseResume=(Button)view.findViewById(R.id.upcv_btn);
         chooseGradeSheet=(Button)view.findViewById(R.id.gradeSheetBtn);
         menteeUpdateProfile=(Button)view.findViewById(R.id.menteeUpdateProfile);
         fabProgressCircle = (FABProgressCircle) view.findViewById(R.id.fabProgressCircle);
+        fname = (EditText) view.findViewById(R.id.fname);
+        lname = (EditText) view.findViewById(R.id.lname);
+        id = (EditText) view.findViewById(R.id.id);
+        phone = (EditText) view.findViewById(R.id.phone);
+        email = (EditText) view.findViewById(R.id.email);
+        mentor = (EditText) view.findViewById(R.id.mentor);
+        major = (EditText) view.findViewById(R.id.major);
+        semster = (EditText) view.findViewById(R.id.semster);
+        average = (EditText) view.findViewById(R.id.average);
+        address = (EditText) view.findViewById(R.id.address);
+        notes = (EditText) view.findViewById(R.id.address);
+        courseid = (EditText) view.findViewById(R.id.courseid);
+        datestart = (EditText) view.findViewById(R.id.datestart);
+        graduation_status = (EditText) view.findViewById(R.id.graduation_status);
         setMyimageOnClick();
         setChooseResumeOnClick();
         setChooseGradeSheetOnClick();
@@ -78,6 +104,31 @@ public class UpdateProfileFragment extends Fragment
         super.onStart();
         IntentFilter intentFilter = new IntentFilter(MenteeProfileService.ACTION);
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver,intentFilter);
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        if(isMentee)
+        {
+            if(isProfileUpdate)
+            {
+                getDataFromServer();
+            }
+            else
+            {
+                Gson gson = new Gson();
+                String registerJson = Preferences.RegisterObject(getContext());
+                register = gson.fromJson(registerJson,Register.class);
+            }
+        }
+        else
+        {
+            getDataFromServer();
+        }
+
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver()
@@ -110,6 +161,7 @@ public class UpdateProfileFragment extends Fragment
             public void onClick(View v)
             {
                 getTextFromEditText();
+                getType();
                 MenteeProfile menteeProfile = new MenteeProfile(1,"S","S",1,"S","S","S",50,"S",50,"S","S","S",50,"S","S",null,null,null);
                 fireMenteeProfileService(menteeProfile);
                 fabProgressCircle.show();
@@ -191,6 +243,7 @@ public class UpdateProfileFragment extends Fragment
             if(requestCode==SELECT_PICTURE)
             {
                 imageUriString=data.getData().toString();
+                myImage.setImageURI(data.getData());
             }
             else if(requestCode==SELECT_RESUME)
             {
@@ -234,7 +287,40 @@ public class UpdateProfileFragment extends Fragment
 
     private void getTextFromEditText()
     {
+        _fname = fname.getText().toString();
+        _lname = lname.getText().toString();
+        _email = email.getText().toString();
+        _address = address.getText().toString();
+        _id = id.getText().toString();
+        _phone = phone.getText().toString();
+        _mentor = mentor.getText().toString();
+        _major = major.getText().toString();
+        _semster = semster.getText().toString();
+        _average = average.getText().toString();
+        _notes = notes.getText().toString();
+        _courseid = courseid.getText().toString();
+        _datestart = datestart.getText().toString();
+        _graduation_status = graduation_status.getText().toString();
+    }
+    private void getType()
+    {
+        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                _gender = gender.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+    private void getDataFromServer()
+    {
 
     }
+
+
 }
 

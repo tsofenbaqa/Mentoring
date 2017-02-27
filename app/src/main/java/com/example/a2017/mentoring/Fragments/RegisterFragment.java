@@ -24,6 +24,7 @@ import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
 import com.example.a2017.mentoring.Utils.Preferences;
 
+import com.google.gson.Gson;
 import com.gospelware.liquidbutton.LiquidButton;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,6 +39,7 @@ public class RegisterFragment extends Fragment {
   Button ok;
   ProgressBar progressBar;
   LiquidButton liquidButton;
+  int typePosition;
 
   @Nullable @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -83,6 +85,7 @@ public class RegisterFragment extends Fragment {
       @Override
       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         _type = type.getItemAtPosition(position).toString();
+        typePosition = position;
       }
 
       @Override public void onNothingSelected(AdapterView<?> parent) {
@@ -177,10 +180,19 @@ public class RegisterFragment extends Fragment {
     addNewUser.enqueue(new Callback<String>() {
       @Override public void onResponse(Call<String> call, Response<String> response) {
         Log.d("onResponse: ", "done");
-        if (response.code() == 200 || response.code() == 204) {
+        if (response.code() == 200 || response.code() == 204)
+        {
 
           liquidButton.startPour();
           liquidButton.setAutoPlay(true);
+          int myId = Integer.parseInt(response.body());
+          Preferences.setMyId(myId,getContext());
+          Gson gson = new Gson();
+          Preferences.setRegisterObject(gson.toJson(register),getContext());
+          if(typePosition==1)
+          {
+              Preferences.setMentee(true,getContext());
+          }
         } else if (response.code() == 302) {
           Toast.makeText(getActivity(), getResources().getString(R.string.userExists), Toast.LENGTH_LONG).show();
 

@@ -11,7 +11,12 @@ public class Login
     private String Type;
     private int Id;
 
-    public Login(String type,int id){
+
+    public Login()
+    {
+    }
+
+    public Login(String type, int id) {
         Type = type;
         Id = id;
     }
@@ -38,6 +43,19 @@ public class Login
     }
 
 
+    public String getType() {
+        return Type;
+    }
 
+    public void setType(String type) {
+        Type = type;
+    }
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
 }

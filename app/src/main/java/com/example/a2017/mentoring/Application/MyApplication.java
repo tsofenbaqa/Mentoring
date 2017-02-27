@@ -18,11 +18,11 @@ public class MyApplication extends Application
     {
         super.onCreate();
         Fresco.initialize(this);
-        if(isNetworkAvailable())
+       /* if(isNetworkAvailable())
         {
             ImagePipeline imagePipeline = Fresco.getImagePipeline();
             imagePipeline.clearCaches();
-        }
+        }*/
     }
 
     private boolean isNetworkAvailable()

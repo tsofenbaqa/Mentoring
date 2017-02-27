@@ -40,7 +40,7 @@
     </string-array>
     <string name="type">נרשם כ</string>
     <string name="ok">אישור</string>
-    <string name="profile">פרופיל</string>
+    <string name="mentee_profile"> מנטיי פרופיל</string>
     <!-- meeting row -->
     <string name="meetingTitle">כותרת פגישה</string>
     <string name="meetingTopic">נושא פגישה</string>

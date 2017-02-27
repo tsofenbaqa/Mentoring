@@ -14,6 +14,8 @@ public class Preferences
     private static final String PROFILEUPDATE = "profileupdate";
     private static final String REGISTEROBJECT= "registerobject";
     private static final String FIRST_RUN = "firstRun";
+    private static final String MY_ID = "myId";
+    private static final String IS_MENTEE = "isMentee";
 
     public static boolean isLogin(Context context)
     {
@@ -38,13 +40,23 @@ public class Preferences
         preferences.edit().putBoolean(PROFILEUPDATE,isProfileUpdate).apply();
     }
 
-    public static String isRegisterObject(Context context){
+    public static String RegisterObject(Context context){
         SharedPreferences preferences = getPreferences(context);
         return preferences.getString(REGISTEROBJECT,"");
     }
     public static void setRegisterObject(String isRegisterObject,Context context){
         SharedPreferences preferences = getPreferences(context);
         preferences.edit().putString(REGISTEROBJECT,isRegisterObject).apply();
+    }
+
+    public static int myId(Context context)
+    {
+        SharedPreferences preferences = getPreferences(context);
+        return preferences.getInt(MY_ID,0);
+    }
+    public static void setMyId(int id,Context context){
+        SharedPreferences preferences = getPreferences(context);
+        preferences.edit().putInt(MY_ID,id).apply();
     }
 
     public static boolean isFirstRun(Context context)
@@ -59,6 +71,17 @@ public class Preferences
         preferences.edit().putBoolean(FIRST_RUN,isLogin).apply();
     }
 
+    public static boolean isMentee(Context context)
+    {
+        SharedPreferences preferences = getPreferences(context);
+        return preferences.getBoolean(IS_MENTEE,false);
+    }
+
+    public static void setMentee(boolean isMentee,Context context)
+    {
+        SharedPreferences preferences = getPreferences(context);
+        preferences.edit().putBoolean(IS_MENTEE,isMentee).apply();
+    }
 
     private static SharedPreferences getPreferences(Context context)
     {

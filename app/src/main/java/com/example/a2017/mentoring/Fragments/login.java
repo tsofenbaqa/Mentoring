@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.a2017.mentoring.Activitys.MainActivity;
@@ -28,8 +29,9 @@ import retrofit2.Response;
 public class login extends Fragment
 {
 
-   Button signin_btn;
+    Button signin_btn;
     EditText et_username, et_password;
+    ProgressBar progressBar;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class login extends Fragment
         signin_btn = (Button) view.findViewById(R.id.signin_btn);
         et_username = (EditText)view.findViewById(R.id.etusername);
         et_password = (EditText) view.findViewById(R.id.etpassword);
+        progressBar = (ProgressBar)view.findViewById(R.id.login_progressBar);
         signinBtn();
         return view;
     }
@@ -68,6 +71,7 @@ public class login extends Fragment
     }
     private void sendLoginToServer(Login login)
     {
+        progressBar.setVisibility(View.VISIBLE);
         ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
         Call<Login> loginUser = retrofit.LoginUser(login);
         loginUser.enqueue(new Callback<Login>()
@@ -82,6 +86,11 @@ public class login extends Fragment
                     getContext().startActivity(i2);
 
                     Preferences.setLogin(true,getContext());
+                    Preferences.setMyId(response.body().getId(),getContext());
+                    if(response.body().getType()=="mentee")
+                    {
+                        Preferences.setMentee(true,getContext());
+                    }
                 }
                 else if(response.code() == 404 )
                 {
@@ -91,12 +100,14 @@ public class login extends Fragment
                 {
                     Toast.makeText(getActivity(),getText(R.string.error_general) , Toast.LENGTH_LONG).show();
                 }
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<Login> call, Throwable t)
             {
                 Toast.makeText(getActivity(),getText(R.string.failure) , Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,7 +22,6 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp">
-
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/myImageView"
                 android:layout_alignParentLeft="true"
@@ -31,6 +31,13 @@
                 fresco:placeholderImage="@drawable/default_image"
                 app:layout_collapseMode="parallax"
                 />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/settings_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin"
+                />
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -38,6 +45,7 @@
         android:id="@+id/fabProgressCircle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_collapseMode="parallax"
         app:reusable="true"
         app:arcColor="@color/colorPrimary"
         android:layout_margin="@dimen/activity_horizontal_margin"
@@ -68,7 +76,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/ed1"
@@ -184,6 +191,19 @@
                 android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/major"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:hint="@string/major" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/ed16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/graduation_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"

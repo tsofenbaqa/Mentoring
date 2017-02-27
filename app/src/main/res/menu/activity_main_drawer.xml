@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/profile"
-        android:title="@string/profile" />
+        android:title="@string/mentee_profile" />
     <item
         android:id="@+id/logout"
         android:title="@string/logout"
