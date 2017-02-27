@@ -170,7 +170,7 @@ public class RegisterFragment extends Fragment {
 
   }
 
-  public void sendRegisterToServer(Register register) {
+  public void sendRegisterToServer(final Register register) {
     progressBar.setVisibility(View.VISIBLE);
     ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
     Call<String> addNewUser = retrofit.addNewUser(register);

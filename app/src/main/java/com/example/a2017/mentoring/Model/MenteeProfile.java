@@ -8,28 +8,31 @@ import java.io.Serializable;
 
 public class MenteeProfile implements Serializable
 {
+
+    private int userId;
     private String fname;
     private String lname;
     private long id ;
     private String gender;
     private String phone;
     private String email;
-    private String mentor;
+    private int mentor;
     private String major;
-    private String semesterLeft;
+    private int semesterLeft;
     private String educationStatus;
+    private String acadimicinstitution;
     private String address;
     private String note ;
-    private String tsofenCourse;
+    private int tsofenCourse;
     private String courseRegistrationDate;
     private byte[] imageFile;
     private byte[] resumeFile;
     private byte[] gradeSheetFile;
-
     public MenteeProfile() {
     }
+    public MenteeProfile(int user,String fname, String lname, long id, String gender, String phone, String email, int mentor, String major, int semesterLeft, String educationStatus, String address, String note, int tsofenCourse,String Acadimicinstitution, String courseRegistrationDate, byte[] imageFile, byte[] resumeFile, byte[] gradeSheetFile) {
 
-    public MenteeProfile(String fname, String lname, long id, String gender, String phone, String email, String mentor, String major, String semesterLeft, String educationStatus, String address, String note, String tsofenCourse, String courseRegistrationDate, byte[] imageFile, byte[] resumeFile, byte[] gradeSheetFile) {
+        this.userId=user;
         this.fname = fname;
         this.lname = lname;
         this.id = id;
@@ -47,140 +50,124 @@ public class MenteeProfile implements Serializable
         this.imageFile = imageFile;
         this.resumeFile = resumeFile;
         this.gradeSheetFile = gradeSheetFile;
+        this.acadimicinstitution=Acadimicinstitution;
     }
-
+    public int getUserId() {
+        return userId;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+    public void setMentor(int mentor) {
+        this.mentor = mentor;
+    }
     public String getFname() {
         return fname;
     }
-
     public void setFname(String fname) {
         this.fname = fname;
     }
-
     public String getLname() {
         return lname;
     }
-
     public void setLname(String lname) {
         this.lname = lname;
     }
-
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
-
     public String getGender() {
         return gender;
     }
-
     public void setGender(String gender) {
         this.gender = gender;
     }
-
     public String getPhone() {
         return phone;
     }
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
     public String getEmail() {
         return email;
     }
 
+    public String getAcadimicinstitution() {
+        return acadimicinstitution;
+    }
+    public void setAcadimicinstitution(String acadimicinstitution) {
+        this.acadimicinstitution = acadimicinstitution;
+    }
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getMentor() {
+    public int getMentor() {
         return mentor;
     }
-
-    public void setMentor(String mentor) {
-        this.mentor = mentor;
+    public void setmentor(int mentor)
+    {
+        this.mentor=mentor;
     }
-
     public String getMajor() {
         return major;
     }
-
     public void setMajor(String major) {
         this.major = major;
     }
-
-    public String getSemesterLeft() {
+    public int getSemesterLeft() {
         return semesterLeft;
     }
-
-    public void setSemesterLeft(String semesterLeft) {
+    public void setSemesterLeft(int semesterLeft) {
         this.semesterLeft = semesterLeft;
     }
-
     public String getEducationStatus() {
         return educationStatus;
     }
-
     public void setEducationStatus(String educationStatus) {
         this.educationStatus = educationStatus;
     }
-
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
-
     public String getNote() {
         return note;
     }
-
     public void setNote(String note) {
         this.note = note;
     }
-
-    public String getTsofenCourse() {
+    public int getTsofenCourse() {
         return tsofenCourse;
     }
-
-    public void setTsofenCourse(String tsofenCourse) {
+    public void setTsofenCourse(int tsofenCourse) {
         this.tsofenCourse = tsofenCourse;
     }
-
     public String getCourseRegistrationDate() {
         return courseRegistrationDate;
     }
-
     public void setCourseRegistrationDate(String courseRegistrationDate) {
         this.courseRegistrationDate = courseRegistrationDate;
     }
-
     public byte[] getImageFile() {
         return imageFile;
     }
-
     public void setImageFile(byte[] imageFile) {
         this.imageFile = imageFile;
     }
-
     public byte[] getResumeFile() {
         return resumeFile;
     }
-
     public void setResumeFile(byte[] resumeFile) {
         this.resumeFile = resumeFile;
     }
-
     public byte[] getGradeSheetFile() {
         return gradeSheetFile;
     }
-
     public void setGradeSheetFile(byte[] gradeSheetFile) {
         this.gradeSheetFile = gradeSheetFile;
     }

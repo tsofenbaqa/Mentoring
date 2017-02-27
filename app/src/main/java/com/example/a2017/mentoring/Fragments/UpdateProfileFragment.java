@@ -63,12 +63,12 @@ public class UpdateProfileFragment extends Fragment
         myImage = (SimpleDraweeView) view.findViewById(R.id.myImageView);
         chooseResume=(Button)view.findViewById(R.id.upcv_btn);
         chooseGradeSheet=(Button)view.findViewById(R.id.gradeSheetBtn);
-        //menteeUpdateProfile=(Button)view.findViewById(R.id.menteeUpdateProfile);
+        menteeUpdateProfile=(Button)view.findViewById(R.id.menteeUpdateProfile);
         fabProgressCircle = (FABProgressCircle) view.findViewById(R.id.fabProgressCircle);
         setMyimageOnClick();
         setChooseResumeOnClick();
         setChooseGradeSheetOnClick();
-        //setmenteeUpdateProfileOnClick();
+        setmenteeUpdateProfileOnClick();
         return view;
     }
 
@@ -102,7 +102,7 @@ public class UpdateProfileFragment extends Fragment
         }
     };
 
-   /* private void setmenteeUpdateProfileOnClick()
+   private void setmenteeUpdateProfileOnClick()
     {
         menteeUpdateProfile.setOnClickListener(new View.OnClickListener()
         {
@@ -110,12 +110,12 @@ public class UpdateProfileFragment extends Fragment
             public void onClick(View v)
             {
                 getTextFromEditText();
-                MenteeProfile menteeProfile = new MenteeProfile("s","s",1,"s","s","s","s","s","s","s","s","s","s","s",null,null,null);
+                MenteeProfile menteeProfile = new MenteeProfile(1,"S","S",1,"S","S","S",50,"S",50,"S","S","S",50,"S","S",null,null,null);
                 fireMenteeProfileService(menteeProfile);
                 fabProgressCircle.show();
             }
         });
-    }*/
+    }
 
     private void setMyimageOnClick()
     {
