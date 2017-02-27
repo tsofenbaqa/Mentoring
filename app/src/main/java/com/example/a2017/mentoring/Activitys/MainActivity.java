@@ -1,8 +1,12 @@
 package com.example.a2017.mentoring.Activitys;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -25,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle toggle;
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
+    private static final int READ_PERMISSION_CODE = 123;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,5 +100,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MeetingFragment meetingFragment = new MeetingFragment();
         transaction.replace(R.id.fragment_container, meetingFragment,"MEETING_FRAGMENT");
         transaction.commit();
+    }
+
+    private void configureRequestPermissions()
+    {
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            {
+                if(!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                {
+                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, READ_PERMISSION_CODE);
+                }
+            }
+        }
+
     }
 }

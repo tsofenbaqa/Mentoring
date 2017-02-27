@@ -20,4 +20,7 @@ public interface ApiInterfaceRetrofit
     @POST("loginUser")
     Call<String> LoginUser(@Body Login login);
 
+    @POST("updateMenteeProfile")
+    Call<Void> updateMenteeProfile(@Body MenteeProfile menteeProfile);
+
 }
