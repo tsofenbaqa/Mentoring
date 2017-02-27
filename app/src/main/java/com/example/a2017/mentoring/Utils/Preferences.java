@@ -11,6 +11,8 @@ public class Preferences
 {
     private static final String SHARED_PREFERENCES_FILE_NAME = "chatAppPreferences";
     private static final String LOGIN = "login";
+    private static final String PROFILEUPDATE = "profileupdate";
+    private static final String REGISTEROBJECT= "registerobject";
     private static final String FIRST_RUN = "firstRun";
 
     public static boolean isLogin(Context context)
@@ -23,6 +25,26 @@ public class Preferences
     {
         SharedPreferences preferences = getPreferences(context);
         preferences.edit().putBoolean(LOGIN,isLogin).apply();
+    }
+
+    public static boolean isProfileUpdate(Context context)
+    {
+        SharedPreferences preferences = getPreferences(context);
+        return preferences.getBoolean(PROFILEUPDATE,false);
+    }
+    public static void setProfileUpdate(boolean isProfileUpdate,Context context)
+    {
+        SharedPreferences preferences = getPreferences(context);
+        preferences.edit().putBoolean(PROFILEUPDATE,isProfileUpdate).apply();
+    }
+
+    public static String isRegisterObject(Context context){
+        SharedPreferences preferences = getPreferences(context);
+        return preferences.getString(REGISTEROBJECT,"");
+    }
+    public static void setRegisterObject(String isRegisterObject,Context context){
+        SharedPreferences preferences = getPreferences(context);
+        preferences.edit().putString(REGISTEROBJECT,isRegisterObject).apply();
     }
 
     public static boolean isFirstRun(Context context)

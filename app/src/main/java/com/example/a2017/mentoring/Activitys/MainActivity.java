@@ -20,7 +20,6 @@ import com.example.a2017.mentoring.Fragments.MeetingFragment;
 import com.example.a2017.mentoring.Fragments.UpdateProfileFragment;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.Utils.Preferences;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     private Toolbar toolbar;

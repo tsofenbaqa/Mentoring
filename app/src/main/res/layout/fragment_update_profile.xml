@@ -58,7 +58,14 @@
                             fresco:placeholderImage="@drawable/androidteam"
                             app:layout_collapseMode="parallax"
                             />
+
+
+
+
                     </android.support.design.widget.CollapsingToolbarLayout>
+
+
+
                 </android.support.design.widget.AppBarLayout>
 
                 <android.support.v4.widget.NestedScrollView
@@ -281,13 +288,13 @@
                             android:background="@color/bar"/>
 
                         <Button
-                            android:id="@+id/gradeSheetBtn"
+                            android:id="@+id/upmark_btn"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:text="@string/upmark"
                             android:layout_gravity="right"
                             android:background="@color/bar"
-                            />
+                            android:layout_marginTop="15dp"/>
 
                         <Button android:layout_width="match_parent"
                             android:layout_height="wrap_content"
