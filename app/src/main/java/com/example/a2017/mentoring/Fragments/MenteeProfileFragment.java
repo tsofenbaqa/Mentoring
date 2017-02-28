@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -28,8 +29,9 @@ import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.Services.MenteeProfileService;
 import com.example.a2017.mentoring.Utils.Preferences;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.github.jorgecastilloprz.FABProgressCircle;
+import com.facebook.imagepipeline.core.ImagePipeline;
 import com.google.gson.Gson;
 
 /**
@@ -45,7 +47,6 @@ public class MenteeProfileFragment extends Fragment
     private boolean checkServiceRunning = false;
     private SimpleDraweeView myImage;
     private CoordinatorLayout coordinatorLayout;
-    private FABProgressCircle fabProgressCircle;
     private Button  menteeUpdateProfile;
     private String imageUriString = null ;
     private String resumeUriString = null ;
@@ -122,15 +123,12 @@ public class MenteeProfileFragment extends Fragment
             boolean isRunning = intent.getExtras().getBoolean("running");
             if(isRunning)
             {
-                fabProgressCircle.show();
             }
             if(isDone)
             {
-                fabProgressCircle.beginFinalAnimation();
             }
             else
             {
-                fabProgressCircle.hide();
             }
         }
     };
@@ -147,7 +145,6 @@ public class MenteeProfileFragment extends Fragment
                 getGraduation_status();
                 MenteeProfile menteeProfile = new MenteeProfile(1,"S","S",1,"S","S","S",50,"S",50,"S","S","S",50,"S","S",null,null,null);
                 fireMenteeProfileService(menteeProfile);
-                fabProgressCircle.show();
             }
         });
     }
@@ -225,8 +222,11 @@ public class MenteeProfileFragment extends Fragment
         {
             if(requestCode==SELECT_PICTURE)
             {
-                imageUriString=data.getData().toString();
-                myImage.setImageURI(data.getData());
+                Uri imageUri = data.getData();
+                imageUriString=imageUri.toString();
+                Fresco.getImagePipeline().evictFromMemoryCache(imageUri);
+                myImage.setImageURI(imageUriString);
+                myImage.refreshDrawableState();
             }
             else if(requestCode==SELECT_RESUME)
             {
@@ -326,7 +326,6 @@ public class MenteeProfileFragment extends Fragment
     {
         myImage = (SimpleDraweeView) view.findViewById(R.id.myImageView);
         menteeUpdateProfile=(Button)view.findViewById(R.id.menteeUpdateProfile);
-        fabProgressCircle = (FABProgressCircle) view.findViewById(R.id.fabProgressCircle);
         fname = (EditText) view.findViewById(R.id.fname);
         lname = (EditText) view.findViewById(R.id.lname);
         id = (EditText) view.findViewById(R.id.id);
@@ -349,7 +348,5 @@ public class MenteeProfileFragment extends Fragment
         gender = (Spinner) view.findViewById(R.id.gender);
 
     }
-
-
 }
 
