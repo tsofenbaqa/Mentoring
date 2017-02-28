@@ -20,8 +20,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.a2017.mentoring.Model.MenteeProfile;
 import com.example.a2017.mentoring.Model.Register;
@@ -46,16 +46,17 @@ public class MenteeProfileFragment extends Fragment
     private SimpleDraweeView myImage;
     private CoordinatorLayout coordinatorLayout;
     private FABProgressCircle fabProgressCircle;
-    private Button chooseResume, chooseGradeSheet, menteeUpdateProfile;
+    private Button  menteeUpdateProfile;
     private String imageUriString = null ;
     private String resumeUriString = null ;
     private String gradeSheetUriString = null;
     private boolean isProfileUpdate ;
     private boolean isMentee ;
     private Register register;
-    private Spinner gender;
-    private EditText fname , lname ,id ,phone ,email ,mentor ,major ,semster ,average ,address ,notes ,courseid ,datestart , graduation_status;
-    private String _fname , _lname ,_id ,_gender ,_phone ,_email ,_mentor ,_major ,_semster ,_average ,_address ,_notes ,_courseid ,_datestart , _graduation_status;
+    private TextView chooseResume , resume_review , chooseGradeSheet , gradeSheet_review;
+    private Spinner gender, graduation_status;
+    private EditText fname , lname ,id ,phone ,email ,mentor ,major ,semster ,average ,address ,notes ,courseid ,datestart ,institution ;
+    private String _fname , _lname ,_id ,_gender ,_phone ,_email ,_mentor ,_major ,_semster ,_average ,_address ,_notes ,_courseid ,_datestart , _graduation_status ,_institution;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
@@ -71,26 +72,7 @@ public class MenteeProfileFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_update_mentee_profile,container,false);
-       // coordinatorLayout = (CoordinatorLayout)view.findViewById(R.id.cor);
-        myImage = (SimpleDraweeView) view.findViewById(R.id.myImageView);
-        chooseResume=(Button)view.findViewById(R.id.upcv_btn);
-        chooseGradeSheet=(Button)view.findViewById(R.id.gradeSheetBtn);
-        menteeUpdateProfile=(Button)view.findViewById(R.id.menteeUpdateProfile);
-        fabProgressCircle = (FABProgressCircle) view.findViewById(R.id.fabProgressCircle);
-        fname = (EditText) view.findViewById(R.id.fname);
-        lname = (EditText) view.findViewById(R.id.lname);
-        id = (EditText) view.findViewById(R.id.id);
-        phone = (EditText) view.findViewById(R.id.phone);
-        email = (EditText) view.findViewById(R.id.email);
-        mentor = (EditText) view.findViewById(R.id.mentor);
-        major = (EditText) view.findViewById(R.id.major);
-        semster = (EditText) view.findViewById(R.id.semster);
-        average = (EditText) view.findViewById(R.id.average);
-        address = (EditText) view.findViewById(R.id.address);
-        notes = (EditText) view.findViewById(R.id.address);
-        courseid = (EditText) view.findViewById(R.id.courseid);
-        datestart = (EditText) view.findViewById(R.id.datestart);
-        graduation_status = (EditText) view.findViewById(R.id.graduation_status);
+        initialize(view);
         setMyimageOnClick();
         setChooseResumeOnClick();
         setChooseGradeSheetOnClick();
@@ -162,6 +144,7 @@ public class MenteeProfileFragment extends Fragment
             {
                 getTextFromEditText();
                 getType();
+                getGraduation_status();
                 MenteeProfile menteeProfile = new MenteeProfile(1,"S","S",1,"S","S","S",50,"S",50,"S","S","S",50,"S","S",null,null,null);
                 fireMenteeProfileService(menteeProfile);
                 fabProgressCircle.show();
@@ -300,7 +283,7 @@ public class MenteeProfileFragment extends Fragment
         _notes = notes.getText().toString();
         _courseid = courseid.getText().toString();
         _datestart = datestart.getText().toString();
-        _graduation_status = graduation_status.getText().toString();
+        _institution = institution.getText().toString();
     }
     private void getType()
     {
@@ -316,8 +299,54 @@ public class MenteeProfileFragment extends Fragment
             }
         });
     }
+
+    private void getGraduation_status()
+    {
+        graduation_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                _graduation_status = graduation_status.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+        });
+    }
     private void getDataFromServer()
     {
+
+    }
+
+    private void initialize(View view)
+    {
+        myImage = (SimpleDraweeView) view.findViewById(R.id.myImageView);
+        menteeUpdateProfile=(Button)view.findViewById(R.id.menteeUpdateProfile);
+        fabProgressCircle = (FABProgressCircle) view.findViewById(R.id.fabProgressCircle);
+        fname = (EditText) view.findViewById(R.id.fname);
+        lname = (EditText) view.findViewById(R.id.lname);
+        id = (EditText) view.findViewById(R.id.id);
+        phone = (EditText) view.findViewById(R.id.phone);
+        email = (EditText) view.findViewById(R.id.email);
+        mentor = (EditText) view.findViewById(R.id.mentor);
+        major = (EditText) view.findViewById(R.id.major);
+        semster = (EditText) view.findViewById(R.id.semster);
+        average = (EditText) view.findViewById(R.id.average);
+        address = (EditText) view.findViewById(R.id.address);
+        notes = (EditText) view.findViewById(R.id.address);
+        courseid = (EditText) view.findViewById(R.id.courseid);
+        datestart = (EditText) view.findViewById(R.id.datestart);
+        institution = (EditText) view.findViewById(R.id.institution);
+        graduation_status = (Spinner) view.findViewById(R.id.graduation_status);
+        chooseResume = (TextView) view.findViewById(R.id.resume);
+        resume_review = (TextView) view.findViewById(R.id.resume_review);
+        chooseGradeSheet = (TextView) view.findViewById(R.id.gradeSheet);
+        gradeSheet_review = (TextView) view.findViewById(R.id.gradeSheet_review);
+        gender = (Spinner) view.findViewById(R.id.gender);
 
     }
 

@@ -14,6 +14,8 @@
     <string name="email">דוא"ל</string>
     <string name="mentor">מנטור</string>
     <string name="major">התמחות</string>
+    <!-- sanad -->
+    <string name="graduation_status">סטטוס לימודים</string>
     <string name="institution">מוסד לימודים</string>
     <string name="semster">מספר סמסטר לסיום</string>
     <string name="average">ממוצע ציונים</string>
@@ -40,7 +42,6 @@
     </string-array>
     <string name="type">נרשם כ</string>
     <string name="ok">אישור</string>
-    <string name="mentee_profile"> מנטיי פרופיל</string>
     <!-- meeting row -->
     <string name="meetingTitle">כותרת פגישה</string>
     <string name="meetingTopic">נושא פגישה</string>
@@ -75,4 +76,12 @@
     <!-- Registration Strings -->
     <string name="logout">יציאה</string>
     <string name="registered">נרשם בהצלחה</string>
+
+    <!-- sanad -->
+    <string name="mentee_profile"> מנטיי פרופיל</string>
+    <string-array name="graduation_status">
+        <item>סטודנט</item>
+        <item>בוגר</item>
+    </string-array>
+
 </resources>
