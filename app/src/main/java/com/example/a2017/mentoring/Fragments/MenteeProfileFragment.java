@@ -56,9 +56,9 @@ public class MenteeProfileFragment extends Fragment
     private Register register;
     private TextView chooseResume , resume_review , chooseGradeSheet , gradeSheet_review;
     private Spinner gender, graduation_status;
-    private EditText fname , lname ,id ,phone ,email ,mentor ,major ,semster ,average ,address ,notes ,courseid ,datestart ,institution ;
-    private String _fname , _lname ,_id ,_gender ,_phone ,_email ,_mentor ,_major ,_semster ,_average ,_address ,_notes ,_courseid ,_datestart , _graduation_status ,_institution;
-
+    private EditText fname , lname ,id ,phone ,email ,major ,semster ,average ,address ,notes ,courseid ,datestart ,institution ;
+    private String _fname , _lname ,_id ,_gender ,_phone ,_email  ,_major ,_semster ,_average ,_address ,_notes ,_courseid ,_datestart , _graduation_status ,_institution;
+    private int userid;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -66,6 +66,7 @@ public class MenteeProfileFragment extends Fragment
         isFirstRun = Preferences.isFirstRun(getActivity());
         isProfileUpdate = Preferences.isProfileUpdate(getContext());
         isMentee = Preferences.isMentee(getContext());
+        userid= Preferences.myId(getContext());
     }
 
     @Nullable
@@ -140,10 +141,11 @@ public class MenteeProfileFragment extends Fragment
             @Override
             public void onClick(View v)
             {
+
                 getTextFromEditText();
                 getType();
                 getGraduation_status();
-                MenteeProfile menteeProfile = new MenteeProfile(1,"S","S",1,"S","S","S",50,"S",50,"S","S","S",50,"S","S",null,null,null);
+                MenteeProfile menteeProfile = new MenteeProfile(userid,_fname,_lname,Long.parseLong(_id),_gender,_phone,_email,_major,Integer.parseInt(_semster),_graduation_status,_address,_notes,Integer.parseInt(_courseid),_institution,_datestart,null,null,null);
                 fireMenteeProfileService(menteeProfile);
             }
         });
@@ -274,7 +276,6 @@ public class MenteeProfileFragment extends Fragment
         _address = address.getText().toString();
         _id = id.getText().toString();
         _phone = phone.getText().toString();
-        _mentor = mentor.getText().toString();
         _major = major.getText().toString();
         _semster = semster.getText().toString();
         _average = average.getText().toString();
@@ -329,7 +330,6 @@ public class MenteeProfileFragment extends Fragment
         id = (EditText) view.findViewById(R.id.id);
         phone = (EditText) view.findViewById(R.id.phone);
         email = (EditText) view.findViewById(R.id.email);
-        mentor = (EditText) view.findViewById(R.id.mentor);
         major = (EditText) view.findViewById(R.id.major);
         semster = (EditText) view.findViewById(R.id.semster);
         average = (EditText) view.findViewById(R.id.average);

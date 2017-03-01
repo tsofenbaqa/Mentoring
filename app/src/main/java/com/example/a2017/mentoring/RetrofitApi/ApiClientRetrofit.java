@@ -9,7 +9,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClientRetrofit
 {
-    private static final String BASE_URL = "http://192.168.0.43:8080/MentoringServer/MentoringServices/";
+    private static final String BASE_URL = "http://52.29.110.203:8080/MentoringServer/MentoringServices/";
+
+    //private static final String BASE_URL = "http://192.168.0.43:8080/MentoringServer/MentoringServices/";
    // private static final String BASE_URL = "http://10.0.0.8:8080/test/";
     private static Retrofit retrofit = null ;
     public static Retrofit getClient()
