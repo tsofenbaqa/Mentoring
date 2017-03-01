@@ -16,7 +16,6 @@ public class MenteeProfile implements Serializable
     private String gender;
     private String phone;
     private String email;
-    private int mentor;
     private String major;
     private int semesterLeft;
     private String educationStatus;
@@ -30,7 +29,7 @@ public class MenteeProfile implements Serializable
     private byte[] gradeSheetFile;
     public MenteeProfile() {
     }
-    public MenteeProfile(int user,String fname, String lname, long id, String gender, String phone, String email, int mentor, String major, int semesterLeft, String educationStatus, String address, String note, int tsofenCourse,String Acadimicinstitution, String courseRegistrationDate, byte[] imageFile, byte[] resumeFile, byte[] gradeSheetFile) {
+    public MenteeProfile(int user,String fname, String lname, long id, String gender, String phone, String email, String major, int semesterLeft, String educationStatus, String address, String note, int tsofenCourse,String Acadimicinstitution, String courseRegistrationDate, byte[] imageFile, byte[] resumeFile, byte[] gradeSheetFile) {
 
         this.userId=user;
         this.fname = fname;
@@ -39,7 +38,6 @@ public class MenteeProfile implements Serializable
         this.gender = gender;
         this.phone = phone;
         this.email = email;
-        this.mentor = mentor;
         this.major = major;
         this.semesterLeft = semesterLeft;
         this.educationStatus = educationStatus;
@@ -57,9 +55,6 @@ public class MenteeProfile implements Serializable
     }
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-    public void setMentor(int mentor) {
-        this.mentor = mentor;
     }
     public String getFname() {
         return fname;
@@ -103,13 +98,6 @@ public class MenteeProfile implements Serializable
     }
     public void setEmail(String email) {
         this.email = email;
-    }
-    public int getMentor() {
-        return mentor;
-    }
-    public void setmentor(int mentor)
-    {
-        this.mentor=mentor;
     }
     public String getMajor() {
         return major;
