@@ -44,34 +44,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         isMentee = Preferences.isMentee(this);
         actionBarDrawerToggle();
         configureRequestPermissions();
+        whichFragmentToShow();
     }
 
     @Override
     protected void onStart()
     {
         super.onStart();
-        if(isMentee)
-        {
-            if(isProfileUpdate)
-            {
-                goToMettingFragment();
-            }
-            else
-            {
-                goToMenteeProfile();
-            }
-        }
-        else
-        {
-            if(isProfileUpdate)
-            {
-                goToMenteeList();
-            }
-            else
-            {
-                goToMentorProfile();
-            }
-        }
+
     }
 
     @Override
@@ -171,5 +151,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
+    }
+
+    private void whichFragmentToShow()
+    {
+        if(isMentee)
+        {
+            if(isProfileUpdate)
+            {
+                goToMettingFragment();
+            }
+            else
+            {
+                goToMenteeProfile();
+            }
+        }
+        else
+        {
+            if(isProfileUpdate)
+            {
+                goToMenteeList();
+            }
+            else
+            {
+                goToMentorProfile();
+            }
+        }
     }
 }

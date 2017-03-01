@@ -224,9 +224,7 @@ public class MenteeProfileFragment extends Fragment
             {
                 Uri imageUri = data.getData();
                 imageUriString=imageUri.toString();
-                Fresco.getImagePipeline().evictFromMemoryCache(imageUri);
-                myImage.setImageURI(imageUriString);
-                myImage.refreshDrawableState();
+                myImage.setImageURI(imageUri);
             }
             else if(requestCode==SELECT_RESUME)
             {
