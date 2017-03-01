@@ -82,7 +82,6 @@ public class Preferences
         SharedPreferences preferences = getPreferences(context);
         preferences.edit().putBoolean(IS_MENTEE,isMentee).apply();
     }
-
     private static SharedPreferences getPreferences(Context context)
     {
         SharedPreferences preferences = context.getSharedPreferences(SHARED_PREFERENCES_FILE_NAME,context.MODE_PRIVATE);

@@ -24,14 +24,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.a2017.mentoring.Model.MenteeProfile;
 import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.Services.MenteeProfileService;
 import com.example.a2017.mentoring.Utils.Preferences;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.core.ImagePipeline;
 import com.google.gson.Gson;
 
 /**
@@ -56,8 +55,8 @@ public class MenteeProfileFragment extends Fragment
     private Register register;
     private TextView chooseResume , resume_review , chooseGradeSheet , gradeSheet_review;
     private Spinner gender, graduation_status;
-    private EditText fname , lname ,id ,phone ,email ,major ,semster ,average ,address ,notes ,courseid ,datestart ,institution ;
-    private String _fname , _lname ,_id ,_gender ,_phone ,_email  ,_major ,_semster ,_average ,_address ,_notes ,_courseid ,_datestart , _graduation_status ,_institution;
+    private EditText fname , lname ,phone ,email ,major ,semster ,average ,address ,notes ,courseid ,institution ;
+    private String _fname , _lname ,_gender ,_phone ,_email  ,_major ,_semster ,_average ,_address ,_notes ,_courseid , _graduation_status ,_institution;
     private int userid;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
@@ -103,9 +102,7 @@ public class MenteeProfileFragment extends Fragment
             }
             else
             {
-                Gson gson = new Gson();
-                String registerJson = Preferences.RegisterObject(getContext());
-                register = gson.fromJson(registerJson,Register.class);
+                getRegisterObject();
             }
         }
         else
@@ -145,7 +142,7 @@ public class MenteeProfileFragment extends Fragment
                 getTextFromEditText();
                 getType();
                 getGraduation_status();
-                MenteeProfile menteeProfile = new MenteeProfile(userid,_fname,_lname,Long.parseLong(_id),_gender,_phone,_email,_major,Integer.parseInt(_semster),_graduation_status,_address,_notes,Integer.parseInt(_courseid),_institution,_datestart,null,null,null);
+                MenteeProfile menteeProfile = new MenteeProfile(userid,_fname,_lname,_gender,_phone,_email,_major,Integer.parseInt(_semster),_graduation_status,_address,_notes,Integer.parseInt(_courseid),_institution,null,null,null);
                 fireMenteeProfileService(menteeProfile);
             }
         });
@@ -274,14 +271,12 @@ public class MenteeProfileFragment extends Fragment
         _lname = lname.getText().toString();
         _email = email.getText().toString();
         _address = address.getText().toString();
-        _id = id.getText().toString();
         _phone = phone.getText().toString();
         _major = major.getText().toString();
         _semster = semster.getText().toString();
         _average = average.getText().toString();
         _notes = notes.getText().toString();
         _courseid = courseid.getText().toString();
-        _datestart = datestart.getText().toString();
         _institution = institution.getText().toString();
     }
     private void getType()
@@ -327,7 +322,6 @@ public class MenteeProfileFragment extends Fragment
         menteeUpdateProfile=(Button)view.findViewById(R.id.menteeUpdateProfile);
         fname = (EditText) view.findViewById(R.id.fname);
         lname = (EditText) view.findViewById(R.id.lname);
-        id = (EditText) view.findViewById(R.id.id);
         phone = (EditText) view.findViewById(R.id.phone);
         email = (EditText) view.findViewById(R.id.email);
         major = (EditText) view.findViewById(R.id.major);
@@ -336,7 +330,6 @@ public class MenteeProfileFragment extends Fragment
         address = (EditText) view.findViewById(R.id.address);
         notes = (EditText) view.findViewById(R.id.address);
         courseid = (EditText) view.findViewById(R.id.courseid);
-        datestart = (EditText) view.findViewById(R.id.datestart);
         institution = (EditText) view.findViewById(R.id.institution);
         graduation_status = (Spinner) view.findViewById(R.id.graduation_status);
         chooseResume = (TextView) view.findViewById(R.id.resume);
@@ -345,6 +338,17 @@ public class MenteeProfileFragment extends Fragment
         gradeSheet_review = (TextView) view.findViewById(R.id.gradeSheet_review);
         gender = (Spinner) view.findViewById(R.id.gender);
 
+    }
+
+    private void getRegisterObject()
+    {
+        Gson gson = new Gson();
+        String registerJson = Preferences.RegisterObject(getContext());
+        register = gson.fromJson(registerJson,Register.class);
+        email.setText(register.getEmail());
+        fname.setText(register.getFirstName());
+        lname.setText(register.getLastName());
+        phone.setText(register.getPhone());
     }
 }
 

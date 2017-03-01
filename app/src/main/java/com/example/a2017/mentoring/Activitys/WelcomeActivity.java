@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.a2017.mentoring.Fragments.RegisterFragment;
-import com.example.a2017.mentoring.Fragments.RequestFragment;
 import com.example.a2017.mentoring.Fragments.login;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.Utils.Preferences;

@@ -2,10 +2,9 @@ package com.example.a2017.mentoring.Fragments;
 
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +22,12 @@ import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
 import com.example.a2017.mentoring.Utils.Preferences;
-
 import com.google.gson.Gson;
 import com.gospelware.liquidbutton.LiquidButton;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -16,13 +15,17 @@ import com.example.a2017.mentoring.Model.MenteeProfile;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
+import com.example.a2017.mentoring.Utils.Preferences;
 import com.google.gson.Gson;
+
 import org.apache.commons.io.IOUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -181,6 +184,7 @@ public class MenteeProfileService extends IntentService
                     Log.d("onResponse: " ,"done");
                     fireIntentToFragment(true);
                     sendFullNotification(false,getResources().getString(R.string.notify_completed));
+                    Preferences.setProfileUpdate(true,getBaseContext());
                 }
             }
 

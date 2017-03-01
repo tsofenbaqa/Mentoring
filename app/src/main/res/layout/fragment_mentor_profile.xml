@@ -15,12 +15,12 @@
         app:elevation="0dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
-        android:id="@+id/main.collapsing"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed"
-        app:contentScrim="?attr/colorPrimary"
-        app:expandedTitleMarginStart="48dp"
+            android:id="@+id/main.collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp">
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/myImageView"
@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 fresco:placeholderImageScaleType="centerCrop"
+                fresco:placeholderImage="@drawable/default_image"
                 app:layout_collapseMode="parallax"
                 />
             <android.support.v7.widget.Toolbar
@@ -147,16 +148,16 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/ed17"
+                android:id="@+id/ed7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
-                    android:id="@+id/institution"
+                    android:id="@+id/mentor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:hint="@string/institution" />
+                    android:hint="@string/mentor" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -173,63 +174,6 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/ed16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="15dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/graduation_status"
-                        android:entries="@array/graduation_status"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginRight="25dp"
-                        android:layout_weight="1"
-                        android:layout_gravity="right"/>
-                    <TextView
-                        android:id="@+id/ed42"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/graduation_status"
-                        android:layout_weight="5"
-                        />
-
-                </LinearLayout>
-
-            </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/ed10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/semster"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:hint="@string/semster" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/ed11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/average"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:hint="@string/average" />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
                 android:id="@+id/ed12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -240,6 +184,19 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:hint="@string/address" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/ed14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/company"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:hint="@string/company" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -254,65 +211,6 @@
                     android:maxLines="1"
                     android:hint="@string/notes" />
             </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/ed14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/courseid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="@string/courseid" />
-            </android.support.design.widget.TextInputLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/resume"
-                    android:paddingTop="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17sp"
-                    android:layout_alignParentRight="true"
-                    android:drawableRight="@mipmap/ic_attach_file_black_24dp"
-                    android:text="@string/upcv"/>
-
-                <TextView
-                    android:id="@+id/resume_review"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17sp"
-                    android:paddingTop="16dp"
-                    android:text="test.doc"
-                    android:layout_toLeftOf="@id/resume"
-                    android:layout_marginRight="16dp"/>
-
-                <TextView
-                    android:id="@+id/gradeSheet"
-                    android:layout_below="@id/resume"
-                    android:paddingTop="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17sp"
-                    android:layout_alignParentRight="true"
-                    android:drawableRight="@mipmap/ic_attach_file_black_24dp"
-                    android:text="@string/upmark"/>
-
-                <TextView
-                    android:id="@+id/gradeSheet_review"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="17sp"
-                    android:paddingTop="16dp"
-                    android:layout_below="@id/resume"
-                    android:text="test.pdf"
-                    android:layout_toLeftOf="@id/gradeSheet"
-                    android:layout_marginRight="16dp"/>
-            </RelativeLayout>
-
 
             <Button android:layout_width="match_parent"
                 android:layout_height="wrap_content"

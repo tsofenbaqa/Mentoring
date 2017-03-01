@@ -2,7 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/profile"
+        android:icon="@drawable/ic_home_black"
+        android:id="@+id/main_page"
+        android:title="@string/main_page" />
+    <item
+        android:icon="@drawable/ic_supervisor_account_black"
+        android:id="@+id/mentorprofile"
+        android:title="@string/mentor_profile" />
+    <item
+        android:icon="@drawable/ic_account_circle_black"
+        android:id="@+id/menteeprofile"
         android:title="@string/mentee_profile" />
     <item
         android:id="@+id/logout"
