@@ -83,5 +83,11 @@
         <item>סטודנט</item>
         <item>בוגר</item>
     </string-array>
-
+    <!-- Registration Validation Strings -->
+    <string name="Illegal_name">שם לא חוקי</string>
+    <string name="Illegal_last_name">שם משפחה חוקי</string>
+    <string name="Illegal_email">דוא''ל לא חוקי</string>
+    <string name="Illegal_password">סיסמה לא חוקית, על הסיסמה להכיל לפחות אות גדולה אותיות קטנות ורמזים מיוחדים</string>
+    <string name="Illegal_second_password">הסיסמה לא זוהה לראשונה</string>
+    <string name="Illegal_phone_number">מספר פלאפון לא חוקי,מספרי פלאפון לא פחות/יותר 10 ספרות</string>
 </resources>

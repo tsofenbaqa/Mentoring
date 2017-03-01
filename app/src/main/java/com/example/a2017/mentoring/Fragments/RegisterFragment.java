@@ -97,7 +97,7 @@ public class RegisterFragment extends Fragment {
   public boolean isValidPhoneNumber() {
     if((!android.util.Patterns.PHONE.matcher(phone_number.getText().toString()).matches())|| (_phone_number.length()<10)||(_phone_number.length()>10)) {
       //if((/*phone_number.getText().toString().length()<10)||*/(phone_number.getText().toString().length()>10)))
-      phone_number.setError("Invalid Phone number");
+      phone_number.setError(getResources().getString(R.string.Illegal_phone_number));
       return false;
     } else {
       return true;
@@ -109,7 +109,7 @@ public class RegisterFragment extends Fragment {
 //    if (TextUtils.isEmpty(target)) {
     if(!android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches())
     {
-      email.setError("Invalid Email Address");
+      email.setError(getResources().getString(R.string.Illegal_email));
       return false;
     }
     {
@@ -122,7 +122,7 @@ public class RegisterFragment extends Fragment {
     Pattern pattern = Pattern.compile(regx, Pattern.CASE_INSENSITIVE);
     Matcher matcher = pattern.matcher(first_name.getText().toString());
     if (!matcher.matches()) {
-      first_name.setError("Invalid First Name");
+      first_name.setError(getResources().getString(R.string.Illegal_name));
       return false;
     }
     else return true;
@@ -133,7 +133,7 @@ public class RegisterFragment extends Fragment {
     Pattern pattern = Pattern.compile(regx, Pattern.CASE_INSENSITIVE);
     Matcher matcher = pattern.matcher(last_name.getText().toString());
     if (!matcher.matches()) {
-      last_name.setError("Invalid Last Name");
+      last_name.setError(getResources().getString(R.string.Illegal_last_name));
       return false;
     }
     else return true;
@@ -147,7 +147,7 @@ public class RegisterFragment extends Fragment {
     matcher = pattern.matcher(first_password.getText().toString());
     if(!matcher.matches())
     {
-      first_password.setError("Invalid Password,Password must contain 0-9,A-Z and special characters");
+      first_password.setError(getResources().getString(R.string.Illegal_password));
       return false;
 
     }
@@ -164,7 +164,7 @@ public class RegisterFragment extends Fragment {
       if (isValidPassword())
         if (first_password.getText().toString().equals(second_password.getText().toString())) return true;
         else {
-          second_password.setError("Passwords doesn't match");
+          second_password.setError(getResources().getString(R.string.Illegal_second_password));
           return false;
         }
     }
