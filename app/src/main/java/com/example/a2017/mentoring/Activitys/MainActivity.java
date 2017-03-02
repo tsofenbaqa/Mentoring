@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import com.example.a2017.mentoring.Fragments.MeetingFragment;
 import com.example.a2017.mentoring.Fragments.MenteeProfileFragment;
 import com.example.a2017.mentoring.Fragments.MentorProfileFragment;
+import com.example.a2017.mentoring.Fragments.RequestFragment;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.Utils.Preferences;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int READ_PERMISSION_CODE = 123;
     private boolean isProfileUpdate ;
     private boolean isMentee ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle();
         configureRequestPermissions();
         whichFragmentToShow();
+
+        //goToMeettingFragment();
+        //goToMeetingRequest();  ignore this
     }
 
     @Override
@@ -117,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
     }
 
-    private void goToMettingFragment()
+    private void goToMeettingFragment()
     {
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
@@ -151,6 +156,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction.commit();
     }
 
+    private void goToMeetingRequest(){
+        fragmentManager = getSupportFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        RequestFragment requestFragment = new RequestFragment();
+        transaction.replace(R.id.fragment_container, requestFragment,"REQUEST_MEETING");
+        transaction.commit();
+    }
+
     private void configureRequestPermissions()
     {
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
@@ -173,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             if(isProfileUpdate)
             {
-                goToMettingFragment();
+                goToMeettingFragment();
             }
             else
             {

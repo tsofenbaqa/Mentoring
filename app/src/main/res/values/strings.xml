@@ -89,5 +89,9 @@
     <string name="main_page">עמוד ראשי</string>
     <string name="company">חברה</string>
 
+    <!-- 2/3/2017 -->
+    <string name="cv_filename"><u>CV קובץ</u></string>
+    <string name="grade_sheet"><u>קובץ גליון ציונים</u></string>
+
 
 </resources>
