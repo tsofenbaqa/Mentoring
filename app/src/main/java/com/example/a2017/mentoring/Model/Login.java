@@ -10,6 +10,7 @@ public class Login
     private String Password;
     private String Type;
     private int Id;
+    private boolean isProfileUpdated;
 
 
     public Login()
@@ -21,10 +22,11 @@ public class Login
         Id = id;
     }
 
-    public Login(String email, String password)
+    public Login(String email, String password,boolean isProfileUpdated)
     {
         Email = email;
         Password = password;
+        this.isProfileUpdated = isProfileUpdated;
     }
     public void setPassword(String password) {
         Password = password;
@@ -57,5 +59,13 @@ public class Login
 
     public void setId(int id) {
         Id = id;
+    }
+
+    public boolean isProfileUpdated() {
+        return isProfileUpdated;
+    }
+
+    public void setProfileUpdated(boolean isProfileUpdated) {
+        this.isProfileUpdated = isProfileUpdated;
     }
 }

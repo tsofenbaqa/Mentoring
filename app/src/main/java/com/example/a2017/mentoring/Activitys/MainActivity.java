@@ -1,6 +1,7 @@
 package com.example.a2017.mentoring.Activitys;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -15,10 +16,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
+import com.example.a2017.mentoring.Fragments.FileViewerFragment;
 import com.example.a2017.mentoring.Fragments.MeetingFragment;
 import com.example.a2017.mentoring.Fragments.MenteeProfileFragment;
 import com.example.a2017.mentoring.Fragments.MentorProfileFragment;
+import com.example.a2017.mentoring.Model.MentorProfile;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.Utils.Preferences;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle();
         configureRequestPermissions();
         whichFragmentToShow();
+        backStackFragment();
     }
 
     @Override
@@ -98,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 transaction.commit();
                 break;
             case R.id.mentorprofile :
-                MentorProfileFragment mentorProfileFragment = new MentorProfileFragment();
+               MentorProfileFragment mentorProfileFragment = new MentorProfileFragment();
                 transaction.replace(R.id.fragment_container, mentorProfileFragment,"PROFILE_Mentor_FRAGMENT");
                 transaction.commit();
                 break;
@@ -137,8 +143,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
-        MenteeProfileFragment menteeProfile = new MenteeProfileFragment();
-        transaction.replace(R.id.fragment_container, menteeProfile,"MENTEE_PROFILE");
+        MentorProfileFragment mentorProfile = new MentorProfileFragment();
+        transaction.replace(R.id.fragment_container, mentorProfile,"MENTOR_PROFILE");
         transaction.commit();
     }
 
@@ -191,5 +197,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 goToMentorProfile();
             }
         }
+    }
+
+
+    private void backStackFragment()
+    {
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0)
+                {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true); // show back button
+                    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            onBackPressed();
+                        }
+                    });
+                }
+                else
+                {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                    actionBarDrawerToggle();
+                }
+            }
+        });
     }
 }

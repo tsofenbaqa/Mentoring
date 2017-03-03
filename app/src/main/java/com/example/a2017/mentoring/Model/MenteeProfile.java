@@ -22,13 +22,15 @@ public class MenteeProfile implements Serializable
     private String address;
     private String note ;
     private int tsofenCourse;
+    private int avg;
     private byte[] imageFile;
     private byte[] resumeFile;
     private byte[] gradeSheetFile;
     public MenteeProfile() {
     }
-    public MenteeProfile(int user,String fname, String lname, String gender, String phone, String email, String major, int semesterLeft, String educationStatus, String address, String note, int tsofenCourse,String Acadimicinstitution, byte[] imageFile, byte[] resumeFile, byte[] gradeSheetFile) {
+    public MenteeProfile(int user,String fname, String lname, String gender, String phone, String email, String major, int semesterLeft, String educationStatus, String address, String note, int tsofenCourse,String Acadimicinstitution, byte[] imageFile, byte[] resumeFile, byte[] gradeSheetFile , int avg) {
 
+        this.avg = avg;
         this.userId=user;
         this.fname = fname;
         this.lname = lname;
@@ -142,5 +144,14 @@ public class MenteeProfile implements Serializable
     }
     public void setGradeSheetFile(byte[] gradeSheetFile) {
         this.gradeSheetFile = gradeSheetFile;
+    }
+
+    public int getAvg()
+    {
+        return avg;
+    }
+    public void setAvg(int avg)
+    {
+        this.avg = avg;
     }
 }

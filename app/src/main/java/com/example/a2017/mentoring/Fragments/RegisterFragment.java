@@ -56,7 +56,6 @@ public class RegisterFragment extends Fragment {
       ok = (Button) view.findViewById(R.id.btnok);
       liquidButton=(LiquidButton)view.findViewById(R.id.reg_done_animation);
       progressBar = (ProgressBar)view.findViewById(R.id.reg_progressBar);
-      getType();
       doAnimation();
       registerButton();
       return view;
@@ -68,7 +67,6 @@ public class RegisterFragment extends Fragment {
       @Override public void onClick(View v) {
         readTextFromEditText();
         isAllValid();
-        getType();
 
         if(isAllValid()) {
           Register register = new Register(_first_name, _last_name, _phone_number, _email, _first_password, _type);
@@ -80,19 +78,6 @@ public class RegisterFragment extends Fragment {
     });
   }
 
-  private void getType() {
-    type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-      @Override
-      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        _type = type.getItemAtPosition(position).toString();
-        typePosition = position;
-      }
-
-      @Override public void onNothingSelected(AdapterView<?> parent) {
-
-      }
-    });
-  }
 
   public boolean isValidPhoneNumber() {
     if((!android.util.Patterns.PHONE.matcher(phone_number.getText().toString()).matches())|| (_phone_number.length()<10)||(_phone_number.length()>10)) {
@@ -189,9 +174,13 @@ public class RegisterFragment extends Fragment {
           Preferences.setMyId(myId,getContext());
           Gson gson = new Gson();
           Preferences.setRegisterObject(gson.toJson(register),getContext());
-          if(typePosition==1)
+          if(typePosition == 1)
           {
               Preferences.setMentee(true,getContext());
+          }
+          else
+          {
+            Preferences.setMentee(false,getContext());
           }
         } else if (response.code() == 302) {
           Toast.makeText(getActivity(), getResources().getString(R.string.userExists), Toast.LENGTH_LONG).show();
@@ -217,6 +206,17 @@ public class RegisterFragment extends Fragment {
     _first_password = first_password.getText().toString();
     _second_password = second_password.getText().toString();
     _phone_number = phone_number.getText().toString();
+    if(type.getSelectedItemPosition()== 0)
+    {
+      _type = "mentor";
+      typePosition = 0;
+
+    }
+    else
+    {
+      _type = "mentee";
+      typePosition = 1;
+    }
   }
 
   private void doAnimation() {

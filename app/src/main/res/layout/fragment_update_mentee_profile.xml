@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 fresco:placeholderImageScaleType="centerCrop"
+                fresco:placeholderImage="@drawable/default_image"
                 app:layout_collapseMode="parallax"
                 />
             <android.support.v7.widget.Toolbar
@@ -286,7 +287,10 @@
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
                     android:paddingTop="16dp"
-                    android:text="test.doc"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_toLeftOf="@id/resume"
                     android:layout_marginRight="16dp"/>
 
@@ -308,7 +312,10 @@
                     android:textSize="17sp"
                     android:paddingTop="16dp"
                     android:layout_below="@id/resume"
-                    android:text="test.pdf"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_toLeftOf="@id/gradeSheet"
                     android:layout_marginRight="16dp"/>
             </RelativeLayout>
