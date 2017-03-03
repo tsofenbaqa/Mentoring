@@ -8,6 +8,8 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,16 +24,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
 import com.dd.morphingbutton.MorphingButton;
+import com.example.a2017.mentoring.Model.Request;
 import com.example.a2017.mentoring.R;
-import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
-import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
 
 import java.util.Calendar;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class RequestFragment extends Fragment implements
@@ -52,6 +50,9 @@ public class RequestFragment extends Fragment implements
 
     String meeting_date,meeting_time,meeting_type,meeting_topic,meeting_public_feedback,meeting_private_feedback;
     MorphingButton morphingButton;
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction transaction;
 
     public RequestFragment() {
         // Required empty public constructor
@@ -122,9 +123,11 @@ public class RequestFragment extends Fragment implements
             @Override
             public void onClick(View v) {
                 if(validInformations()){
-                    Toast.makeText(getActivity(),"Request was sent Successfull",Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(),"Request was sent Successfull",Toast.LENGTH_SHORT).show();
                     hideErrors();
                     success();
+                    Request request = new Request("title","topic","date");
+                    addMeetingToList(request);
                     //sendRequestMeetingToServer(new Request(1,2,meeting_type,meeting_date,meeting_time,meeting_topic,"",""));
 
                 }else{
@@ -262,6 +265,17 @@ public class RequestFragment extends Fragment implements
         morphingButton.morph(circle);
     }
 
+
+    public void addMeetingToList(Request request){
+         MeetingFragment meetingFragment = new MeetingFragment();
+//        meetingFragment.meetingList.add(request);
+//        meetingFragment.mAdapter.updateDataSet(meetingFragment.meetingList);
+//
+//         fragmentManager = getFragmentManager();
+//         transaction = fragmentManager.beginTransaction();
+//         transaction.replace(R.id.fragment_container, meetingFragment,"MEETING_FRAGMENT");
+//         transaction.commit();
+    }
 
     /*public void sendRequestMeetingToServer(Request request){
         ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
