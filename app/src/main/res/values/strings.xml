@@ -92,6 +92,7 @@
     <!-- 2/3/2017 -->
     <string name="cv_filename"><u>CV קובץ</u></string>
     <string name="grade_sheet"><u>קובץ גליון ציונים</u></string>
+    <string name="download">הורדה</string>
 
 
 </resources>

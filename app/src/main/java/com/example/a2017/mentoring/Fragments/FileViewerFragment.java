@@ -1,9 +1,15 @@
 package com.example.a2017.mentoring.Fragments;
 
+import android.app.DownloadManager;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
@@ -19,12 +25,14 @@ public class FileViewerFragment extends Fragment
 {
     private WebView webView;
     private boolean isResume;
+    private String fileUri;
     private  int id ;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        this.setHasOptionsMenu(true);
         getArgument();
     }
 
@@ -38,6 +46,25 @@ public class FileViewerFragment extends Fragment
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        inflater.inflate(R.menu.download, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+        if (id == R.id.action_download)
+        {
+            startDownload();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setUpWebView()
     {
         webView.setWebChromeClient(new WebChromeClient());
@@ -49,12 +76,13 @@ public class FileViewerFragment extends Fragment
         webView.getSettings().setUseWideViewPort(true);
             if(isResume)
             {
-                webView.loadUrl(BaseUrl.GOOGLE_DOC+BaseUrl.MENTORING_DOCX+id);
+                fileUri = BaseUrl.MENTORING_DOCX+id;
             }
             else
             {
-                webView.loadUrl(BaseUrl.GOOGLE_DOC+BaseUrl.MENTORING_PDF+id);
+                fileUri = BaseUrl.MENTORING_PDF+id;
             }
+        webView.loadUrl(BaseUrl.GOOGLE_DOC+fileUri);
 
     }
 
@@ -63,6 +91,15 @@ public class FileViewerFragment extends Fragment
         isResume = getArguments().getBoolean("isResume");
         id = getArguments().getInt("userid");
 
+    }
+
+    private void startDownload()
+    {
+        Uri uri = Uri.parse(fileUri);
+        DownloadManager downloadManager = (DownloadManager)getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        downloadManager.enqueue(request);
     }
 
 }

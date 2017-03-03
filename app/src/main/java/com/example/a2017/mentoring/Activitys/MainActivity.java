@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int READ_PERMISSION_CODE = 123;
     private boolean isProfileUpdate ;
     private boolean isMentee ;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             if(isProfileUpdate)
             {
-                goToMettingFragment();
+                goToMeettingFragment();
             }
             else
             {
