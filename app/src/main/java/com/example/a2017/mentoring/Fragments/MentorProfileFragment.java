@@ -23,13 +23,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.example.a2017.mentoring.Model.MenteeProfile;
 import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.R;
+import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
+import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
 import com.example.a2017.mentoring.Services.MenteeProfileService;
 import com.example.a2017.mentoring.Utils.Preferences;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.Gson;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by 2017 on 13/02/2017.
@@ -47,6 +52,7 @@ public class MentorProfileFragment extends Fragment
     private String imageUriString = null ;
     private boolean isProfileUpdate ;
     private Register register;
+    private int userid;
     private Spinner gender; // graduation_status;
     private EditText fname , lname  ,phone ,email ,mentor ,major,address;
     private String _fname , _lname ,_gender ,_phone ,_email ,_major ,_address ;
@@ -58,6 +64,7 @@ public class MentorProfileFragment extends Fragment
         isFirstRun = Preferences.isFirstRun(getActivity());
         isProfileUpdate = Preferences.isProfileUpdate(getContext());
         isMentee = Preferences.isMentee(getContext());
+        userid= Preferences.myId(getContext());
     }
 
     @Nullable
@@ -67,6 +74,7 @@ public class MentorProfileFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_mentor_profile,container,false);
         initialize(view);
         setMyimageOnClick();
+        whatToDo();
         return view;
     }
 
@@ -174,21 +182,6 @@ public class MentorProfileFragment extends Fragment
         _phone = phone.getText().toString();
         _major = major.getText().toString();
     }
-    private void getType()
-    {
-        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                _gender = gender.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
 
     private void getDataFromServer()
     {
@@ -238,6 +231,53 @@ public class MentorProfileFragment extends Fragment
                 fireMentorProfileService(menteeProfile);
             }
         });
+    }
+
+    private void getRegister()
+    {
+        ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
+        Call<Register> registerCall = retrofit.getRegister(userid);
+        registerCall.enqueue(new Callback<Register>()
+        {
+            @Override
+            public void onResponse(Call<Register> call, Response<Register> response)
+            {
+                if(response.code() == 200 || response.code() ==204)
+                {
+                    Register register = response.body();
+                    updateUifromRegisterObject(register);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Register> call, Throwable t)
+            {
+
+            }
+        });
+    }
+
+    private void getRegisterObject()
+    {
+        Gson gson = new Gson();
+        String registerJson = Preferences.RegisterObject(getContext());
+        register = gson.fromJson(registerJson,Register.class);
+        if(register!=null)
+        {
+            updateUifromRegisterObject(register);
+        }
+        else
+        {
+            getRegister();
+        }
+    }
+
+    private void updateUifromRegisterObject(Register register)
+    {
+        email.setText(register.getEmail());
+        fname.setText(register.getFirstName());
+        lname.setText(register.getLastName());
+        phone.setText(register.getPhone());
     }
 
     private void whatToDo()
