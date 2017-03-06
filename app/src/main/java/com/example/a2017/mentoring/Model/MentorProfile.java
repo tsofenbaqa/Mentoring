@@ -18,13 +18,14 @@ public class MentorProfile implements Serializable
     private String experience;
     private String address;
     private String note ;
+    private String company;
     private byte[] imageFile;
 
 
 
 
     public MentorProfile(int userId, String fname, String lname, String gender, String phone, String email,
-                         String position, String experience, String address, String note, byte[] imageFile) {
+                         String position, String experience, String address,String company, String note, byte[] imageFile) {
         this.userId = userId;
         this.fname = fname;
         this.lname = lname;
@@ -35,6 +36,7 @@ public class MentorProfile implements Serializable
         this.experience = experience;
         this.address = address;
         this.note = note;
+        this.company = company;
         this.imageFile = imageFile;
     }
 

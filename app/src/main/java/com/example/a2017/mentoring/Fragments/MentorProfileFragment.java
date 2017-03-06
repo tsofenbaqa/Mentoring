@@ -18,12 +18,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.example.a2017.mentoring.Model.MenteeProfile;
+
+import com.example.a2017.mentoring.Model.MentorProfile;
 import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
@@ -32,6 +32,7 @@ import com.example.a2017.mentoring.Services.MenteeProfileService;
 import com.example.a2017.mentoring.Utils.Preferences;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,8 +55,8 @@ public class MentorProfileFragment extends Fragment
     private Register register;
     private int userid;
     private Spinner gender; // graduation_status;
-    private EditText fname , lname  ,phone ,email ,mentor ,major,address;
-    private String _fname , _lname ,_gender ,_phone ,_email ,_major ,_address ;
+    private EditText fname , lname  ,phone ,email ,mentor ,major,address,company,notes;
+    private String _fname , _lname ,_gender ,_phone ,_email ,_major ,_address,_notes,_company ;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
@@ -149,10 +150,10 @@ public class MentorProfileFragment extends Fragment
 
 
 
-    private void fireMentorProfileService( MenteeProfile menteeProfile )
+    private void fireMentorProfileService( MentorProfile mentorProfile )
     {
         Intent intent = new Intent(getContext(), MenteeProfileService.class);
-        intent.putExtra("mentorObject",menteeProfile);
+        intent.putExtra("mentorObject",mentorProfile);
         intent.putExtra("imageUri",imageUriString);
         getContext().startService(intent);
     }
@@ -181,6 +182,8 @@ public class MentorProfileFragment extends Fragment
         _address = address.getText().toString();
         _phone = phone.getText().toString();
         _major = major.getText().toString();
+        _company = company.getText().toString();
+        _notes = notes.getText().toString();
     }
 
     private void getDataFromServer()
@@ -200,6 +203,8 @@ public class MentorProfileFragment extends Fragment
         major = (EditText) view.findViewById(R.id.major);
         address = (EditText) view.findViewById(R.id.address);
         gender = (Spinner) view.findViewById(R.id.gender);
+        company = (EditText) view.findViewById(R.id.company);
+        notes = (EditText) view.findViewById(R.id.notes);
 
     }
 
@@ -216,6 +221,8 @@ public class MentorProfileFragment extends Fragment
         major.setEnabled(false);
         address.setEnabled(false);
         gender.setEnabled(false);
+        company.setEnabled(false);
+        notes.setEnabled(false);
     }
 
     private void setmenteeUpdateProfileOnClick()
@@ -227,8 +234,8 @@ public class MentorProfileFragment extends Fragment
             {
 
                 getTextFromEditText();
-                MenteeProfile menteeProfile = new MenteeProfile(userid,_fname,_lname,_gender,_phone,_email,_major,Integer.parseInt(_semster),_graduation_status,_address,_notes,Integer.parseInt(_courseid),_institution,null,null,null,Integer.parseInt(_average));
-                fireMentorProfileService(menteeProfile);
+                MentorProfile mentorProfile = new MentorProfile(userid,_fname,_lname,_gender,_phone,_email,_major,_address,_notes,null,null,null);
+                fireMentorProfileService(mentorProfile);
             }
         });
     }
