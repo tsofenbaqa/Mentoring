@@ -1,4 +1,3 @@
-
 <resources>
     <string name="app_name">Mentoring</string>
     <string name="notify_completed">העלאה הושלמה</string>
@@ -84,12 +83,22 @@
         <item>סטודנט</item>
         <item>בוגר</item>
     </string-array>
+
+    <!-- mentor profile 1/3/2017 -->
+    <string name="mentor_profile"> מנטור פרופיל</string>
+    <string name="main_page">עמוד ראשי</string>
+    <string name="company">חברה</string>
+
+    <!-- 2/3/2017 -->
+    <string name="cv_filename"><u>CV קובץ</u></string>
+    <string name="grade_sheet"><u>קובץ גליון ציונים</u></string>
+    <string name="download">הורדה</string>
     <!-- Registration Validation Strings -->
     <string name="Illegal_name">שם לא חוקי</string>
     <string name="Illegal_last_name">שם משפחה חוקי</string>
     <string name="Illegal_email">דואר אלקטרוני לא חוקי</string>
     <string name="Illegal_password">סיסמה לא חוקית על הסיסמה להכיל לפחות אות גדולה אותיות קטנות ורמזים מיוחדים</string>
     <string name="Illegal_second_password">הסיסמה לא זוהה לראשונה</string>
-    <string name="Illegal_phone_number">מספר פלאפון לא חוקי","מספרי פלאפון לא פחות "
-        /" יותר מעשר ספרות</string>
+    <string name="Illegal_phone_number">מספר פלאפון לא חוקי","מספרי פלאפון לא פחות "/" יותר מעשר ספרות</string>
+
 </resources>
