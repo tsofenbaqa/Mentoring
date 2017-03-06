@@ -20,14 +20,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a2017.mentoring.Model.Login;
 import com.example.a2017.mentoring.Model.MenteeProfile;
 import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.R;
@@ -485,6 +483,32 @@ public class MenteeProfileFragment extends Fragment
         fname.setText(register.getFirstName());
         lname.setText(register.getLastName());
         phone.setText(register.getPhone());
+    }
+
+    private void disableMenteeEditing(){
+        myImage.setClickable(false);
+        myImage.setEnabled(false);
+        menteeUpdateProfile.setClickable(false);
+        menteeUpdateProfile.setEnabled(false);
+        fname.setEnabled(false);
+        lname.setEnabled(false);
+        phone.setEnabled(false);
+        email.setEnabled(false);
+        major.setEnabled(false);
+        semster.setEnabled(false);
+        average.setEnabled(false);
+        address.setEnabled(false);
+        notes.setEnabled(false);
+        courseid.setEnabled(false);
+        institution.setEnabled(false);
+        graduation_status.setEnabled(false);
+        graduation_status.setClickable(false);
+        chooseResume.setEnabled(false);
+        resume_review.setEnabled(false);
+        chooseGradeSheet.setEnabled(false);
+        gradeSheet_review.setEnabled(false);
+        gender.setEnabled(false);
+        gender.setClickable(false);
     }
 }
 

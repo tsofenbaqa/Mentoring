@@ -241,5 +241,20 @@ public class MentorProfileFragment extends Fragment
         gender = (Spinner) view.findViewById(R.id.gender);
 
     }
+
+    private void disableMentorEditing(){
+        myImage.setEnabled(false);
+        myImage.setClickable(false);
+        menteeUpdateProfile.setEnabled(false);
+        menteeUpdateProfile.setClickable(false);
+        fname.setEnabled(false);
+        lname.setEnabled(false);
+        phone.setEnabled(false);
+        email.setEnabled(false);
+        mentor.setEnabled(false);
+        major.setEnabled(false);
+        address.setEnabled(false);
+        gender.setEnabled(false);
+    }
 }
 
