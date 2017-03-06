@@ -28,7 +28,7 @@ import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
-import com.example.a2017.mentoring.Services.MenteeProfileService;
+import com.example.a2017.mentoring.Services.MentorProfileService;
 import com.example.a2017.mentoring.Utils.Preferences;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
@@ -49,7 +49,7 @@ public class MentorProfileFragment extends Fragment
     private boolean checkServiceRunning = false;
     private SimpleDraweeView myImage;
     private CoordinatorLayout coordinatorLayout;
-    private Button  menteeUpdateProfile;
+    private Button  mentorUpdateProfile;
     private String imageUriString = null ;
     private boolean isProfileUpdate ;
     private Register register;
@@ -75,6 +75,7 @@ public class MentorProfileFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_mentor_profile,container,false);
         initialize(view);
         setMyimageOnClick();
+        setMentorUpdateProfileOnClick();
         whatToDo();
         return view;
     }
@@ -83,7 +84,7 @@ public class MentorProfileFragment extends Fragment
     public void onStart()
     {
         super.onStart();
-        IntentFilter intentFilter = new IntentFilter(MenteeProfileService.ACTION);
+        IntentFilter intentFilter = new IntentFilter(MentorProfileService.ACTION);
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver,intentFilter);
     }
 
@@ -152,7 +153,7 @@ public class MentorProfileFragment extends Fragment
 
     private void fireMentorProfileService( MentorProfile mentorProfile )
     {
-        Intent intent = new Intent(getContext(), MenteeProfileService.class);
+        Intent intent = new Intent(getContext(), MentorProfileService.class);
         intent.putExtra("mentorObject",mentorProfile);
         intent.putExtra("imageUri",imageUriString);
         getContext().startService(intent);
@@ -184,6 +185,15 @@ public class MentorProfileFragment extends Fragment
         _major = major.getText().toString();
         _company = company.getText().toString();
         _notes = notes.getText().toString();
+        if(gender.getSelectedItemPosition() == 0)
+        {
+            _gender ="male";
+        }
+        else
+        {
+            _gender = "female";
+        }
+
     }
 
     private void getDataFromServer()
@@ -194,12 +204,11 @@ public class MentorProfileFragment extends Fragment
     private void initialize(View view)
     {
         myImage = (SimpleDraweeView) view.findViewById(R.id.myImageView);
-        menteeUpdateProfile=(Button)view.findViewById(R.id.menteeUpdateProfile);
+        mentorUpdateProfile=(Button)view.findViewById(R.id.mentorUpdateProfile);
         fname = (EditText) view.findViewById(R.id.fname);
         lname = (EditText) view.findViewById(R.id.lname);
         phone = (EditText) view.findViewById(R.id.phone);
         email = (EditText) view.findViewById(R.id.email);
-        mentor = (EditText) view.findViewById(R.id.mentor);
         major = (EditText) view.findViewById(R.id.major);
         address = (EditText) view.findViewById(R.id.address);
         gender = (Spinner) view.findViewById(R.id.gender);
@@ -211,8 +220,8 @@ public class MentorProfileFragment extends Fragment
     private void disableMentorEditing(){
         myImage.setEnabled(false);
         myImage.setClickable(false);
-        menteeUpdateProfile.setEnabled(false);
-        menteeUpdateProfile.setClickable(false);
+        mentorUpdateProfile.setEnabled(false);
+        mentorUpdateProfile.setClickable(false);
         fname.setEnabled(false);
         lname.setEnabled(false);
         phone.setEnabled(false);
@@ -225,16 +234,16 @@ public class MentorProfileFragment extends Fragment
         notes.setEnabled(false);
     }
 
-    private void setmenteeUpdateProfileOnClick()
+    private void setMentorUpdateProfileOnClick()
     {
-        menteeUpdateProfile.setOnClickListener(new View.OnClickListener()
+        mentorUpdateProfile.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
 
                 getTextFromEditText();
-                MentorProfile mentorProfile = new MentorProfile(userid,_fname,_lname,_gender,_phone,_email,_major,_address,_notes,null,null,null);
+                MentorProfile mentorProfile = new MentorProfile(userid,_fname,_lname,_gender,_phone,_email,_major,_major,_address,_company,_notes,null);
                 fireMentorProfileService(mentorProfile);
             }
         });
@@ -289,7 +298,7 @@ public class MentorProfileFragment extends Fragment
 
     private void whatToDo()
     {
-        if(isMentee)
+        if(!isMentee)
         {
             if(isProfileUpdate)
             {

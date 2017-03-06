@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -226,6 +225,9 @@ public class RegisterFragment extends Fragment {
         Intent i2 = new Intent(getContext(), MainActivity.class);
         getContext().startActivity(i2);
         Preferences.setLogin(true, getContext());
+        if(typePosition==1){
+        Preferences.setMentee(true,getContext());
+        }
       }
 
       @Override public void onProgressUpdate(float progress) {

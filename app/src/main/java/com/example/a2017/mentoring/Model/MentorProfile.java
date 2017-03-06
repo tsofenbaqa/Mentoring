@@ -22,10 +22,8 @@ public class MentorProfile implements Serializable
     private byte[] imageFile;
 
 
-
-
     public MentorProfile(int userId, String fname, String lname, String gender, String phone, String email,
-                         String position, String experience, String address,String company, String note, byte[] imageFile) {
+                         String position, String experience, String address, String company, String note, byte[] imageFile) {
         this.userId = userId;
         this.fname = fname;
         this.lname = lname;
@@ -35,6 +33,7 @@ public class MentorProfile implements Serializable
         this.position = position;
         this.experience = experience;
         this.address = address;
+
         this.note = note;
         this.company = company;
         this.imageFile = imageFile;
@@ -110,6 +109,14 @@ public class MentorProfile implements Serializable
     }
     public void setImageFile(byte[] imageFile) {
         this.imageFile = imageFile;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
 }

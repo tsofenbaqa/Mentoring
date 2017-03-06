@@ -6,7 +6,7 @@ package com.example.a2017.mentoring.RetrofitApi;
 
 public class BaseUrl
 {
-    public static final String BASE_URL = "http://52.29.110.203:8080/MentoringServer/MentoringServices/";
+   public static final String BASE_URL = "http://52.29.110.203:8080/MentoringServer/MentoringServices/";
     //public static final String BASE_URL = "http://192.168.0.43:8080/MentoringServer/MentoringServices/";
     //public static final String BASE_URL = "http://10.0.0.8:8080/MentoringServer/MentoringServices/";
     public static final String GOOGLE_DOC = "http://docs.google.com/gview?embedded=true&url=";

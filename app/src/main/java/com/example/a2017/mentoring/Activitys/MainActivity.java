@@ -16,13 +16,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import com.example.a2017.mentoring.Fragments.FileViewerFragment;
+
 import com.example.a2017.mentoring.Fragments.MeetingFragment;
 import com.example.a2017.mentoring.Fragments.MenteeProfileFragment;
 import com.example.a2017.mentoring.Fragments.MentorProfileFragment;
 import com.example.a2017.mentoring.Fragments.RequestFragment;
-import com.example.a2017.mentoring.Model.MentorProfile;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.Utils.Preferences;
 
@@ -200,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             if(isProfileUpdate)
             {
-                goToMenteeList();
+                goToMentorProfile();
             }
             else
             {

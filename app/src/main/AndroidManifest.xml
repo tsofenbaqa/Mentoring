@@ -31,6 +31,9 @@
         <service
             android:name=".Services.MenteeProfileService"
             android:exported="false"/>
+        <service
+            android:name=".Services.MentorProfileService"
+            android:exported="false"/>
     </application>
 
 </manifest>
