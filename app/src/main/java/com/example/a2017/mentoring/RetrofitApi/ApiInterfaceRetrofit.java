@@ -25,6 +25,9 @@ public interface ApiInterfaceRetrofit
     @POST("updateMenteeProfile")
     Call<Void> updateMenteeProfile(@Body MenteeProfile menteeProfile);
 
+    @POST("updateMentorProfile")
+    Call<Void> updateMentorProfile(@Body MentorProfile mentorProfile);
+
     @GET("getMenteeProfile/{id}")
     Call<MenteeProfile> getMenteeProfile(@Path("id") int id );
 
