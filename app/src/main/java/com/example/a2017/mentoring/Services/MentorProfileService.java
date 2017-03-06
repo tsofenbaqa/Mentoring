@@ -1,5 +1,6 @@
 package com.example.a2017.mentoring.Services;
 
+import android.annotation.TargetApi;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -7,58 +8,44 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-
 import com.example.a2017.mentoring.Activitys.MainActivity;
 import com.example.a2017.mentoring.Model.MenteeProfile;
+import com.example.a2017.mentoring.Model.MentorProfile;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
 import com.example.a2017.mentoring.Utils.Preferences;
 import com.google.gson.Gson;
-
 import org.apache.commons.io.IOUtils;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by 2017 on 26/02/2017.
+ * Created by 2017 on 06/03/2017.
  */
 
-public class MenteeProfileService extends IntentService
+public class MentorProfileService extends IntentService
 {
-    public static final String ACTION ="com.example.a2017.mentoring.Services.MenteeProfileService";
+    public static final String ACTION ="com.example.a2017.mentoring.Services.MentorProfileService";
     private String imageUriString;
-    private String resumeUriString;
-    private String gradeSheetUriString;
     private Uri imageUri = null;
-    private Uri resumeUri = null;
-    private Uri gradeSheetUri = null;
-    private MenteeProfile menteeObject;
     private boolean isRunning = false;
     private boolean checkRunning = false;
+    private MentorProfile mentorObject;
 
-    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
-    public MenteeProfileService()
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
+    public MentorProfileService()
     {
-        super("MenteeProfileService");
-    }
-
-    @Override
-    public void onDestroy()
-    {
-        isRunning = false ;
+        super("MentorProfileService");
     }
 
     @Override
@@ -86,13 +73,10 @@ public class MenteeProfileService extends IntentService
     @Override
     protected void onHandleIntent(Intent intent)
     {
-        Log.d("onHandleIntent:","accessed");
         try
         {
             imageUriString = intent.getExtras().getString("imageUri");
-            resumeUriString = intent.getExtras().getString("resumeUri");
-            gradeSheetUriString = intent.getExtras().getString("gradeSheetUri");
-            menteeObject = (MenteeProfile) intent.getExtras().getSerializable("menteeObject");
+            mentorObject = (MentorProfile) intent.getExtras().getSerializable("mentorObject");
             compressFiles();
         }
         catch (Exception e)
@@ -106,8 +90,9 @@ public class MenteeProfileService extends IntentService
         sendFullNotification(true,getResources().getString(R.string.notify_upload));
         Log.d( "compressFiles: ","accessed");
         isRunning = true;
-        byte [] imageByte , resumeByte , gradeSheetByte;
-        if(imageUriString!=null) {
+        byte [] imageByte ;
+        if(imageUriString!=null)
+        {
             imageUri = Uri.parse(imageUriString);
             // get files stream
             InputStream imageInputStream = getContentResolver().openInputStream(imageUri);
@@ -117,58 +102,18 @@ public class MenteeProfileService extends IntentService
             ByteArrayOutputStream imageZipArrayOutputStream = new ByteArrayOutputStream();
             ZipOutputStream imagezipOutputStream = new ZipOutputStream(imageZipArrayOutputStream);
             // set files name in zip file container
-            ZipEntry imageEntry = new ZipEntry(menteeObject.getUserId() + ".jpg");
+            ZipEntry imageEntry = new ZipEntry(mentorObject.getUserId() + ".jpg");
             // start compress image
             imagezipOutputStream.putNextEntry(imageEntry);
             imagezipOutputStream.write(imageByte);
             imagezipOutputStream.closeEntry();
             imagezipOutputStream.close();
-            // add files to menteeObject
-            menteeObject.setImageFile(imageZipArrayOutputStream.toByteArray());
-        }
-        if(resumeUriString!=null)
-        {
-            resumeUri = Uri.parse(resumeUriString);
-            // get files stream
-            InputStream resumeInputStream = getContentResolver().openInputStream(resumeUri);
-            // convert stream to byte
-            resumeByte = IOUtils.toByteArray(resumeInputStream);
-            // set zip and output stream for resume
-            ByteArrayOutputStream resumeZipArrayOutputStream = new ByteArrayOutputStream();
-            ZipOutputStream resumeZipOutputStream = new ZipOutputStream(resumeZipArrayOutputStream);
-            // set files name in zip file container
-            ZipEntry resumeEntry = new ZipEntry(menteeObject.getUserId() + ".docx");
-            // start compress resume
-            resumeZipOutputStream.putNextEntry(resumeEntry);
-            resumeZipOutputStream.write(resumeByte);
-            resumeZipOutputStream.closeEntry();
-            resumeZipOutputStream.close();
-            // add files to menteeObject
-            menteeObject.setResumeFile(resumeZipArrayOutputStream.toByteArray());
-        }
-        if(gradeSheetUriString!=null)
-        {
-            gradeSheetUri = Uri.parse(gradeSheetUriString);
-            // get files stream
-            InputStream gradeSheetInputStream = getContentResolver().openInputStream(gradeSheetUri);
-            // convert stream to byte
-            gradeSheetByte = IOUtils.toByteArray(gradeSheetInputStream);
-            // set zip and output stream for gradeSheet
-            ByteArrayOutputStream gradeSheetZipArrayOutputStream = new ByteArrayOutputStream();
-            ZipOutputStream gradeSheetZipOutputStream = new ZipOutputStream(gradeSheetZipArrayOutputStream);
-            // set files name in zip file container
-            ZipEntry gradeSheetEntry = new ZipEntry(menteeObject.getUserId() + ".pdf");
-            // start compress gradSheet
-            gradeSheetZipOutputStream.putNextEntry(gradeSheetEntry);
-            gradeSheetZipOutputStream.write(gradeSheetByte);
-            gradeSheetZipOutputStream.closeEntry();
-            gradeSheetZipOutputStream.close();
-            // add files to menteeObject
-            menteeObject.setGradeSheetFile(gradeSheetZipArrayOutputStream.toByteArray());
+            // add files to mentorObject
+            mentorObject.setImageFile(imageZipArrayOutputStream.toByteArray());
         }
         // for testing show object in log before send to server
         Gson gson = new Gson();
-        Log.d("compressFiles: " ,gson.toJson(menteeObject));
+        Log.d("compressFiles: " ,gson.toJson(mentorObject));
         //send object to server
         updateMenteeProfile();
     }
@@ -176,7 +121,7 @@ public class MenteeProfileService extends IntentService
     private void updateMenteeProfile()
     {
         ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
-        Call<Void> updateMenteeProfile = retrofit.updateMenteeProfile(menteeObject);
+        Call<Void> updateMenteeProfile = retrofit.updateMentorProfile(mentorObject);
         updateMenteeProfile.enqueue(new Callback<Void>()
         {
             @Override
@@ -221,8 +166,5 @@ public class MenteeProfileService extends IntentService
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0,notification.build());
     }
-
-
-
 
 }

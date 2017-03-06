@@ -1,11 +1,13 @@
 package com.example.a2017.mentoring.Fragments;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -37,6 +39,7 @@ public class MentorProfileFragment extends Fragment
 {
     private static final int SELECT_PICTURE = 100;
     private boolean isFirstRun = false;
+    private boolean isMentee ;
     private boolean checkServiceRunning = false;
     private SimpleDraweeView myImage;
     private CoordinatorLayout coordinatorLayout;
@@ -44,10 +47,9 @@ public class MentorProfileFragment extends Fragment
     private String imageUriString = null ;
     private boolean isProfileUpdate ;
     private Register register;
-    //private TextView chooseResume , resume_review , chooseGradeSheet , gradeSheet_review;
     private Spinner gender; // graduation_status;
-    private EditText fname , lname ,id ,phone ,email ,mentor ,major ,semster ,average ,address ,notes ,courseid ,datestart ,institution ;
-    private String _fname , _lname ,_id ,_gender ,_phone ,_email ,_mentor ,_major ,_address ;
+    private EditText fname , lname  ,phone ,email ,mentor ,major,address;
+    private String _fname , _lname ,_gender ,_phone ,_email ,_major ,_address ;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
@@ -55,7 +57,7 @@ public class MentorProfileFragment extends Fragment
         super.onCreate(savedInstanceState);
         isFirstRun = Preferences.isFirstRun(getActivity());
         isProfileUpdate = Preferences.isProfileUpdate(getContext());
-
+        isMentee = Preferences.isMentee(getContext());
     }
 
     @Nullable
@@ -76,30 +78,6 @@ public class MentorProfileFragment extends Fragment
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver,intentFilter);
     }
 
-//    @Override
-//    public void onResume()
-//    {
-//        super.onResume();
-//
-//        if(isMentee)
-//        {
-//            if(isProfileUpdate)
-//            {
-//                getDataFromServer();
-//            }
-//            else
-//            {
-//                Gson gson = new Gson();
-//                String registerJson = Preferences.RegisterObject(getContext());
-//                register = gson.fromJson(registerJson,Register.class);
-//            }
-//        }
-//        else
-//        {
-//            getDataFromServer();
-//        }
-//
-//    }
 
     private BroadcastReceiver receiver = new BroadcastReceiver()
     {
@@ -147,34 +125,26 @@ public class MentorProfileFragment extends Fragment
 
 
 
-//    public void onActivityResult(int requestCode, int resultCode, Intent data)
-//    {
-//        if(resultCode == Activity.RESULT_OK)
-//        {
-//            if(requestCode==SELECT_PICTURE)
-//            {
-//                Uri imageUri = data.getData();
-//                imageUriString=imageUri.toString();
-//                myImage.setImageURI(imageUri);
-//            }
-//            else if(requestCode==SELECT_RESUME)
-//            {
-//                resumeUriString = data.getData().toString();
-//            }
-//            else
-//            {
-//                gradeSheetUriString = data.getData().toString();
-//            }
-//        }
-//
-//    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if(resultCode == Activity.RESULT_OK)
+        {
+            if(requestCode==SELECT_PICTURE)
+            {
+                Uri imageUri = data.getData();
+                imageUriString=imageUri.toString();
+                myImage.setImageURI(imageUri);
+            }
+        }
+
+    }
 
 
 
     private void fireMentorProfileService( MenteeProfile menteeProfile )
     {
         Intent intent = new Intent(getContext(), MenteeProfileService.class);
-        intent.putExtra("menteeObject",menteeProfile);
+        intent.putExtra("mentorObject",menteeProfile);
         intent.putExtra("imageUri",imageUriString);
         getContext().startService(intent);
     }
@@ -201,9 +171,7 @@ public class MentorProfileFragment extends Fragment
         _lname = lname.getText().toString();
         _email = email.getText().toString();
         _address = address.getText().toString();
-        _id = id.getText().toString();
         _phone = phone.getText().toString();
-        _mentor = mentor.getText().toString();
         _major = major.getText().toString();
     }
     private void getType()
@@ -255,6 +223,40 @@ public class MentorProfileFragment extends Fragment
         major.setEnabled(false);
         address.setEnabled(false);
         gender.setEnabled(false);
+    }
+
+    private void setmenteeUpdateProfileOnClick()
+    {
+        menteeUpdateProfile.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+
+                getTextFromEditText();
+                MenteeProfile menteeProfile = new MenteeProfile(userid,_fname,_lname,_gender,_phone,_email,_major,Integer.parseInt(_semster),_graduation_status,_address,_notes,Integer.parseInt(_courseid),_institution,null,null,null,Integer.parseInt(_average));
+                fireMentorProfileService(menteeProfile);
+            }
+        });
+    }
+
+    private void whatToDo()
+    {
+        if(isMentee)
+        {
+            if(isProfileUpdate)
+            {
+                getDataFromServer();
+            }
+            else
+            {
+                getRegisterObject();
+            }
+        }
+        else
+        {
+            getDataFromServer();
+        }
     }
 }
 
