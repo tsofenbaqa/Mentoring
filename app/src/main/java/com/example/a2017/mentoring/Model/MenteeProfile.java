@@ -12,7 +12,6 @@ public class MenteeProfile implements Serializable
     private int userId;
     private String fname;
     private String lname;
-    private long id ;
     private String gender;
     private String phone;
     private String email;
@@ -23,18 +22,18 @@ public class MenteeProfile implements Serializable
     private String address;
     private String note ;
     private int tsofenCourse;
-    private String courseRegistrationDate;
+    private int avg;
     private byte[] imageFile;
     private byte[] resumeFile;
     private byte[] gradeSheetFile;
     public MenteeProfile() {
     }
-    public MenteeProfile(int user,String fname, String lname, long id, String gender, String phone, String email, String major, int semesterLeft, String educationStatus, String address, String note, int tsofenCourse,String Acadimicinstitution, String courseRegistrationDate, byte[] imageFile, byte[] resumeFile, byte[] gradeSheetFile) {
+    public MenteeProfile(int user,String fname, String lname, String gender, String phone, String email, String major, int semesterLeft, String educationStatus, String address, String note, int tsofenCourse,String Acadimicinstitution, byte[] imageFile, byte[] resumeFile, byte[] gradeSheetFile , int avg) {
 
+        this.avg = avg;
         this.userId=user;
         this.fname = fname;
         this.lname = lname;
-        this.id = id;
         this.gender = gender;
         this.phone = phone;
         this.email = email;
@@ -44,7 +43,6 @@ public class MenteeProfile implements Serializable
         this.address = address;
         this.note = note;
         this.tsofenCourse = tsofenCourse;
-        this.courseRegistrationDate = courseRegistrationDate;
         this.imageFile = imageFile;
         this.resumeFile = resumeFile;
         this.gradeSheetFile = gradeSheetFile;
@@ -67,12 +65,6 @@ public class MenteeProfile implements Serializable
     }
     public void setLname(String lname) {
         this.lname = lname;
-    }
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
     }
     public String getGender() {
         return gender;
@@ -135,12 +127,6 @@ public class MenteeProfile implements Serializable
     public void setTsofenCourse(int tsofenCourse) {
         this.tsofenCourse = tsofenCourse;
     }
-    public String getCourseRegistrationDate() {
-        return courseRegistrationDate;
-    }
-    public void setCourseRegistrationDate(String courseRegistrationDate) {
-        this.courseRegistrationDate = courseRegistrationDate;
-    }
     public byte[] getImageFile() {
         return imageFile;
     }
@@ -158,5 +144,14 @@ public class MenteeProfile implements Serializable
     }
     public void setGradeSheetFile(byte[] gradeSheetFile) {
         this.gradeSheetFile = gradeSheetFile;
+    }
+
+    public int getAvg()
+    {
+        return avg;
+    }
+    public void setAvg(int avg)
+    {
+        this.avg = avg;
     }
 }

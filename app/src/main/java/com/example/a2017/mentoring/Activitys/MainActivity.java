@@ -15,11 +15,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import com.example.a2017.mentoring.Fragments.FileViewerFragment;
 import com.example.a2017.mentoring.Fragments.MeetingFragment;
 import com.example.a2017.mentoring.Fragments.MenteeProfileFragment;
+import com.example.a2017.mentoring.Fragments.MentorProfileFragment;
+import com.example.a2017.mentoring.Fragments.RequestFragment;
+import com.example.a2017.mentoring.Model.MentorProfile;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.Utils.Preferences;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     private Toolbar toolbar;
@@ -45,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle();
         configureRequestPermissions();
         whichFragmentToShow();
+        backStackFragment();
+        //goToMeettingFragment();
+        //goToMeetingRequest();  ignore this
     }
 
     @Override
@@ -75,18 +84,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right);
+
         switch (id)
         {
-            case R.id.profile :
-                MenteeProfileFragment menteeProfileFragment = new MenteeProfileFragment();
-                transaction.replace(R.id.fragment_container, menteeProfileFragment,"PROFILE_FRAGMENT");
-                transaction.commit();
-                break;
+//            case R.id.main_page :
+//                MenteeProfileFragment menteeProfileFragment = new MenteeProfileFragment();
+//                transaction.replace(R.id.fragment_container, menteeProfileFragment,"PROFILE_FRAGMENT");
+//                transaction.commit();
+//                break;
             case R.id.logout:
                 Intent intent = new Intent(this,WelcomeActivity.class);
                 startActivity(intent);
                 this.finish();
                 Preferences.setLogin(false,this);
+                break;
+            case R.id.menteeprofile :
+                MenteeProfileFragment menteeProfileFragment = new MenteeProfileFragment();
+                transaction.replace(R.id.fragment_container, menteeProfileFragment,"PROFILE_Mentee_FRAGMENT");
+                transaction.commit();
+                break;
+            case R.id.mentorprofile :
+               MentorProfileFragment mentorProfileFragment = new MentorProfileFragment();
+                transaction.replace(R.id.fragment_container, mentorProfileFragment,"PROFILE_Mentor_FRAGMENT");
+                transaction.commit();
                 break;
 
 
@@ -103,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
     }
 
-    private void goToMettingFragment()
+    private void goToMeettingFragment()
     {
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
@@ -123,8 +145,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
-        MenteeProfileFragment menteeProfile = new MenteeProfileFragment();
-        transaction.replace(R.id.fragment_container, menteeProfile,"MENTEE_PROFILE");
+        MentorProfileFragment mentorProfile = new MentorProfileFragment();
+        transaction.replace(R.id.fragment_container, mentorProfile,"MENTOR_PROFILE");
         transaction.commit();
     }
 
@@ -134,6 +156,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction = fragmentManager.beginTransaction();
         MenteeProfileFragment menteeProfile = new MenteeProfileFragment();
         transaction.replace(R.id.fragment_container, menteeProfile,"MENTEE_PROFILE");
+        transaction.commit();
+    }
+
+    private void goToMeetingRequest(){
+        fragmentManager = getSupportFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        RequestFragment requestFragment = new RequestFragment();
+        transaction.replace(R.id.fragment_container, requestFragment,"REQUEST_MEETING");
         transaction.commit();
     }
 
@@ -159,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             if(isProfileUpdate)
             {
-                goToMettingFragment();
+                goToMeettingFragment();
             }
             else
             {
@@ -177,5 +207,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 goToMentorProfile();
             }
         }
+    }
+
+
+    private void backStackFragment()
+    {
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0)
+                {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true); // show back button
+                    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            onBackPressed();
+                        }
+                    });
+                }
+                else
+                {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                    actionBarDrawerToggle();
+                }
+            }
+        });
     }
 }

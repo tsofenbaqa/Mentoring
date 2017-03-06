@@ -90,4 +90,16 @@
     <string name="Illegal_password">סיסמה לא חוקית, על הסיסמה להכיל לפחות אות גדולה אותיות קטנות ורמזים מיוחדים</string>
     <string name="Illegal_second_password">הסיסמה לא זוהה לראשונה</string>
     <string name="Illegal_phone_number">מספר פלאפון לא חוקי,מספרי פלאפון לא פחות/יותר 10 ספרות</string>
+
+    <!-- mentor profile 1/3/2017 -->
+    <string name="mentor_profile"> מנטור פרופיל</string>
+    <string name="main_page">עמוד ראשי</string>
+    <string name="company">חברה</string>
+
+    <!-- 2/3/2017 -->
+    <string name="cv_filename"><u>CV קובץ</u></string>
+    <string name="grade_sheet"><u>קובץ גליון ציונים</u></string>
+    <string name="download">הורדה</string>
+
+
 </resources>

@@ -56,7 +56,7 @@ public class login extends Fragment
                 String password = et_password.getText().toString();
                 if(! username.isEmpty() && !password.isEmpty())
                 {
-                    Login login = new Login(username,password);
+                    Login login = new Login(username,password,false);
                     sendLoginToServer(login);
                 }
                 else if(username.isEmpty()){
@@ -84,12 +84,17 @@ public class login extends Fragment
                 {
                     Intent i2 = new Intent(getContext(), MainActivity.class);
                     getContext().startActivity(i2);
-
                     Preferences.setLogin(true,getContext());
                     Preferences.setMyId(response.body().getId(),getContext());
-                    if(response.body().getType()=="mentee")
+                    boolean isProfileUpdated = response.body().isProfileUpdated();
+                    Preferences.setProfileUpdate(isProfileUpdated,getContext());
+                    if(response.body().getType().equals("mentee"))
                     {
                         Preferences.setMentee(true,getContext());
+                    }
+                    else
+                    {
+                        Preferences.setMentee(false,getContext());
                     }
                 }
                 else if(response.code() == 404 )

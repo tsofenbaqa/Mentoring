@@ -80,7 +80,7 @@
                 android:background="@drawable/icon_bg"
                 android:hint="Password"
                 android:textColor="@color/white"
-                android:inputType="numberPassword"
+                android:inputType="text"
                 android:id="@+id/etpassword"/>
 
             <TextView

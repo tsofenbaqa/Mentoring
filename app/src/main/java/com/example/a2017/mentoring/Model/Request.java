@@ -6,6 +6,7 @@ package com.example.a2017.mentoring.Model;
 
 public class Request {
         int    mentorID,menteeID;
+        String meetingTitle;
         String meetingType;
         String meetingDate;
         String meetingTime;
@@ -14,76 +15,58 @@ public class Request {
         String privateFeedback;
 
 
-        public Request(int mentorID, int menteeID,String meetingType, String meetingDate, String meetingTime, String meetingTopic,
-                       String publicFeedback, String privateFeedback) {
+    public Request(String title,String topic,String date){
+        this.meetingTitle = title;
+        this.meetingTopic = topic;
+        this.meetingDate  = date;
+    }
+    public Request(int mentorID, int menteeID, String meetingType,String meetingTitle, String meetingDate, String meetingTime, String meetingTopic,
+                   String publicFeedback, String privateFeedback) {
             super();
             this.mentorID = mentorID;
             this.menteeID = menteeID;
             this.meetingType = meetingType;
             this.meetingDate = meetingDate;
             this.meetingTime = meetingTime;
+            this.meetingTitle = meetingTitle;
             this.meetingTopic = meetingTopic;
             this.publicFeedback = publicFeedback;
             this.privateFeedback = privateFeedback;
-        }
 
+        }
         public String getMeetingType() {
             return meetingType;
         }
-
-
         public void setMeetingType(String meetingType) {
             this.meetingType = meetingType;
         }
-
-
         public String getMeetingDate() {
             return meetingDate;
         }
-
-
         public void setMeetingDate(String meetingDate) {
             this.meetingDate = meetingDate;
         }
-
-
         public String getMeetingTime() {
             return meetingTime;
         }
-
-
         public void setMeetingTime(String meetingTime) {
             this.meetingTime = meetingTime;
         }
-
-
         public String getMeetingTopic() {
             return meetingTopic;
         }
-
-
         public void setMeetingTopic(String meetingTopic) {
             this.meetingTopic = meetingTopic;
         }
-
-
         public String getPublicFeedback() {
             return publicFeedback;
         }
-
-
-        public void setPublicFeedback(String publicFeedback) {
-            this.publicFeedback = publicFeedback;
-        }
-
-
+        public void setPublicFeedback(String publicFeedback) {this.publicFeedback = publicFeedback;}
         public String getPrivateFeedback() {
             return privateFeedback;
         }
-
-
-        public void setPrivateFeedback(String privateFeedback) {
-            this.privateFeedback = privateFeedback;
-        }
+        public void setPrivateFeedback(String privateFeedback) {this.privateFeedback = privateFeedback;}
+        public String getMeetingTitle() {return meetingTitle;}
+        public void setMeetingTitle(String meetingTitle) {this.meetingTitle = meetingTitle;}
 
     }
