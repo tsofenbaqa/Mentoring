@@ -4,6 +4,8 @@ import com.example.a2017.mentoring.Model.Login;
 import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.Model.*;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -36,5 +38,9 @@ public interface ApiInterfaceRetrofit
 
     @GET("getRegister/{id}")
     Call<Register> getRegister(@Path("id") int id );
+
+    @GET("getMenteeList/{id}")
+    Call<ArrayList<MenteeList>> getMenteeList(@Path("id") int id );
+
 
 }

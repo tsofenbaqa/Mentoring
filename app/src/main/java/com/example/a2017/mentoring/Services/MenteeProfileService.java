@@ -221,8 +221,4 @@ public class MenteeProfileService extends IntentService
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0,notification.build());
     }
-
-
-
-
 }

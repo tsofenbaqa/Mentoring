@@ -449,6 +449,7 @@ public class MenteeProfileFragment extends Fragment
         }
         else
         {
+            userid = getArguments().getInt("userId");
             getDataFromServer();
         }
     }

@@ -28,7 +28,8 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         isLoggedIn();
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = (TabLayout) findViewById
+                (R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
     }
 
