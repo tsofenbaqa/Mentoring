@@ -22,17 +22,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.example.a2017.mentoring.Model.MentorProfile;
 import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
+import com.example.a2017.mentoring.RetrofitApi.BaseUrl;
 import com.example.a2017.mentoring.Services.MentorProfileService;
 import com.example.a2017.mentoring.Utils.Preferences;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -198,6 +197,27 @@ public class MentorProfileFragment extends Fragment
 
     private void getDataFromServer()
     {
+        ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
+        Call<MentorProfile> mentorProfileCall = retrofit.getMentorProfiles(userid);
+        mentorProfileCall.enqueue(new Callback<MentorProfile>()
+        {
+            @Override
+            public void onResponse(Call<MentorProfile> call, Response<MentorProfile> response)
+            {
+
+                if(response.code() == 200 || response.code() == 204)
+                {
+                    MentorProfile mentorProfile = response.body();
+                    updateUi(mentorProfile);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<MentorProfile> call, Throwable t) {
+
+            }
+        });
 
     }
 
@@ -226,7 +246,7 @@ public class MentorProfileFragment extends Fragment
         lname.setEnabled(false);
         phone.setEnabled(false);
         email.setEnabled(false);
-        mentor.setEnabled(false);
+//        mentor.setEnabled(false);
         major.setEnabled(false);
         address.setEnabled(false);
         gender.setEnabled(false);
@@ -296,6 +316,27 @@ public class MentorProfileFragment extends Fragment
         phone.setText(register.getPhone());
     }
 
+    private void updateUi(MentorProfile mentorProfile)
+    {
+        email.setText(mentorProfile.getEmail());
+        fname.setText(mentorProfile.getFname());
+        lname.setText(mentorProfile.getLname());
+        phone.setText(mentorProfile.getPhone());
+        major.setText(mentorProfile.getExperience());
+        address.setText(mentorProfile.getAddress());
+        company.setText(mentorProfile.getCompany());
+        notes.setText(mentorProfile.getNote());
+        if(mentorProfile.getGender().equals("male"))
+        {
+            gender.setSelection(0);
+        }
+        else
+        {
+            gender.setSelection(1);
+        }
+        myImage.setImageURI(BaseUrl.MENTORING_JPG+userid);
+    }
+
     private void whatToDo()
     {
         if(!isMentee)
@@ -312,6 +353,7 @@ public class MentorProfileFragment extends Fragment
         else
         {
             getDataFromServer();
+            disableMentorEditing();
         }
     }
 }
