@@ -221,6 +221,32 @@ public class MentorProfileFragment extends Fragment
 
     }
 
+    private void getDataFromServer(int menteeId)
+    {
+        ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
+        Call<MentorProfile> mentorProfileCall = retrofit.getMentorProfiles(menteeId);
+        mentorProfileCall.enqueue(new Callback<MentorProfile>()
+        {
+            @Override
+            public void onResponse(Call<MentorProfile> call, Response<MentorProfile> response)
+            {
+
+                if(response.code() == 200 || response.code() == 204)
+                {
+                    MentorProfile mentorProfile = response.body();
+                    updateUi(mentorProfile);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<MentorProfile> call, Throwable t) {
+
+            }
+        });
+
+    }
+
     private void initialize(View view)
     {
         myImage = (SimpleDraweeView) view.findViewById(R.id.myImageView);
@@ -352,7 +378,7 @@ public class MentorProfileFragment extends Fragment
         }
         else
         {
-            getDataFromServer();
+            getDataFromServer(userid);
             disableMentorEditing();
         }
     }

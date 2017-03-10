@@ -34,6 +34,9 @@ public interface ApiInterfaceRetrofit
     @GET("getMentorProfile/{id}")
     Call<MentorProfile> getMentorProfiles(@Path("id") int id );
 
+    @GET("getmentorofmentee/{id}")
+    Call<MenteeProfile> getMenteeProfiles(@Path("id") int id );
+
     @GET("getRegister/{id}")
     Call<Register> getRegister(@Path("id") int id );
 
