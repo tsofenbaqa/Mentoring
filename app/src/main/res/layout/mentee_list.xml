@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:background="?android:attr/selectableItemBackground"
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
+    android:layoutDirection="rtl"
     >
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/contactImage"
@@ -40,9 +40,12 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
-        android:layout_below="@+id/mentee_name"
-        android:layout_toLeftOf="@id/mentee_name"
-        android:layout_toEndOf="@id/mentee_name"
+        android:layout_below="@+id/contactImage"
+        android:layout_marginStart="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@id/contactImage"
+        android:layout_toEndOf="@id/contactImage"
+        android:layoutDirection="rtl"
         />
 
 </RelativeLayout>

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.a2017.mentoring.Fragments.MeetingFragment;
+import com.example.a2017.mentoring.Fragments.MenteeListFragment;
 import com.example.a2017.mentoring.Fragments.MenteeProfileFragment;
 import com.example.a2017.mentoring.Fragments.MentorProfileFragment;
 import com.example.a2017.mentoring.Fragments.RequestFragment;
@@ -99,14 +100,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Preferences.setLogin(false,this);
                 break;
             case R.id.menteeprofile :
-                MenteeProfileFragment menteeProfileFragment = new MenteeProfileFragment();
-                transaction.replace(R.id.fragment_container, menteeProfileFragment,"PROFILE_Mentee_FRAGMENT");
-                transaction.commit();
+                if(isMentee)
+                {
+                    goToMenteeProfile();
+                }
+                else
+                {
+                    goToMenteeList();
+                }
                 break;
             case R.id.mentorprofile :
-               MentorProfileFragment mentorProfileFragment = new MentorProfileFragment();
-                transaction.replace(R.id.fragment_container, mentorProfileFragment,"PROFILE_Mentor_FRAGMENT");
-                transaction.commit();
+                goToMentorProfile();
                 break;
 
 
@@ -152,8 +156,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
-        MenteeProfileFragment menteeProfile = new MenteeProfileFragment();
-        transaction.replace(R.id.fragment_container, menteeProfile,"MENTEE_PROFILE");
+        MenteeListFragment menteeListFragment = new MenteeListFragment();
+        transaction.replace(R.id.fragment_container, menteeListFragment,"MENTEE_PROFILE");
         transaction.commit();
     }
 
@@ -198,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             if(isProfileUpdate)
             {
-                goToMentorProfile();
+                goToMeettingFragment();
             }
             else
             {

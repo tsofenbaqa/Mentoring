@@ -450,6 +450,7 @@ public class MenteeProfileFragment extends Fragment
         else
         {
             userid = getArguments().getInt("userId");
+            disableMenteeEditing();
             getDataFromServer();
         }
     }
@@ -486,7 +487,8 @@ public class MenteeProfileFragment extends Fragment
         phone.setText(register.getPhone());
     }
 
-    private void disableMenteeEditing(){
+    private void disableMenteeEditing()
+    {
         myImage.setClickable(false);
         myImage.setEnabled(false);
         menteeUpdateProfile.setClickable(false);
@@ -505,9 +507,9 @@ public class MenteeProfileFragment extends Fragment
         graduation_status.setEnabled(false);
         graduation_status.setClickable(false);
         chooseResume.setEnabled(false);
-        resume_review.setEnabled(false);
+        resume_review.setEnabled(true);
         chooseGradeSheet.setEnabled(false);
-        gradeSheet_review.setEnabled(false);
+        gradeSheet_review.setEnabled(true);
         gender.setEnabled(false);
         gender.setClickable(false);
     }

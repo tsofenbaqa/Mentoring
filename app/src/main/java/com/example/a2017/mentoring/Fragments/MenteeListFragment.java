@@ -114,19 +114,23 @@ public class MenteeListFragment extends Fragment implements SwipeRefreshLayout.O
     {
         ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
         Call<ArrayList<MenteeList>> menteeListCall = retrofit.getMenteeList(userid);
+        Log.d("Size:", String.valueOf(userid));
         menteeListCall.enqueue(new Callback<ArrayList<MenteeList>>() {
             @Override
             public void onResponse(Call<ArrayList<MenteeList>> call, Response<ArrayList<MenteeList>> response)
             {
                 if (response.code()==200||response.code()==204)
                 {
-                 menteelist= response.body();
+                    menteelist= response.body();
                     refreshLayout.setRefreshing(false);
+                    menteeAdapter.updateDataSet(menteelist);
+                    Log.d("Size:", "1");
 
                 }
                 else
                 {
                     refreshLayout.setRefreshing(false);
+                    Log.d("Size:", "2");
 
                 }
             }
@@ -135,6 +139,8 @@ public class MenteeListFragment extends Fragment implements SwipeRefreshLayout.O
             public void onFailure(Call<ArrayList<MenteeList>> call, Throwable t)
             {
                 refreshLayout.setRefreshing(false);
+                Log.d("Size:", "3");
+                t.printStackTrace();
 
             }
         });
