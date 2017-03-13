@@ -17,6 +17,7 @@ public class Preferences
     private static final String MY_ID = "myId";
     private static final String IS_MENTEE = "isMentee";
     private static final String LAST_MEETING_NUMBER = "lastMeetingNumber";
+    private static final String TOKEN ="token";
 
     public static int getLastMeetingNumber(Context context){
         SharedPreferences preferences = getPreferences(context);
@@ -91,6 +92,19 @@ public class Preferences
         SharedPreferences preferences = getPreferences(context);
         preferences.edit().putBoolean(IS_MENTEE,isMentee).apply();
     }
+
+    public static String getMyToken(Context context)
+    {
+        SharedPreferences preferences = getPreferences(context);
+        return preferences.getString(TOKEN,null);
+    }
+
+    public static void setMyToken(String token,Context context)
+    {
+        SharedPreferences preferences = getPreferences(context);
+        preferences.edit().putString(TOKEN,token).apply();
+    }
+
     private static SharedPreferences getPreferences(Context context)
     {
         SharedPreferences preferences = context.getSharedPreferences(SHARED_PREFERENCES_FILE_NAME,context.MODE_PRIVATE);

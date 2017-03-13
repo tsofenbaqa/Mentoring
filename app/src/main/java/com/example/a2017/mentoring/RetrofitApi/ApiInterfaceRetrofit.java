@@ -18,6 +18,12 @@ import retrofit2.http.Path;
 
 public interface ApiInterfaceRetrofit
 {
+    @POST("UsersTokens")
+    Call<UserToken> submitMyToken(@Body UserToken mytoken);
+
+    @POST("UpdateUsersTokens")
+    Call<UserToken> updateMyToken(@Body UserToken mytoken);
+
     @POST("addNewUser")
     Call<String> addNewUser(@Body Register register);
 

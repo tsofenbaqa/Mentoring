@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.a2017.mentoring.Activitys.MainActivity;
 import com.example.a2017.mentoring.Model.Login;
+import com.example.a2017.mentoring.Model.UserToken;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
@@ -69,55 +70,76 @@ public class login extends Fragment
             }
         });
     }
-    private void sendLoginToServer(Login login)
-    {
+    private void sendLoginToServer(Login login) {
         progressBar.setVisibility(View.VISIBLE);
         ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
         Call<Login> loginUser = retrofit.LoginUser(login);
-        loginUser.enqueue(new Callback<Login>()
-        {
+        loginUser.enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response)
             {
-                Log.d( "onResponse: ","done");
-                if(response.code() == 200 ||response.code() == 204)
+                Log.d("onResponse: ", "done");
+                if (response.code() == 200 || response.code() == 204)
                 {
-                    Intent i2 = new Intent(getContext(), MainActivity.class);
-                    getContext().startActivity(i2);
-                    Preferences.setLogin(true,getContext());
-                    Preferences.setMyId(response.body().getId(),getContext());
+                    String token = Preferences.getMyToken(getContext());
+                    int id = response.body().getId();
+                    sendTokenToServer(token,id);
+                    Preferences.setLogin(true, getContext());
+                    Preferences.setMyId(id, getContext());
                     boolean isProfileUpdated = response.body().isProfileUpdated();
-                    Preferences.setProfileUpdate(isProfileUpdated,getContext());
-                    if(response.body().getType().equals("mentee"))
-                    {
-                        Preferences.setMentee(true,getContext());
+                    Preferences.setProfileUpdate(isProfileUpdated, getContext());
+                    if (response.body().getType().equals("mentee")) {
+                        Preferences.setMentee(true, getContext());
+                    } else {
+                        Preferences.setMentee(false, getContext());
                     }
-                    else
-                    {
-                        Preferences.setMentee(false,getContext());
-                    }
-                }
-                else if(response.code() == 404 )
-                {
-                    Toast.makeText(getActivity(),getText(R.string.userNOTexist) , Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    Toast.makeText(getActivity(),getText(R.string.error_general) , Toast.LENGTH_LONG).show();
+                } else if (response.code() == 404) {
+                    Toast.makeText(getActivity(), getText(R.string.userNOTexist), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), getText(R.string.error_general), Toast.LENGTH_LONG).show();
                 }
                 progressBar.setVisibility(View.GONE);
             }
 
             @Override
-            public void onFailure(Call<Login> call, Throwable t)
-            {
-                Toast.makeText(getActivity(),getText(R.string.failure) , Toast.LENGTH_LONG).show();
+            public void onFailure(Call<Login> call, Throwable t) {
+                Toast.makeText(getActivity(), getText(R.string.failure), Toast.LENGTH_LONG).show();
                 progressBar.setVisibility(View.GONE);
             }
         });
     }
 
+        private void sendTokenToServer(String token,final int id)
+        {
+            UserToken mytoken = new UserToken(id,token);
+            ApiInterfaceRetrofit apiClientRetrofit= ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
+            Call<UserToken> sendToken = apiClientRetrofit.submitMyToken(mytoken);
+            sendToken.enqueue(new Callback<UserToken>()
+            {
+                @Override
+                public void onResponse(Call<UserToken> call, Response<UserToken> response)
+                {
+                    if(response.code()==200 || response.code() == 204)
+                    {
+                        Intent i2 = new Intent(getContext(), MainActivity.class);
+                        getContext().startActivity(i2);
+                    }
+                    else
+                    {
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserToken> call, Throwable t)
+                {
+
+                }
+            });
+        }
     }
+
+
 
 
 

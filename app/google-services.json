@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "828909422945",
+    "firebase_url": "https://mentoring-4bf79.firebaseio.com",
+    "project_id": "mentoring-4bf79",
+    "storage_bucket": "mentoring-4bf79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828909422945:android:70f5c93139c22460",
+        "android_client_info": {
+          "package_name": "com.example.a2017.mentoring"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828909422945-4a52soe99k4hbht8e6v2n6p8r72k9s4v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsPbZmM1cawUn5Dbtg_Uixbuwz3-UhcZQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
