@@ -28,8 +28,17 @@ import android.widget.Toast;
 import com.dd.morphingbutton.MorphingButton;
 import com.example.a2017.mentoring.Model.Request;
 import com.example.a2017.mentoring.R;
+import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
+import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
+import com.example.a2017.mentoring.Utils.Preferences;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RequestFragment extends Fragment implements
@@ -48,7 +57,7 @@ public class RequestFragment extends Fragment implements
     int validMeetingType = 1;
     int validTopic = 1;
 
-    String meeting_date,meeting_time,meeting_type,meeting_topic,meeting_public_feedback,meeting_private_feedback;
+    String meeting_date_time,meeting_date,meeting_type,meeting_topic,meeting_public_feedback,meeting_private_feedback;
     MorphingButton morphingButton;
 
     private FragmentManager fragmentManager;
@@ -125,10 +134,13 @@ public class RequestFragment extends Fragment implements
                 if(validInformations()){
                    // Toast.makeText(getActivity(),"Request was sent Successfull",Toast.LENGTH_SHORT).show();
                     hideErrors();
+
                     success();
-                    Request request = new Request("title","topic","date");
-                    addMeetingToList(request);
-                    //sendRequestMeetingToServer(new Request(1,2,meeting_type,meeting_date,meeting_time,meeting_topic,"",""));
+
+                    //Request request = new Request("title","topic","date");
+                    Request request = new Request(Preferences.myId(getContext()),"call","2017/03/13","sanad");
+                    //addMeetingToList(request);
+                    sendRequestMeetingToServer(request);
 
                 }else{
                     Toast.makeText(getActivity(),"invalid info, try again...",Toast.LENGTH_SHORT).show();
@@ -181,10 +193,21 @@ public class RequestFragment extends Fragment implements
         hour_final = hourOfDay;
         minute_final = minute;
 
-        String date = "Date:"+day_final+"/"+month_final+"/"+year_final+"   ";
-        String time = "Time:"+hour_final+"/"+minute_final;
-        meeting_date = day_final+"/"+month_final+"/"+year_final;
-        meeting_time = hour_final+":"+minute_final;
+        String date = day_final+"-"+month_final+"-"+year_final+"   ";
+        String time = hour_final+":"+minute_final;
+        meeting_date_time = date+time;
+
+        meeting_date = date;
+       //meeting_time = hour_final+":"+minute_final;
+
+
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            Date date1 = dateFormat.parse(date);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+
         Toast.makeText(getActivity(),date+time,Toast.LENGTH_LONG).show();
     }
 
@@ -254,7 +277,7 @@ public class RequestFragment extends Fragment implements
     }
 
     public void success(){
-        MorphingButton.Params circle = MorphingButton.Params.create()
+         MorphingButton.Params circle = MorphingButton.Params.create()
                 .duration(500)
                 .cornerRadius(dimen(R.dimen.mb_height_56)) // 56 dp
                 .width(dimen(R.dimen.mb_height_56)) // 56 dp
@@ -268,37 +291,43 @@ public class RequestFragment extends Fragment implements
 
     public void addMeetingToList(Request request){
          MeetingFragment meetingFragment = new MeetingFragment();
-//        meetingFragment.meetingList.add(request);
-//        meetingFragment.mAdapter.updateDataSet(meetingFragment.meetingList);
-//
-//         fragmentManager = getFragmentManager();
-//         transaction = fragmentManager.beginTransaction();
-//         transaction.replace(R.id.fragment_container, meetingFragment,"MEETING_FRAGMENT");
-//         transaction.commit();
+           ArrayList<Request> a = new ArrayList<>();
+           a.add(request);
+           meetingFragment.updateMeetings(a);
+//         meetingFragment.meetingList.add(request);
+//         meetingFragment.mAdapter.updateDataSet(meetingFragment.meetingList);
+         Log.i("new","new");
+         fragmentManager = getFragmentManager();
+         transaction = fragmentManager.beginTransaction();
+         transaction.replace(R.id.fragment_container, meetingFragment,"MEETING_FRAGMENT");
+         transaction.commit();
     }
 
-    /*public void sendRequestMeetingToServer(Request request){
+    public void sendRequestMeetingToServer(Request request)
+    {
+        Gson gson = new Gson();
+        String json = gson.toJson(request);
+        Log.d("json: ", json);
         ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
         Call<Void> requestMeeting = retrofit.requestMeeting(request);
-        requestMeeting.enqueue(new Callback<Void>(){
+        requestMeeting.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response){
-                Log.d( "onResponse: ","done");
-                if(response.code() == 200 ||response.code() == 204){
-                    Toast.makeText(getContext(),"received successfully" , Toast.LENGTH_LONG).show();
-                }
-                else if(response.code() == 302 ){
-                    Toast.makeText(getActivity(),"sending meeting request failed, sorry... " , Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Toast.makeText(getActivity(),"error " , Toast.LENGTH_LONG).show();
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                if (response.code() == 200 || response.code() == 204) {
+                    Toast.makeText(getContext(), "received successfully", Toast.LENGTH_LONG).show();
+                    Log.d("onResponse: ", "done");
+                } else if (response.code() == 302) {
+                    Toast.makeText(getActivity(), "sending meeting request failed, sorry... ", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), "error ", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t){
-                Toast.makeText(getActivity(),"onFailure" , Toast.LENGTH_LONG).show();
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getActivity(), "onFailure", Toast.LENGTH_LONG).show();
             }
         });
-    }*/
+    }
 }

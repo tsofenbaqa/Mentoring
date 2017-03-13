@@ -39,9 +39,9 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
     }
     @Override
     public void onBindViewHolder(RequestsHolder holder, int position) {
-        holder.title.setText(String.valueOf(requests.get(position).getMeetingTitle()));
-        holder.topic.setText(String.valueOf(requests.get(position).getMeetingTopic()));
-        holder.date.setText(String.valueOf(requests.get(position).getMeetingDate()));
+//        holder.title.setText(String.valueOf(requests.get(position).get));
+//        holder.topic.setText(String.valueOf(requests.get(position).getMeetingTopic()));
+//        holder.date.setText(String.valueOf(requests.get(position).getDate()));
 
     }
     @Override

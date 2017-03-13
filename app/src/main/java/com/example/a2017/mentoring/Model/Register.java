@@ -9,8 +9,6 @@ public class Register {
     private String Type;
     private String Phone;
 
-
-
     public Register(String firstName ,String lastName, String phone, String email, String password, String type){
 
         this.Email=email;

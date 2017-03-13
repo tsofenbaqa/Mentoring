@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         whichFragmentToShow();
         backStackFragment();
         //goToMeettingFragment();
-        //goToMeetingRequest();  ignore this
+        goToMeetingRequest();
     }
 
     @Override
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             if(isProfileUpdate)
             {
-                goToMeettingFragment();
+                goToMentorProfile();
             }
             else
             {

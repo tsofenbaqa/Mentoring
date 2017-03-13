@@ -15,12 +15,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 
 import com.example.a2017.mentoring.Model.MenteeList;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RecyclerAdapters.MenteeAdapter;
-import com.example.a2017.mentoring.RecyclerAdapters.RequestsAdapter;
 import com.example.a2017.mentoring.RecyclerTools.RecyclerTouchListner;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
@@ -82,12 +80,9 @@ public class MenteeListFragment extends Fragment implements SwipeRefreshLayout.O
             {
                 int userID= menteelist.get(position).getUserId();
                 goToMenteeProfile(userID);
-
-
             }
             @Override
             public void onLongClick(View view, int position) {
-
             }
         }));
     }
@@ -121,7 +116,7 @@ public class MenteeListFragment extends Fragment implements SwipeRefreshLayout.O
             {
                 if (response.code()==200||response.code()==204)
                 {
-                    menteelist= response.body();
+                 menteelist= response.body();
                     refreshLayout.setRefreshing(false);
                     menteeAdapter.updateDataSet(menteelist);
                     Log.d("Size:", "1");

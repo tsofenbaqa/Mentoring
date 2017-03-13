@@ -81,6 +81,8 @@ public class login extends Fragment
                 Log.d("onResponse: ", "done");
                 if (response.code() == 200 || response.code() == 204)
                 {
+                    Intent i2 = new Intent(getContext(), MainActivity.class);
+                    getContext().startActivity(i2);
                     String token = Preferences.getMyToken(getContext());
                     int id = response.body().getId();
                     sendTokenToServer(token,id);
@@ -121,8 +123,7 @@ public class login extends Fragment
                 {
                     if(response.code()==200 || response.code() == 204)
                     {
-                        Intent i2 = new Intent(getContext(), MainActivity.class);
-                        getContext().startActivity(i2);
+
                     }
                     else
                     {
