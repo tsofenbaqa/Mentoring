@@ -66,6 +66,7 @@
             android:layout_alignStart="@+id/callimage_id" />
 
         <TextView
+            android:visibility="invisible"
             android:text="@string/publicFB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,6 +75,7 @@
             android:id="@+id/public_hint" />
 
         <TextView
+            android:visibility="invisible"
             android:text="@string/privateFB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -117,6 +119,7 @@
             android:layout_marginStart="13dp" />
 
         <EditText
+            android:visibility="invisible"
             android:theme="@style/EditTextTheme"
             android:textDirection="locale"
             android:gravity="right|top"
@@ -131,6 +134,7 @@
             android:layout_marginTop="15dp" />
 
         <EditText
+            android:visibility="invisible"
             android:theme="@style/EditTextTheme"
             android:textDirection="locale"
             android:gravity="right|top"

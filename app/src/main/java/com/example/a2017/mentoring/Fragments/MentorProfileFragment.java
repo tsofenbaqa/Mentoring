@@ -224,7 +224,7 @@ public class MentorProfileFragment extends Fragment
     private void getDataFromServer(int menteeId)
     {
         ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
-        Call<MentorProfile> mentorProfileCall = retrofit.getMentorProfiles(menteeId);
+        Call<MentorProfile> mentorProfileCall = retrofit.getmentorofmentee(menteeId);
         mentorProfileCall.enqueue(new Callback<MentorProfile>()
         {
             @Override

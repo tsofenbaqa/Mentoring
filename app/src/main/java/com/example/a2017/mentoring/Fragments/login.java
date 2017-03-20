@@ -84,6 +84,7 @@ public class login extends Fragment
                     Intent i2 = new Intent(getContext(), MainActivity.class);
                     getContext().startActivity(i2);
                     String token = Preferences.getMyToken(getContext());
+                    Log.d("token:",token);
                     int id = response.body().getId();
                     sendTokenToServer(token,id);
                     Preferences.setLogin(true, getContext());

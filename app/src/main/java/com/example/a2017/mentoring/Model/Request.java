@@ -1,7 +1,9 @@
 package com.example.a2017.mentoring.Model;
 
 
-public class Request {
+import java.io.Serializable;
+
+public class Request implements Serializable{
 
     int    id;
     int    mentorID;

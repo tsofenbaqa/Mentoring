@@ -91,13 +91,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.Request:
                 if(isMentee)
                 {
-                    goToMeetingRequest();
+                    goToMeetingRequest(0);
                 }
                 else
                 {
-                    goToMenteeList(1);
+                    goToMenteeList(2);
                 }
-
+                break;
             case R.id.main_page :
                 if(isMentee)
                 {
@@ -179,11 +179,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction.commit();
     }
 
-    private void goToMeetingRequest()
+    private void goToMeetingRequest(int flag)
     {
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
+        Bundle bundle= new Bundle();
+        bundle.putInt("flag",flag);
         RequestFragment requestFragment = new RequestFragment();
+        requestFragment.setArguments(bundle);
         transaction.replace(R.id.fragment_container, requestFragment,"REQUEST_MEETING");
         transaction.commit();
     }

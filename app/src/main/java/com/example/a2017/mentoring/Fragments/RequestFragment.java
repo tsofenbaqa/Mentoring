@@ -60,6 +60,8 @@ public class RequestFragment extends Fragment implements
     boolean isMentee ;
     int myId;
     int menteeId;
+    int flag;
+    Request request = null;
 
     String meeting_date_time,meeting_date,meeting_type,meeting_topic,meeting_public_feedback,meeting_private_feedback;
     MorphingButton morphingButton;
@@ -76,8 +78,18 @@ public class RequestFragment extends Fragment implements
     {
         super.onCreate(savedInstanceState);
         isMentee= Preferences.isMentee(getContext());
+        flag = getArguments().getInt("flag");
+        if(flag==1)
+        {
+           request = (Request) getArguments().getSerializable("request");
+            publicFeedback.setVisibility(View.VISIBLE);
+            privateFeedback.setVisibility(View.VISIBLE);
+        }
         myId = Preferences.myId(getContext());
-        menteeId = getArguments().getInt("menteeId");
+        if(!isMentee)
+        {
+            menteeId = getArguments().getInt("menteeId");
+        }
     }
 
     @Override
@@ -92,6 +104,7 @@ public class RequestFragment extends Fragment implements
 
         dateAndtimebuttonHandler(); // do event when clicked
         sendRequestHandler();
+        updateUi();
         return view;
     }
 
@@ -147,10 +160,7 @@ public class RequestFragment extends Fragment implements
                 if(validInformations()){
                    // Toast.makeText(getActivity(),"Request was sent Successfull",Toast.LENGTH_SHORT).show();
                     hideErrors();
-
                     success();
-
-                    //Request request = new Request("title","topic","date");
                     Request request = null;
 
                     if(isMentee)
@@ -256,10 +266,10 @@ public class RequestFragment extends Fragment implements
             validTopic = 1;
         }
         if(faceToface.isChecked() && !call.isChecked()) {
-            meeting_type = getResources().getString(R.string.faceToface);
+            meeting_type = "faceToface";
             validMeetingType = 1;
         }else if(!faceToface.isChecked() && call.isChecked()){
-            meeting_type = getResources().getString(R.string.call);
+            meeting_type ="call";
             validMeetingType = 1;
         }else{
             validMeetingType = 0;
@@ -319,8 +329,6 @@ public class RequestFragment extends Fragment implements
            ArrayList<Request> a = new ArrayList<>();
            a.add(request);
            meetingFragment.updateMeetings(a);
-//         meetingFragment.meetingList.add(request);
-//         meetingFragment.mAdapter.updateDataSet(meetingFragment.meetingList);
          Log.i("new","new");
          fragmentManager = getFragmentManager();
          transaction = fragmentManager.beginTransaction();
@@ -354,5 +362,40 @@ public class RequestFragment extends Fragment implements
                 Toast.makeText(getActivity(), "onFailure", Toast.LENGTH_LONG).show();
             }
         });
+
+    }
+
+    private void updateUi()
+    {
+        if(request!=null)
+        {
+            meeting_type      = request.getMeetingType();
+            meeting_date_time = request.getMeetingDate_time();
+            meeting_topic     = request.getMeetingTopic();
+
+            if(isMentee)
+            {
+                meeting_public_feedback = request.getMentee_notes();
+                meeting_private_feedback= request.getMentee_private();
+            }
+            else
+            {
+                meeting_public_feedback = request.getMentor_notes();
+                meeting_private_feedback = request.getMentor_private();
+            }
+
+            topic.setText(meeting_topic);
+            publicFeedback.setText(meeting_public_feedback);
+            privateFeedback.setText(meeting_private_feedback);
+
+            if(meeting_type.equals("call"))
+            {
+                call.setChecked(true);
+            }
+            else
+            {
+                faceToface.setChecked(true);
+            }
+        }
     }
 }

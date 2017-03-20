@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,7 +16,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.a2017.mentoring.Model.Request;
 import com.example.a2017.mentoring.R;
@@ -47,11 +47,11 @@ public class MeetingFragment extends Fragment implements SwipeRefreshLayout.OnRe
     public  RecyclerView recyclerView_meeting_list ;
     int menteeId ;
     boolean isMentee ;
+    FloatingActionButton fab;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        menteeId = getArguments().getInt("menteeId");
         isMentee= Preferences.isMentee(getContext());
         if(isMentee)
         {
@@ -71,9 +71,10 @@ public class MeetingFragment extends Fragment implements SwipeRefreshLayout.OnRe
         View view = inflater.inflate(R.layout.meeting_main,container,false);
         recyclerView_meeting_list= (RecyclerView) view.findViewById(R.id.recycler_meeting_list);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.meetings_refresh);
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
         configureRecyclerView();
         configureSwipeRefreshLayout();
-        Toast.makeText(getActivity(),"oncreate",Toast.LENGTH_SHORT).show();
+        fabOnClick();
         return view;
     }
 
@@ -142,7 +143,8 @@ public class MeetingFragment extends Fragment implements SwipeRefreshLayout.OnRe
             @Override
             public void onClick(View view, int position)
             {
-
+                Request request = meetingList.get(position);
+                SendMeetingRequest(menteeId,request,1);
             }
 
             @Override
@@ -153,12 +155,35 @@ public class MeetingFragment extends Fragment implements SwipeRefreshLayout.OnRe
         })));
 
     }
-    private void goToMeetingRequest(int menteeId)
+    private void fabOnClick(){
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMeetingRequest(menteeId,0);
+            }
+        });
+    }
+    private void goToMeetingRequest(int menteeId , int flag)
     {
         fragmentManager = getFragmentManager();
         transaction = fragmentManager.beginTransaction();
         Bundle bundle= new Bundle();
         bundle.putInt("menteeId",menteeId);
+        bundle.putInt("flag",flag);
+        RequestFragment requestFragment = new RequestFragment();
+        requestFragment.setArguments(bundle);
+        transaction.replace(R.id.fragment_container, requestFragment,"REQUEST_MEETING");
+        transaction.commit();
+    }
+
+    private void SendMeetingRequest(int menteeId,Request request ,int flag)
+    {
+        fragmentManager = getFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        Bundle bundle= new Bundle();
+        bundle.putInt("menteeId",menteeId);
+        bundle.putInt("flag",flag);
+        bundle.putSerializable("request",request);
         RequestFragment requestFragment = new RequestFragment();
         requestFragment.setArguments(bundle);
         transaction.replace(R.id.fragment_container, requestFragment,"REQUEST_MEETING");

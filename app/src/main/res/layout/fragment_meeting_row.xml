@@ -1,3 +1,11 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="?android:attr/selectableItemBackground"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -5,6 +13,8 @@
     android:orientation="horizontal"
     android:padding="12dp"
     tools:context="com.example.a2017.mentoring.Activitys.MainActivity">
+
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -39,17 +49,18 @@
     <LinearLayout
         android:gravity="right"
         android:layout_gravity="right"
+        android:id="@+id/btnlinear"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
+     <!--   <TextView
             android:fontFamily="serif-monospace"
             android:textSize="22sp"
             android:id="@+id/meeting_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/meetingTitle"/>
-        <TextView
+            android:text="@string/meetingTitle"/>-->
+     <TextView
             android:layout_marginTop="5dp"
             android:textSize="18sp"
             android:id="@+id/meeting_topic"
@@ -57,5 +68,17 @@
             android:layout_height="wrap_content"
             android:text="@string/meetingTopic"/>
 
+
+
     </LinearLayout>
+
+
+
+</LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        />
 </LinearLayout>
