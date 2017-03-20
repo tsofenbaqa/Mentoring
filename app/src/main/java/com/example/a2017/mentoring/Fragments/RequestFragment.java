@@ -47,7 +47,7 @@ public class RequestFragment extends Fragment implements
 
     Button   reqBtn,datebtn;
     TextView meetingType,toolbar_title;
-    TextView inValid_meetingType,inValid_dateAndTime,inValid_topic;
+    TextView inValid_meetingType,inValid_dateAndTime,inValid_topic,public_hint,private_hint;
     Toolbar  toolbar;
     CheckBox faceToface , call;
     EditText topic,publicFeedback,privateFeedback;
@@ -82,8 +82,6 @@ public class RequestFragment extends Fragment implements
         if(flag==1)
         {
            request = (Request) getArguments().getSerializable("request");
-            publicFeedback.setVisibility(View.VISIBLE);
-            privateFeedback.setVisibility(View.VISIBLE);
         }
         myId = Preferences.myId(getContext());
         if(!isMentee)
@@ -118,6 +116,8 @@ public class RequestFragment extends Fragment implements
         topic = (EditText) view.findViewById(R.id.summary_id);
         publicFeedback = (EditText) view.findViewById(R.id.public_feedback_id);
         privateFeedback = (EditText) view.findViewById(R.id.private_feedback_id);
+        public_hint = (TextView) view.findViewById(R.id.public_hint);
+        private_hint = (TextView) view.findViewById(R.id.private_hint);
         inValid_meetingType = (TextView) view.findViewById(R.id.meetingType_error_id);
         inValid_dateAndTime = (TextView) view.findViewById(R.id.dateBtn_error_id);
         inValid_topic = (TextView) view.findViewById(R.id.topic_error_id);
@@ -369,6 +369,12 @@ public class RequestFragment extends Fragment implements
     {
         if(request!=null)
         {
+            if(flag == 1){
+                publicFeedback.setVisibility(View.VISIBLE);
+                privateFeedback.setVisibility(View.VISIBLE);
+                public_hint.setVisibility(View.VISIBLE);
+                private_hint.setVisibility(View.VISIBLE);
+            }
             meeting_type      = request.getMeetingType();
             meeting_date_time = request.getMeetingDate_time();
             meeting_topic     = request.getMeetingTopic();
