@@ -54,7 +54,7 @@ public interface ApiInterfaceRetrofit
     @GET("getMenteeList/{id}")
     Call<ArrayList<MenteeList>> getMenteeList(@Path("id") int id );
 
-    @GET("getMenteeMeetingsList/{id}")
+    @GET("getMeetingList/{id}")
     Call<ArrayList<Request>> getMenteeMeetingsList(@Path("id") int id);
 
 

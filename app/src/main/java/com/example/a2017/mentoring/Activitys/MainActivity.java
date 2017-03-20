@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         configureRequestPermissions();
         whichFragmentToShow();
         backStackFragment();
-        //goToMeettingFragment();
-        goToMeetingRequest();
+//        //goToMeettingFragment();
+//        goToMeetingRequest();
     }
 
     @Override
@@ -88,11 +88,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id)
         {
-//            case R.id.main_page :
-//                MenteeProfileFragment menteeProfileFragment = new MenteeProfileFragment();
-//                transaction.replace(R.id.fragment_container, menteeProfileFragment,"PROFILE_FRAGMENT");
-//                transaction.commit();
-//                break;
+            case R.id.Request:
+                if(isMentee)
+                {
+                    goToMeetingRequest();
+                }
+                else
+                {
+                    goToMenteeList(1);
+                }
+
+            case R.id.main_page :
+                if(isMentee)
+                {
+                    goToMeettingFragment();
+                }
+                else
+                {
+                    goToMenteeList(1);
+                }
+                break;
             case R.id.logout:
                 Intent intent = new Intent(this,WelcomeActivity.class);
                 startActivity(intent);
@@ -106,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 else
                 {
-                    goToMenteeList();
+                    goToMenteeList(0);
                 }
                 break;
             case R.id.mentorprofile :
@@ -152,16 +167,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction.commit();
     }
 
-    private void goToMenteeList()
+    private void goToMenteeList(int flag)
     {
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
         MenteeListFragment menteeListFragment = new MenteeListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("flag",flag);
+        menteeListFragment.setArguments(bundle);
         transaction.replace(R.id.fragment_container, menteeListFragment,"MENTEE_PROFILE");
         transaction.commit();
     }
 
-    private void goToMeetingRequest(){
+    private void goToMeetingRequest()
+    {
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
         RequestFragment requestFragment = new RequestFragment();
@@ -202,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             if(isProfileUpdate)
             {
-                goToMentorProfile();
+                goToMenteeList(1);
             }
             else
             {

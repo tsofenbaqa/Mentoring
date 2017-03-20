@@ -5,6 +5,13 @@
         android:icon="@drawable/ic_home_black"
         android:id="@+id/main_page"
         android:title="@string/main_page" />
+
+    <item
+        android:id="@+id/Request"
+        android:icon="@mipmap/ic_exit_to_app_black_24dp"
+        android:title="@string/request"
+        />
+
     <item
         android:icon="@drawable/ic_supervisor_account_black"
         android:id="@+id/mentorprofile"
@@ -18,4 +25,5 @@
         android:title="@string/logout"
         android:icon="@mipmap/ic_exit_to_app_black_24dp"
         />
+
 </menu>

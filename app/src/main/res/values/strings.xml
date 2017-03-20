@@ -100,5 +100,6 @@
     <string name="Illegal_password">סיסמה לא חוקית על הסיסמה להכיל לפחות אות גדולה אותיות קטנות ורמזים מיוחדים</string>
     <string name="Illegal_second_password">הסיסמה לא זוהה לראשונה</string>
     <string name="Illegal_phone_number">מספר פלאפון לא חוקי","מספרי פלאפון לא פחות "/" יותר מעשר ספרות</string>
+    <string name="request">קביעת פגישה</string>
 
 </resources>

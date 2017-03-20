@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,8 +20,10 @@ import android.widget.Toast;
 import com.example.a2017.mentoring.Model.Request;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RecyclerAdapters.RequestsAdapter;
+import com.example.a2017.mentoring.RecyclerTools.RecyclerTouchListner;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
+import com.example.a2017.mentoring.Utils.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +41,27 @@ public class MeetingFragment extends Fragment implements SwipeRefreshLayout.OnRe
     LinearLayoutManager mLayoutManager;
     private SwipeRefreshLayout refreshLayout;
     RequestsAdapter mAdapter;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction transaction;
     List<Request> meetingList = new ArrayList<Request>();
     public  RecyclerView recyclerView_meeting_list ;
+    int menteeId ;
+    boolean isMentee ;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        menteeId = getArguments().getInt("menteeId");
+        isMentee= Preferences.isMentee(getContext());
+        if(isMentee)
+        {
+            menteeId = Preferences.myId(getContext());
+        }
+        else
+        {
+            menteeId = getArguments().getInt("menteeId");
+        }
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
@@ -59,11 +81,12 @@ public class MeetingFragment extends Fragment implements SwipeRefreshLayout.OnRe
         meetingList = requests;
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        getMeetingsDataFromServer();
-//    }
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        getMeetingsDataFromServer();
+    }
 
     private void configureSwipeRefreshLayout(){
         refreshLayout.setOnRefreshListener(this);
@@ -78,7 +101,7 @@ public class MeetingFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     private void getMeetingsDataFromServer(){
         ApiInterfaceRetrofit retrofit = ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
-        Call<ArrayList<Request>> menteeMeetingsList = retrofit.getMenteeMeetingsList(35);
+        Call<ArrayList<Request>> menteeMeetingsList = retrofit.getMenteeMeetingsList(menteeId);
         menteeMeetingsList.enqueue(new Callback<ArrayList<Request>>() {
             @Override
             public void onResponse(Call<ArrayList<Request>> call, Response<ArrayList<Request>> response)
@@ -114,33 +137,32 @@ public class MeetingFragment extends Fragment implements SwipeRefreshLayout.OnRe
         recyclerView_meeting_list.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new RequestsAdapter(getContext());
         recyclerView_meeting_list.setAdapter(mAdapter);
-
-//        meetingList.add(new Request(1, 2,"call","פגישה מס 1","10/3/2017", "13:00","HR",
-//            "", ""));
-//        meetingList.add(new Request(1, 2,"call","פגישה מס 1","10/3/2017", "13:00","HR",
-//                "", ""));
-//        meetingList.add(new Request(1, 2,"call","פגישה מס 2","10/3/2017", "13:00","HR",
-//                "", ""));
-//        meetingList.add(new Request(1, 2,"call","פגישה מס 3","10/3/2017", "13:00","HR",
-//                "", ""));
-//        meetingList.add(new Request(1, 2,"call","פגישה מס 4","10/3/2017", "13:00","HR",
-//                "", ""));
-//        meetingList.add(new Request(1, 2,"call","פגישה מס 5","10/3/2017", "13:00","HR",
-//                "", ""));
-//        meetingList.add(new Request(1, 2,"call","פגישה מס 6","10/3/2017", "13:00","HR",
-//                "", ""));
-//        meetingList.add(new Request(1, 2,"call","פגישה מס 7","10/3/2017", "13:00","HR",
-//                "", ""));
-//        meetingList.add(new Request(1, 2,"call","פגישה מס 8","10/3/2017", "13:00","HR",
-//                "", ""));
-//        meetingList.add(new Request(1, 2,"call","פגישה מס 9","10/3/2017", "13:00","HR",
-//                "", ""));
-//        meetingList.add(new Request(1, 2,"call","פגישה מס 10","10/3/2017", "13:00","HR",
-//                "", ""));
-//        meetingList.add(new Request(1, 2,"call","פגישה מס 11","10/3/2017", "13:00","HR",
-//                "", ""));
         mAdapter.updateDataSet(meetingList);
+        recyclerView_meeting_list.addOnItemTouchListener((new RecyclerTouchListner(getContext(), recyclerView_meeting_list, new RecyclerTouchListner.IclickListner() {
+            @Override
+            public void onClick(View view, int position)
+            {
 
+            }
+
+            @Override
+            public void onLongClick(View view, int position)
+            {
+
+            }
+        })));
+
+    }
+    private void goToMeetingRequest(int menteeId)
+    {
+        fragmentManager = getFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        Bundle bundle= new Bundle();
+        bundle.putInt("menteeId",menteeId);
+        RequestFragment requestFragment = new RequestFragment();
+        requestFragment.setArguments(bundle);
+        transaction.replace(R.id.fragment_container, requestFragment,"REQUEST_MEETING");
+        transaction.commit();
     }
 
     @Override

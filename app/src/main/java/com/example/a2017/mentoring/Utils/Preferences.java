@@ -16,17 +16,7 @@ public class Preferences
     private static final String FIRST_RUN = "firstRun";
     private static final String MY_ID = "myId";
     private static final String IS_MENTEE = "isMentee";
-    private static final String LAST_MEETING_NUMBER = "lastMeetingNumber";
     private static final String TOKEN ="token";
-
-    public static int getLastMeetingNumber(Context context){
-        SharedPreferences preferences = getPreferences(context);
-        return preferences.getInt(LAST_MEETING_NUMBER,1);
-    }
-    public static void setLastMeetingNumber(int lastMeetingNumber,Context context){
-        SharedPreferences preferences = getPreferences(context);
-        preferences.edit().putInt(LAST_MEETING_NUMBER,lastMeetingNumber+1).apply();
-    }
 
     public static boolean isLogin(Context context)
     {

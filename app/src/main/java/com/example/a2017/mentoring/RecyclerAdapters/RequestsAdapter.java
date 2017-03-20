@@ -39,9 +39,8 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
     }
     @Override
     public void onBindViewHolder(RequestsHolder holder, int position) {
-//        holder.title.setText(String.valueOf(requests.get(position).get));
-//        holder.topic.setText(String.valueOf(requests.get(position).getMeetingTopic()));
-//        holder.date.setText(String.valueOf(requests.get(position).getDate()));
+        holder.topic.setText(String.valueOf(requests.get(position).getMeetingTopic()));
+        holder.date.setText(String.valueOf(requests.get(position).getMeetingDate_time()));
 
     }
     @Override
@@ -56,13 +55,13 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
     }
 
     class RequestsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView title;
+       // TextView title;
         TextView topic;
         TextView date;
 
         public RequestsHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.meeting_title);
+           // title = (TextView) itemView.findViewById(R.id.meeting_title);
             topic = (TextView) itemView.findViewById(R.id.meeting_topic);
             date = (TextView) itemView.findViewById(R.id.meeting_date);
             itemView.setOnClickListener(this);

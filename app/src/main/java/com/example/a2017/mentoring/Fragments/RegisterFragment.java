@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.a2017.mentoring.Activitys.MainActivity;
 import com.example.a2017.mentoring.Model.Register;
+import com.example.a2017.mentoring.Model.UserToken;
 import com.example.a2017.mentoring.R;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
@@ -169,7 +170,9 @@ public class RegisterFragment extends Fragment {
 
           liquidButton.startPour();
           liquidButton.setAutoPlay(true);
+          String token = Preferences.getMyToken(getContext());
           int myId = Integer.parseInt(response.body());
+          sendTokenToServer(token,myId);
           Preferences.setMyId(myId,getContext());
           Gson gson = new Gson();
           Preferences.setRegisterObject(gson.toJson(register),getContext());
@@ -235,7 +238,33 @@ public class RegisterFragment extends Fragment {
       }
     });
   }
+  private void sendTokenToServer(String token,final int id)
+  {
+    UserToken mytoken = new UserToken(id,token);
+    ApiInterfaceRetrofit apiClientRetrofit= ApiClientRetrofit.getClient().create(ApiInterfaceRetrofit.class);
+    Call<UserToken> sendToken = apiClientRetrofit.submitMyToken(mytoken);
+    sendToken.enqueue(new Callback<UserToken>()
+    {
+      @Override
+      public void onResponse(Call<UserToken> call, Response<UserToken> response)
+      {
+        if(response.code()==200 || response.code() == 204)
+        {
 
+        }
+        else
+        {
+
+        }
+      }
+
+      @Override
+      public void onFailure(Call<UserToken> call, Throwable t)
+      {
+
+      }
+    });
+  }
   public boolean isAllValid() {
     if (isValidFirstName()) {
       if (isValidLastName()) {

@@ -42,12 +42,14 @@ public class MenteeListFragment extends Fragment implements SwipeRefreshLayout.O
     private ArrayList<MenteeList> menteelist;
     private MenteeAdapter menteeAdapter;
     private int userid;
+    private int flag;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         userid= Preferences.myId(getContext());
+        flag = getArguments().getInt("flag");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -79,7 +81,18 @@ public class MenteeListFragment extends Fragment implements SwipeRefreshLayout.O
             public void onClick(View view, int position)
             {
                 int userID= menteelist.get(position).getUserId();
-                goToMenteeProfile(userID);
+                if(flag==0)
+                {
+                    goToMenteeProfile(userID);
+                }
+                else if(flag==2)
+                {
+                    goToMeetingRequest(userID);
+                }
+                else
+                {
+                    goToMeetingFragment(userID);
+                }
             }
             @Override
             public void onLongClick(View view, int position) {
@@ -149,6 +162,30 @@ public class MenteeListFragment extends Fragment implements SwipeRefreshLayout.O
         MenteeProfileFragment menteeProfile = new MenteeProfileFragment();
         menteeProfile.setArguments(bundle);
         transaction.replace(R.id.fragment_container, menteeProfile,"MENTEE_PROFILE");
+        transaction.commit();
+    }
+
+    private void goToMeetingFragment(int menteeId)
+    {
+        fragmentManager = getFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        Bundle bundle= new Bundle();
+        bundle.putInt("menteeId",menteeId);
+        MeetingFragment meetingFragment = new MeetingFragment();
+        meetingFragment.setArguments(bundle);
+        transaction.replace(R.id.fragment_container, meetingFragment,"MEETING_FRAGMENT");
+        transaction.commit();
+    }
+
+    private void goToMeetingRequest(int menteeId)
+    {
+        fragmentManager = getFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        Bundle bundle= new Bundle();
+        bundle.putInt("menteeId",menteeId);
+        RequestFragment requestFragment = new RequestFragment();
+        requestFragment.setArguments(bundle);
+        transaction.replace(R.id.fragment_container, requestFragment,"REQUEST_MEETING");
         transaction.commit();
     }
 }

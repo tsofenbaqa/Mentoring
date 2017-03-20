@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.IntegerRes;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -56,6 +57,9 @@ public class RequestFragment extends Fragment implements
     int validDate = 1;
     int validMeetingType = 1;
     int validTopic = 1;
+    boolean isMentee ;
+    int myId;
+    int menteeId;
 
     String meeting_date_time,meeting_date,meeting_type,meeting_topic,meeting_public_feedback,meeting_private_feedback;
     MorphingButton morphingButton;
@@ -65,6 +69,15 @@ public class RequestFragment extends Fragment implements
 
     public RequestFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        isMentee= Preferences.isMentee(getContext());
+        myId = Preferences.myId(getContext());
+        menteeId = getArguments().getInt("menteeId");
     }
 
     @Override
@@ -138,7 +151,19 @@ public class RequestFragment extends Fragment implements
                     success();
 
                     //Request request = new Request("title","topic","date");
-                    Request request = new Request(Preferences.myId(getContext()),"call","2017/03/13","sanad");
+                    Request request = null;
+
+                    if(isMentee)
+                    {
+                        request  = new Request(0,0,myId,
+                                meeting_type,meeting_date_time,meeting_topic,null,null,null,null);
+                    }
+                    else
+                    {
+                        request  = new Request(0,myId,menteeId,
+                                meeting_type,meeting_date_time,meeting_topic,null,null,null,null);
+                    }
+
                     //addMeetingToList(request);
                     sendRequestMeetingToServer(request);
 
