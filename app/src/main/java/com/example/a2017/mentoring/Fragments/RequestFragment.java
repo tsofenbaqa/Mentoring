@@ -2,7 +2,6 @@ package com.example.a2017.mentoring.Fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
@@ -11,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -99,7 +97,6 @@ public class RequestFragment extends Fragment implements
         //morphingButton.setBackgroundResource(R.drawable.button_custom2);
         setUpFields(view); // binding
         setFoucsEditText(view);
-
         dateAndtimebuttonHandler(); // do event when clicked
         sendRequestHandler();
         updateUi();
@@ -109,10 +106,8 @@ public class RequestFragment extends Fragment implements
     private void setUpFields(View view) {
         datebtn = (Button) view.findViewById(R.id.dateBtn_id);
         meetingType = (TextView) view.findViewById(R.id.meetingType_id);
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar2);
         faceToface = (CheckBox) view.findViewById(R.id.facetoface_checkbox_id);
         call = (CheckBox) view.findViewById(R.id.call_checkbox_id);
-        toolbar_title = (TextView) view.findViewById(R.id.toolbar_title);
         topic = (EditText) view.findViewById(R.id.summary_id);
         publicFeedback = (EditText) view.findViewById(R.id.public_feedback_id);
         privateFeedback = (EditText) view.findViewById(R.id.private_feedback_id);
@@ -123,11 +118,11 @@ public class RequestFragment extends Fragment implements
         inValid_topic = (TextView) view.findViewById(R.id.topic_error_id);
         morphingButton = (MorphingButton)view.findViewById(R.id.morph_sendBtn_id);
 
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar); //attach toolbar to fragment
+/*        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar); //attach toolbar to fragment
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         toolbar.setTextDirection(View.TEXT_DIRECTION_RTL);
         setHasOptionsMenu(true); // show toolbar
-        toolbar_title.setTextColor(Color.parseColor("#FFFFFF"));
+        toolbar_title.setTextColor(Color.parseColor("#FFFFFF"));*/
     }
 
 
@@ -161,21 +156,42 @@ public class RequestFragment extends Fragment implements
                    // Toast.makeText(getActivity(),"Request was sent Successfull",Toast.LENGTH_SHORT).show();
                     hideErrors();
                     success();
-                    Request request = null;
+                    Request myRequest = null;
 
                     if(isMentee)
                     {
-                        request  = new Request(0,0,myId,
-                                meeting_type,meeting_date_time,meeting_topic,null,null,null,null);
+                        if(flag==1)
+                        {
+
+                            myRequest  = new Request(request.getId(),0,myId,
+                                    meeting_type,request.getMeetingDate_time(),meeting_topic,null,meeting_public_feedback,null,meeting_private_feedback);
+                            Gson gson = new Gson();
+                            Log.d( "onClick: ",gson.toJson(myRequest));
+                        }
+                        else
+                        {
+                            myRequest  = new Request(0,0,myId,
+                                    meeting_type,meeting_date_time,meeting_topic,null,null,null,null);
+                        }
+
                     }
                     else
                     {
-                        request  = new Request(0,myId,menteeId,
-                                meeting_type,meeting_date_time,meeting_topic,null,null,null,null);
+                        if(flag==1)
+                        {
+
+                            myRequest  = new Request(request.getId(),0,myId,
+                                    meeting_type,request.getMeetingDate_time(),meeting_topic,meeting_public_feedback,null,meeting_private_feedback,null);
+                        }
+                        else
+                        {
+                            myRequest  = new Request(0,0,myId,
+                                    meeting_type,meeting_date_time,meeting_topic,null,null,null,null);
+                        }
                     }
 
-                    //addMeetingToList(request);
-                    sendRequestMeetingToServer(request);
+                    //addMeetingToList(myRequest);
+                    sendRequestMeetingToServer(myRequest);
 
                 }else{
                     Toast.makeText(getActivity(),"invalid info, try again...",Toast.LENGTH_SHORT).show();
@@ -321,6 +337,8 @@ public class RequestFragment extends Fragment implements
                 // pressed state color
                 .icon(R.drawable.ic_check_black_24dp); // icon
         morphingButton.morph(circle);
+
+
     }
 
 
@@ -369,7 +387,8 @@ public class RequestFragment extends Fragment implements
     {
         if(request!=null)
         {
-            if(flag == 1){
+            if(flag == 1)
+            {
                 publicFeedback.setVisibility(View.VISIBLE);
                 privateFeedback.setVisibility(View.VISIBLE);
                 public_hint.setVisibility(View.VISIBLE);

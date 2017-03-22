@@ -24,6 +24,7 @@ import com.example.a2017.mentoring.RecyclerTools.RecyclerTouchListner;
 import com.example.a2017.mentoring.RetrofitApi.ApiClientRetrofit;
 import com.example.a2017.mentoring.RetrofitApi.ApiInterfaceRetrofit;
 import com.example.a2017.mentoring.Utils.Preferences;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,6 +112,8 @@ public class MeetingFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 {
                     meetingList= response.body();
 //                    Log.d("Size:", meetingList.get(0).getContactName());
+                    Gson gson = new Gson();
+                    Log.d( "updateUi: ",gson.toJson(response.body().get(0)));
                     mAdapter.updateDataSet(meetingList);
                     refreshLayout.setRefreshing(false);
 
@@ -167,6 +170,7 @@ public class MeetingFragment extends Fragment implements SwipeRefreshLayout.OnRe
     {
         fragmentManager = getFragmentManager();
         transaction = fragmentManager.beginTransaction();
+        transaction.addToBackStack(null);
         Bundle bundle= new Bundle();
         bundle.putInt("menteeId",menteeId);
         bundle.putInt("flag",flag);

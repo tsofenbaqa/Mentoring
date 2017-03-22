@@ -264,20 +264,17 @@ public class MentorProfileFragment extends Fragment
     }
 
     private void disableMentorEditing(){
-        myImage.setEnabled(false);
         myImage.setClickable(false);
-        mentorUpdateProfile.setEnabled(false);
-        mentorUpdateProfile.setClickable(false);
-        fname.setEnabled(false);
-        lname.setEnabled(false);
-        phone.setEnabled(false);
-        email.setEnabled(false);
-//        mentor.setEnabled(false);
-        major.setEnabled(false);
-        address.setEnabled(false);
+        mentorUpdateProfile.setVisibility(View.GONE);
+        fname.setKeyListener(null);
+        lname.setKeyListener(null);
+        phone.setKeyListener(null);
+        email.setKeyListener(null);
+        major.setKeyListener(null);
+        address.setKeyListener(null);
         gender.setEnabled(false);
-        company.setEnabled(false);
-        notes.setEnabled(false);
+        company.setKeyListener(null);
+        notes.setKeyListener(null);
     }
 
     private void setMentorUpdateProfileOnClick()

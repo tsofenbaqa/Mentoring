@@ -181,6 +181,7 @@ public class MenteeListFragment extends Fragment implements SwipeRefreshLayout.O
     {
         fragmentManager = getFragmentManager();
         transaction = fragmentManager.beginTransaction();
+        transaction.addToBackStack(null);
         Bundle bundle= new Bundle();
         bundle.putInt("menteeId",menteeId);
         RequestFragment requestFragment = new RequestFragment();

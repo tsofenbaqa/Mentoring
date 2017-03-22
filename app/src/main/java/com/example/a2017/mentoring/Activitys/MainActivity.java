@@ -51,8 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         configureRequestPermissions();
         whichFragmentToShow();
         backStackFragment();
-//        //goToMeettingFragment();
-//        goToMeetingRequest();
+
     }
 
     @Override
@@ -183,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
+        transaction.addToBackStack(null);
         Bundle bundle= new Bundle();
         bundle.putInt("flag",flag);
         RequestFragment requestFragment = new RequestFragment();
@@ -258,4 +258,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
 }

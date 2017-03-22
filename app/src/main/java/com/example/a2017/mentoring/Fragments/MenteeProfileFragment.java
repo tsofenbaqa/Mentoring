@@ -490,28 +490,30 @@ public class MenteeProfileFragment extends Fragment
     private void disableMenteeEditing()
     {
         myImage.setClickable(false);
-        myImage.setEnabled(false);
         menteeUpdateProfile.setClickable(false);
-        menteeUpdateProfile.setEnabled(false);
-        fname.setEnabled(false);
-        lname.setEnabled(false);
-        phone.setEnabled(false);
-        email.setEnabled(false);
-        major.setEnabled(false);
-        semster.setEnabled(false);
-        average.setEnabled(false);
-        address.setEnabled(false);
-        notes.setEnabled(false);
-        courseid.setEnabled(false);
-        institution.setEnabled(false);
-        graduation_status.setEnabled(false);
+        menteeUpdateProfile.setVisibility(View.GONE);
+        fname.setKeyListener(null);
+        lname.setKeyListener(null);
+        phone.setKeyListener(null);
+        email.setKeyListener(null);
+        major.setKeyListener(null);
+        semster.setKeyListener(null);
+        average.setKeyListener(null);
+        address.setKeyListener(null);
+        notes.setKeyListener(null);
+        courseid.setKeyListener(null);
+        institution.setKeyListener(null);
         graduation_status.setClickable(false);
-        chooseResume.setEnabled(false);
+        graduation_status.setEnabled(false);
+        chooseResume.setKeyListener(null);
+        chooseResume.setText(getResources().getString(R.string.viewResume));
         resume_review.setEnabled(true);
-        chooseGradeSheet.setEnabled(false);
+        chooseGradeSheet.setKeyListener(null);
+        chooseGradeSheet.setText(getResources().getString(R.string.viewGradeSheet));
         gradeSheet_review.setEnabled(true);
-        gender.setEnabled(false);
         gender.setClickable(false);
+        gender.setEnabled(false);
+
     }
 }
 

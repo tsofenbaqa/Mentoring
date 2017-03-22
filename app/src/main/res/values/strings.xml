@@ -102,4 +102,7 @@
     <string name="Illegal_phone_number">מספר פלאפון לא חוקי","מספרי פלאפון לא פחות "/" יותר מעשר ספרות</string>
     <string name="request">קביעת פגישה</string>
 
+    <string name="viewResume">צפייה בקורות חיים</string>
+    <string name="viewGradeSheet">צפייה גליון ציונים</string>
+
 </resources>
