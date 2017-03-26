@@ -16,14 +16,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.a2017.mentoring.Fragments.MeetingFragment;
 import com.example.a2017.mentoring.Fragments.MenteeListFragment;
 import com.example.a2017.mentoring.Fragments.MenteeProfileFragment;
 import com.example.a2017.mentoring.Fragments.MentorProfileFragment;
 import com.example.a2017.mentoring.Fragments.RequestFragment;
+import com.example.a2017.mentoring.Model.Register;
 import com.example.a2017.mentoring.R;
+import com.example.a2017.mentoring.RetrofitApi.BaseUrl;
 import com.example.a2017.mentoring.Utils.Preferences;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -36,12 +41,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int READ_PERMISSION_CODE = 123;
     private boolean isProfileUpdate ;
     private boolean isMentee ;
+    private int userid;
+    private Register register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        userid= Preferences.myId(this);
+        Gson gson = new Gson();
+        register = gson.fromJson(Preferences.RegisterObject(this),Register.class);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -51,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         configureRequestPermissions();
         whichFragmentToShow();
         backStackFragment();
-
+        setNavigationViewImageAndText();
     }
 
     @Override
@@ -257,6 +268,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
+    }
+
+    private  void setNavigationViewImageAndText()
+    {
+        View view =  navigationView.getHeaderView(0);
+        TextView nav_user = (TextView)view.findViewById(R.id.nav_email);
+        SimpleDraweeView myImage = (SimpleDraweeView) view.findViewById(R.id.contactImage);
+        myImage.setImageURI(BaseUrl.MENTORING_JPG+userid);
+        nav_user.setText(register.getEmail());
     }
 
 

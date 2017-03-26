@@ -326,7 +326,7 @@ public class RequestFragment extends Fragment implements
                 if (response.code() == 200 || response.code() == 204) {
 
 
-                    Toast.makeText(getContext(), "received successfully", Toast.LENGTH_LONG).show();
+                    goToMeettingFragment();
                     Log.d("onResponse: ", "done");
                 } else if (response.code() == 302) {
                     Toast.makeText(getActivity(), "sending meeting request failed, sorry... ", Toast.LENGTH_LONG).show();
@@ -382,5 +382,14 @@ public class RequestFragment extends Fragment implements
                 faceToface.setChecked(true);
             }
         }
+    }
+
+    private void goToMeettingFragment()
+    {
+        fragmentManager = getFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        MeetingFragment meetingFragment = new MeetingFragment();
+        transaction.replace(R.id.fragment_container, meetingFragment,"MEETING_FRAGMENT");
+        transaction.commit();
     }
 }

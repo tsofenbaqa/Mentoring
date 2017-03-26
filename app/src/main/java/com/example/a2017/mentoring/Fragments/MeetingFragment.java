@@ -240,12 +240,12 @@ public class MeetingFragment extends Fragment implements SwipeRefreshLayout.OnRe
                         RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);
                         c.drawBitmap(icon,null,icon_dest,p);
                     }else{
-                        p.setColor(Color.parseColor("#388E3C"));
-                        RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), dX,(float) itemView.getBottom());
-                        c.drawRect(background,p);
-                        icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_edit_white_24dp);
-                        RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
-                        c.drawBitmap(icon,null,icon_dest,p);
+//                        p.setColor(Color.parseColor("#388E3C"));
+//                        RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), dX,(float) itemView.getBottom());
+//                        c.drawRect(background,p);
+//                        icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_edit_white_24dp);
+//                        RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
+//                        c.drawBitmap(icon,null,icon_dest,p);
                     }
                 }
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
