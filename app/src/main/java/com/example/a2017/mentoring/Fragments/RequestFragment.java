@@ -13,7 +13,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -94,9 +93,7 @@ public class RequestFragment extends Fragment implements
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_meeting_request, container, false);
         morphingButton = (MorphingButton) view.findViewById(R.id.morph_sendBtn_id);
-        //morphingButton.setBackgroundResource(R.drawable.button_custom2);
         setUpFields(view); // binding
-        setFoucsEditText(view);
         dateAndtimebuttonHandler(); // do event when clicked
         sendRequestHandler();
         updateUi();
@@ -125,29 +122,6 @@ public class RequestFragment extends Fragment implements
         toolbar_title.setTextColor(Color.parseColor("#FFFFFF"));*/
     }
 
-
-    public  void setFoucsEditText(View view){
-        topic.setOnTouchListener(new View.OnTouchListener(){
-            public boolean onTouch(View arg0, MotionEvent arg1){
-                topic.setAlpha(1.0f);
-                return false;
-            }
-        });
-        publicFeedback.setOnTouchListener(new View.OnTouchListener(){
-            public boolean onTouch(View arg0, MotionEvent arg1){
-                publicFeedback.setAlpha(1.0f);
-                return false;
-            }
-        });
-        privateFeedback.setOnTouchListener(new View.OnTouchListener(){
-            public boolean onTouch(View arg0, MotionEvent arg1){
-                privateFeedback.setAlpha(1.0f);
-                return false;
-            }
-        });
-    }
-
-
     public void sendRequestHandler(){
         morphingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,7 +129,6 @@ public class RequestFragment extends Fragment implements
                 if(validInformations()){
                    // Toast.makeText(getActivity(),"Request was sent Successfull",Toast.LENGTH_SHORT).show();
                     hideErrors();
-                    success();
                     Request myRequest = null;
 
                     if(isMentee)
@@ -190,7 +163,6 @@ public class RequestFragment extends Fragment implements
                         }
                     }
 
-                    //addMeetingToList(myRequest);
                     sendRequestMeetingToServer(myRequest);
 
                 }else{
@@ -202,14 +174,6 @@ public class RequestFragment extends Fragment implements
     }
 
 
-    public void requestBtnHandler(){
-        reqBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"request sent",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
     public void dateAndtimebuttonHandler(){
         datebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -249,15 +213,6 @@ public class RequestFragment extends Fragment implements
         meeting_date_time = date+time;
 
         meeting_date = date;
-       //meeting_time = hour_final+":"+minute_final;
-
-
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            Date date1 = dateFormat.parse(date);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
 
         Toast.makeText(getActivity(),date+time,Toast.LENGTH_LONG).show();
     }
@@ -269,10 +224,14 @@ public class RequestFragment extends Fragment implements
         int temp_day   = cal.get(Calendar.DAY_OF_MONTH);
         int topic_size = topic.getText().toString().length();
 
-        if( (year_final < temp_year) || (year_final <= temp_year && month_final < temp_month)
-                || (year_final <= temp_year && month_final <= temp_month && day_final <= temp_day)){
-            validDate = 0;
-        }else{
+        if(flag != 1 ) {
+            if ((year_final < temp_year) || (year_final <= temp_year && month_final < temp_month)
+                    || (year_final <= temp_year && month_final <= temp_month && day_final <= temp_day)) {
+                validDate = 0;
+            } else {
+                validDate = 1;
+            }
+        }else if( flag == 1){
             validDate = 1;
         }
         if(topic_size <= 0){
@@ -338,7 +297,6 @@ public class RequestFragment extends Fragment implements
                 .icon(R.drawable.ic_check_black_24dp); // icon
         morphingButton.morph(circle);
 
-
     }
 
 
@@ -366,6 +324,8 @@ public class RequestFragment extends Fragment implements
             public void onResponse(Call<Void> call, Response<Void> response) {
 
                 if (response.code() == 200 || response.code() == 204) {
+
+
                     Toast.makeText(getContext(), "received successfully", Toast.LENGTH_LONG).show();
                     Log.d("onResponse: ", "done");
                 } else if (response.code() == 302) {

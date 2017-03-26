@@ -67,10 +67,22 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
             itemView.setOnClickListener(this);
         }
 
+
         @Override
         public void onClick(View v) {
 
         }
+    }
+
+    public void addItem(Request request) {
+        requests.add(request);
+        notifyItemInserted(requests.size());
+    }
+
+    public void removeItem(int position) {
+        requests.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, requests.size());
     }
 
 }
