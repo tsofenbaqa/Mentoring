@@ -9,4 +9,6 @@
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
     <color name="indigo">#4b0082</color>
+    <color name="light_blue_grey">#CFD8DC</color>
+    <color name="dark_grey">#212121</color>
 </resources>

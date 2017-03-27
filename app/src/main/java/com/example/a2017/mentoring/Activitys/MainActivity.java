@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         configureRequestPermissions();
         whichFragmentToShow();
         backStackFragment();
-        setNavigationViewImageAndText();
+       // setNavigationViewImageAndText();
     }
 
     @Override
@@ -276,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView nav_user = (TextView)view.findViewById(R.id.nav_email);
         SimpleDraweeView myImage = (SimpleDraweeView) view.findViewById(R.id.contactImage);
         myImage.setImageURI(BaseUrl.MENTORING_JPG+userid);
-        nav_user.setText(register.getEmail());
+        nav_user.setText("");
     }
 
 

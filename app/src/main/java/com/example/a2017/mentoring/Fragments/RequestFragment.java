@@ -312,7 +312,7 @@ public class RequestFragment extends Fragment implements
          transaction.commit();
     }
 
-    public void sendRequestMeetingToServer(Request request)
+    public void sendRequestMeetingToServer(final Request request)
     {
         Gson gson = new Gson();
         String json = gson.toJson(request);
@@ -321,8 +321,10 @@ public class RequestFragment extends Fragment implements
         Call<Void> requestMeeting = retrofit.requestMeeting(request);
         requestMeeting.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-
+            public void onResponse(Call<Void> call, Response<Void> response)
+            {
+Gson gson = new Gson();
+                Log.d("onResponse: ",gson.toJson(request));
                 if (response.code() == 200 || response.code() == 204) {
 
 

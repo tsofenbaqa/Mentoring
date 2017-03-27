@@ -69,6 +69,8 @@
     <string name="userExists">משתמש קיים</string>
     <string name="error_general"> מצטערים, יש תקלת מערכת</string>
     <string name="failure">תקלה בהתחברות לשרת</string>
+    <string name="signin">התחבר"/"י</string>
+    <string name="forgotpass">שכחתי סיסמה</string>
     <!-- Error Strings -->
     <string name="invalid_name">שם לא חוקי</string>
     <string name="invalid_password">סיסמה לא חוקית</string>
