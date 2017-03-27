@@ -153,12 +153,12 @@ public class RequestFragment extends Fragment implements
                         if(flag==1)
                         {
 
-                            myRequest  = new Request(request.getId(),0,myId,
+                            myRequest  = new Request(request.getId(),myId,menteeId,
                                     meeting_type,request.getMeetingDate_time(),meeting_topic,meeting_public_feedback,null,meeting_private_feedback,null);
                         }
                         else
                         {
-                            myRequest  = new Request(0,0,myId,
+                            myRequest  = new Request(0,myId,menteeId,
                                     meeting_type,meeting_date_time,meeting_topic,null,null,null,null);
                         }
                     }
@@ -328,7 +328,14 @@ Gson gson = new Gson();
                 if (response.code() == 200 || response.code() == 204) {
 
 
-                    goToMeettingFragment();
+                    if(isMentee)
+                    {
+                        goToMeettingFragment();
+                    }
+                    else
+                    {
+                        goToMeetingFragment(menteeId);
+                    }
                     Log.d("onResponse: ", "done");
                 } else if (response.code() == 302) {
                     Toast.makeText(getActivity(), "sending meeting request failed, sorry... ", Toast.LENGTH_LONG).show();
@@ -391,6 +398,17 @@ Gson gson = new Gson();
         fragmentManager = getFragmentManager();
         transaction = fragmentManager.beginTransaction();
         MeetingFragment meetingFragment = new MeetingFragment();
+        transaction.replace(R.id.fragment_container, meetingFragment,"MEETING_FRAGMENT");
+        transaction.commit();
+    }
+    private void goToMeetingFragment(int menteeId)
+    {
+        fragmentManager = getFragmentManager();
+        transaction = fragmentManager.beginTransaction();
+        Bundle bundle= new Bundle();
+        bundle.putInt("menteeId",menteeId);
+        MeetingFragment meetingFragment = new MeetingFragment();
+        meetingFragment.setArguments(bundle);
         transaction.replace(R.id.fragment_container, meetingFragment,"MEETING_FRAGMENT");
         transaction.commit();
     }

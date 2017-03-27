@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -43,6 +44,7 @@ public class login extends Fragment
         et_password = (EditText) view.findViewById(R.id.etpassword);
         progressBar = (ProgressBar)view.findViewById(R.id.login_progressBar);
         signinBtn();
+
         return view;
     }
 
